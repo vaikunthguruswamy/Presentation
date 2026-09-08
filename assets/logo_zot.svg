@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="120" height="40">
-  
-  <rect width="120" height="40" fill="none"></rect>
-  
-  <path d="M4 8h18l-14 24h14" stroke="#004d4d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-  
-  <ellipse cx="47" cy="20" rx="9" ry="12" stroke="#004d4d" stroke-width="3.5" fill="none"></ellipse>
-  
-  <line x1="66" y1="8" x2="84" y2="8" stroke="#004d4d" stroke-width="3.5" stroke-linecap="round"></line>
-  <line x1="75" y1="8" x2="75" y2="32" stroke="#004d4d" stroke-width="3.5" stroke-linecap="round"></line>
-  
-  <circle cx="110" cy="32" r="5" fill="#00ff9d"></circle>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="154" height="58.65" style="enable-background:new 0 0 154 58.65"><linearGradient id="a" x1="0" x2="154" y1="29.323" y2="29.323" gradientUnits="userSpaceOnUse"><stop offset="0" style="stop-color:#00af3f"/><stop offset=".212" style="stop-color:#00ad45"/><stop offset=".487" style="stop-color:#00a755"/><stop offset=".794" style="stop-color:#009d6f"/><stop offset=".841" style="stop-color:#009b74"/></linearGradient><path d="M80.12 0C63.96.05 50.88 13.16 50.88 29.33c0 6.53 2.14 12.56 5.75 17.43H16.68l33.94-34.83-.04-.04h.04V0H0v11.88h34.07L.08 46.76H0v11.88h80.2c16.2 0 29.33-13.12 29.33-29.32 0-6.53-2.14-12.57-5.75-17.44h21.57v46.76h11.88V11.88H154V0H80.12zm.07 46.72c-9.63 0-17.43-7.8-17.43-17.43s7.8-17.43 17.43-17.43 17.43 7.8 17.43 17.43-7.8 17.43-17.43 17.43z" style="fill:url(#a)"/></svg>
