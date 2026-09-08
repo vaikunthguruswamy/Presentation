@@ -3,7 +3,7 @@
     <div style="width:100%; max-width:1100px; margin:0 auto; flex:1; display:flex; flex-direction:column; justify-content:center;">
       <p data-reveal style="opacity:1; font-family:'Poppins',sans-serif; font-size:0.95rem; color:#757575; margin:0 0 1.6rem; letter-spacing:0.02em;">Round 2 presentation</p>
       <h1 data-reveal data-delay="80" style="opacity:1; font-family:'Montserrat','Poppins',sans-serif; font-weight:700; font-size:clamp(2rem,4.4vw,3.5rem); line-height:1.2; color:#004d4d; margin:0 0 1.5rem; max-width:26ch;">Digitization and automation across ZOT's three-divisions </h1>
-      <p data-reveal data-delay="150" style="opacity:1; font-family:'Poppins',sans-serif; font-size:clamp(1.02rem,1.4vw,1.25rem); line-height:1.65; color:#333333; max-width:64ch; margin:0;">ZOT Engineering runs PCB manufacturing, assembly and sheet metal fabrication from one site in Musselburgh. Twenty-five years of production data sat in three unconnected databases and a chain of spreadsheets. This is what we did about it, how it was delivered, and what it has been worth.</p>
+      <!-- <p data-reveal data-delay="150" style="opacity:1; font-family:'Poppins',sans-serif; font-size:clamp(1.02rem,1.4vw,1.25rem); line-height:1.65; color:#333333; max-width:64ch; margin:0;">ZOT Engineering runs PCB manufacturing, assembly and sheet metal fabrication. Twenty-five years of production data spread across databases and a chain of spreadsheets. This is what I did about it, how it was improvised and delivered.</p> -->
       <div data-reveal data-delay="230" style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:2.6rem 0 2rem;"></div>
       <div data-reveal data-delay="230" style="opacity:1;">
         <div style="font-family:'Montserrat',sans-serif; font-size:1.3rem; font-weight:700; color:#004d4d;">Vaikunth Guruswamy</div>
@@ -39,21 +39,32 @@
         </div>
 
         <div class="zts-output">
-          <div class="zts-io zts-io-out">Live insight<small>for teams &amp; customers</small></div>
+          <div class="zts-io zts-io-out" id="ztsOutHit" role="button" tabindex="0" aria-expanded="false" aria-controls="ztsOutFan" aria-label="Show what the platform delivers to teams and customers">
+            <span class="zts-out-io-title">Live insight</span>
+            <small>for teams &amp; customers</small>
+            <span class="zts-io-cue" id="ztsOutCue">SEE WHAT IT DELIVERS &#9662;</span>
+          </div>
+          <div class="zts-out-fan" id="ztsOutFan" aria-hidden="true">
+            <div class="zts-fan-head">
+              <span class="zts-fan-heading"><span class="zts-dot"></span>Live insight, delivered</span>
+              <span class="zts-fan-close" id="ztsOutClose" role="button" tabindex="0" aria-label="Close">CLOSE &#10005;</span>
+            </div>
+            <div class="zts-fan-cards" id="ztsOutGrid"></div>
+          </div>
         </div>
       </div>
 
-      <p id="ztsHint" style="text-align:center; font-family:'Poppins',sans-serif; font-size:0.82rem; color:#9e9e9e; margin:16px 0 0;">Select the <span style="color:#04936a; font-weight:600;">ZOT Platform</span> to see the technology it runs on</p>
+      <p id="ztsHint" style="text-align:center; font-family:'Poppins',sans-serif; font-size:0.82rem; color:#9e9e9e; margin:16px 0 0;">Select the <span style="color:#04936a; font-weight:600;">ZOT Platform</span> to see the technology it runs on, or <span style="color:#04936a; font-weight:600;">Live insight</span> to see what it delivers</p>
     </div>
 
     <div data-reveal data-delay="360" style="opacity:1; width:100%; max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; gap:10px 32px; justify-content:space-between; align-items:center; padding-top:22px; border-top:1px solid #e0e0e0; font-family:'Poppins',sans-serif; font-size:0.85rem; color:#9e9e9e;">
-      <span>Five minutes on me, fifteen on the work, then questions</span>
+      <span>Five minutes about me, fifteen on the work</span>
       <span>Scroll, or use the arrow keys</span>
     </div>
 
     <style>
       #ztsWrap { transition:max-width 0.55s cubic-bezier(0.22,1,0.36,1); }
-      .zts-diagram { position:relative; display:flex; align-items:center; gap:clamp(10px,2.2vw,28px); }
+      .zts-diagram { position:relative; display:flex; align-items:center; gap:clamp(10px,2.2vw,28px); scroll-margin-top:96px; }
       .zts-conn { position:absolute; inset:0; width:100%; height:100%; z-index:0; overflow:visible; pointer-events:none; }
       .zts-conn path { fill:none; stroke:#cfe9dc; stroke-width:2.2; stroke-linecap:round; }
       .zts-conn circle { fill:#00e08a; }
@@ -110,16 +121,46 @@
       .zts-flow polyline { fill:none; stroke:#9fcfc0; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
       @keyframes ztsDash { to { stroke-dashoffset:-10; } }
 
+      /* Live insight output: clickable node */
+      .zts-io-out { cursor:pointer; transition:box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease; }
+      .zts-out-io-title { font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.96rem; color:#004d4d; }
+      .zts-io-cue { font-family:'Poppins',sans-serif; font-size:0.6rem; font-weight:700; letter-spacing:0.07em; color:#05b981; margin-top:5px; }
+      .zts-diagram:not(.fan):not(.open) .zts-io-out { animation:ztsGlow 2.6s ease-in-out infinite; }
+
+      /* Fan-out: Live insight expands into connected delivery nodes */
+      .zts-output { transition:flex-basis 0.55s cubic-bezier(0.22,1,0.36,1); }
+      .zts-diagram.fan { margin-top:38px; align-items:stretch; }
+      .zts-diagram.fan .zts-inputs, .zts-diagram.fan .zts-center { align-self:center; }
+      .zts-diagram.fan .zts-output { flex:1 1 auto; }
+      .zts-diagram.fan .zts-io-out { display:none; }
+      .zts-diagram.fan .zts-platform { animation:none; }
+
+      .zts-out-fan { display:none; flex-direction:column; gap:12px; width:100%; }
+      .zts-diagram.fan .zts-out-fan { display:flex; }
+      .zts-fan-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:2px; }
+      .zts-fan-heading { display:inline-flex; align-items:center; gap:9px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:1.04rem; color:#004d4d; }
+      .zts-fan-close { cursor:pointer; font-family:'Poppins',sans-serif; font-size:0.64rem; font-weight:700; letter-spacing:0.07em; color:#8a9997; border:1px solid #dbe7e9; border-radius:999px; padding:4px 11px; transition:color 0.2s ease, border-color 0.2s ease; }
+      .zts-fan-close:hover { color:#04936a; border-color:#05b981; }
+
+      .zts-fan-cards { display:flex; flex-direction:column; gap:11px; }
+      .zts-fan-card { position:relative; z-index:1; background:#ffffff; border:1px solid #dbe7e9; border-radius:13px; box-shadow:0 6px 16px rgba(0,77,77,0.07); padding:14px 26px 15px 24px; opacity:0; }
+      .zts-fan-card::before { content:''; position:absolute; left:-5px; top:50%; transform:translateY(-50%); width:10px; height:10px; border-radius:50%; background:#00e08a; box-shadow:0 0 0 3px rgba(0,255,157,0.18); }
+      .zts-diagram.fan .zts-fan-card { animation:ztsPop 0.45s cubic-bezier(0.34,1.35,0.64,1) both; animation-delay:var(--d,0ms); }
+      .zts-fan-title { display:flex; align-items:center; gap:8px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.86rem; color:#004d4d; margin-bottom:11px; padding-bottom:9px; border-bottom:1px solid #eef2f3; }
+      .zts-fan-items { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:10px 30px; }
+      .zts-fan-items span { position:relative; display:flex; align-items:flex-start; gap:9px; font-family:'Poppins',sans-serif; font-size:0.76rem; line-height:1.38; color:#2b514a; }
+      .zts-fan-items span::before { content:''; flex:0 0 auto; margin-top:0.4em; width:6px; height:6px; border-radius:1.5px; background:#05b981; transform:rotate(45deg); box-shadow:0 0 0 3px rgba(0,255,157,0.13); }
+
       @media (max-width:900px) {
-        .zts-diagram.open { flex-direction:column; align-items:stretch; }
-        .zts-diagram.open .zts-inputs { flex-direction:row; }
-        .zts-diagram.open .zts-conn { display:none; }
+        .zts-diagram.open, .zts-diagram.fan { flex-direction:column; align-items:stretch; }
+        .zts-diagram.open .zts-inputs, .zts-diagram.fan .zts-inputs { flex-direction:row; }
+        .zts-diagram.open .zts-conn, .zts-diagram.fan .zts-conn { display:none; }
         .zts-arch { grid-template-columns:1fr; gap:20px 0; }
         .zts-flow { position:static; transform:rotate(90deg); }
       }
       @media (prefers-reduced-motion: reduce) {
-        .zts-diagram:not(.open) .zts-platform, .zts-diagram.open .zts-item, .zts-diagram.open .zts-flow line { animation:none; }
-        .zts-diagram.open .zts-item { opacity:1; }
+        .zts-diagram:not(.open) .zts-platform, .zts-diagram:not(.fan):not(.open) .zts-io-out, .zts-diagram.open .zts-item, .zts-diagram.open .zts-flow line, .zts-diagram.fan .zts-fan-card { animation:none; }
+        .zts-diagram.open .zts-item, .zts-diagram.fan .zts-fan-card { opacity:1; }
       }
     </style>
 
@@ -188,9 +229,23 @@
           dots += '<circle r="4.4"><animateMotion dur="2.7s" begin="' + (i * 0.5) + 's" repeatCount="indefinite" calcMode="linear"><mpath href="#ztsp' + i + '"/></animateMotion></circle>';
         }
         paths += '<path id="ztspOut"></path>';
-        dots += '<circle r="4.8"><animateMotion dur="2.3s" begin="0.4s" repeatCount="indefinite" calcMode="linear"><mpath href="#ztspOut"/></animateMotion></circle>';
-        conn.innerHTML = paths + dots;
+        dots += '<circle id="ztspOutDot" r="4.8"><animateMotion dur="2.3s" begin="0.4s" repeatCount="indefinite" calcMode="linear"><mpath href="#ztspOut"/></animateMotion></circle>';
+        conn.innerHTML = paths + dots + '<g id="ztsFanG"></g>';
         connBuilt = true;
+      }
+
+      var fanConnBuilt = false;
+      function buildFanConn() {
+        if (fanConnBuilt) return;
+        var g = document.getElementById('ztsFanG');
+        if (!g) return;
+        var paths = '', dots = '';
+        for (var i = 0; i < DELIVERS.length; i++) {
+          paths += '<path id="ztsf' + i + '"></path>';
+          dots += '<circle r="4.2"><animateMotion dur="' + (2.3 + (i % 3) * 0.35).toFixed(2) + 's" begin="' + (i * 0.26).toFixed(2) + 's" repeatCount="indefinite" calcMode="linear"><mpath href="#ztsf' + i + '"/></animateMotion></circle>';
+        }
+        g.innerHTML = paths + dots;
+        fanConnBuilt = true;
       }
 
       function draw() {
@@ -207,11 +262,30 @@
           var d = 'M' + sx + ',' + sy + ' C' + (sx + 46) + ',' + sy + ' ' + (leftX - 60) + ',' + midY + ' ' + leftX + ',' + midY;
           var p = document.getElementById('ztsp' + i); if (p) p.setAttribute('d', d);
         });
-        if (output) {
-          var ro = output.getBoundingClientRect();
-          var ex = ro.left - dr.left, ey = ro.top - dr.top + ro.height / 2;
-          var d = 'M' + rightX + ',' + midY + ' C' + (rightX + 50) + ',' + midY + ' ' + (ex - 50) + ',' + ey + ' ' + ex + ',' + ey;
-          var po = document.getElementById('ztspOut'); if (po) po.setAttribute('d', d);
+        var po = document.getElementById('ztspOut');
+        var outDot = document.getElementById('ztspOutDot');
+        var fanG = document.getElementById('ztsFanG');
+        var fanCards = outOpen ? Array.prototype.slice.call(outGrid.querySelectorAll('.zts-fan-card')) : [];
+        if (outOpen && fanCards.length) {
+          if (outDot) outDot.style.display = 'none';
+          if (po) po.setAttribute('d', '');
+          if (fanG) fanG.style.display = '';
+          buildFanConn();
+          fanCards.forEach(function (card, i) {
+            var r = card.getBoundingClientRect();
+            var ex = r.left - dr.left, ey = r.top - dr.top + r.height / 2;
+            var c1 = rightX + Math.max(48, (ex - rightX) * 0.42);
+            var d = 'M' + rightX + ',' + midY + ' C' + c1 + ',' + midY + ' ' + (ex - 56) + ',' + ey + ' ' + ex + ',' + ey;
+            var p = document.getElementById('ztsf' + i); if (p) p.setAttribute('d', d);
+          });
+        } else {
+          if (fanG) fanG.style.display = 'none';
+          if (outDot) outDot.style.display = '';
+          if (output && po) {
+            var ro = output.getBoundingClientRect();
+            var ex = ro.left - dr.left, ey = ro.top - dr.top + ro.height / 2;
+            po.setAttribute('d', 'M' + rightX + ',' + midY + ' C' + (rightX + 50) + ',' + midY + ' ' + (ex - 50) + ',' + ey + ' ' + ex + ',' + ey);
+          }
         }
       }
 
@@ -236,14 +310,112 @@
         if (open) setTimeout(function () { diagram.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 280);
       }
 
-      function toggle() { setOpen(!open); }
+      function toggle() { if (!open) setOutOpen(false); setOpen(!open); }
 
       hit.addEventListener('click', function (e) { e.stopPropagation(); toggle(); });
       hit.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); toggle(); }
       });
-      document.addEventListener('click', function () { if (open) setOpen(false); });
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) setOpen(false); });
+
+      /* ---- Live insight: what it delivers ---- */
+      var DELIVERS = [
+        { title: 'Management', items: [
+          'Unified portal for stakeholders and investors',
+          'Sales, procurement, WIP and turnover monitoring',
+          'Forecasts and insights',
+          'Text-to-dashboard generation'
+        ]},
+        { title: 'Manufacturing & procurement', items: [
+          'Digital job cards',
+          'Invoice automation',
+          'PO and supplier metrics',
+          'AI-enhanced component procurement',
+          'Operator and supervisor job traceability',
+          'Machine performance and division efficiency tracking'
+        ]},
+        { title: 'Sales & marketing', items: [
+          'GA4 and Google Tag analytics',
+          'Online footprint and RFQ accessibility',
+          'Custom CRM and customer profiles',
+          'Internal systematic quotation'
+        ]},
+        { title: 'KPI & quality', items: [
+          'Environmental KPIs (water, electricity, gas, CO₂)',
+          'Business-oriented KPIs',
+          'Unified FAI and other quality reports',
+          'Instant alert system'
+        ]},
+        { title: 'HR & accounts', items: [
+          'End-to-end automated payslips with chat reasoning',
+          'Online job portal and internal applicant management',
+          'Unbiased AI-panel ATS',
+          'Profit/loss, expenses and forecasting'
+        ]},
+        { title: 'Customer portal -> Vortex', items: [
+          'Seamless, instant order-status updates',
+          'OTD, quality and order performance dashboards',
+          'Dedicated online support per customer'
+        ]},
+        { title: 'Security & reliability', items: [
+          'Strict GDPR and EU AI Act compliance',
+          'Monitoring and alerting',
+          'Strict authorization and access control'
+        ]}
+      ];
+
+      var outHit = document.getElementById('ztsOutHit');
+      var outGrid = document.getElementById('ztsOutGrid');
+      var outFan = document.getElementById('ztsOutFan');
+      var outClose = document.getElementById('ztsOutClose');
+      var outCue = document.getElementById('ztsOutCue');
+      var outBuilt = false, outOpen = false;
+
+      function buildFan() {
+        if (outBuilt || !outGrid) return;
+        var d = 120, html = '';
+        DELIVERS.forEach(function (region) {
+          html += '<div class="zts-fan-card" style="--d:' + d + 'ms"><div class="zts-fan-title">' + region.title + '</div><div class="zts-fan-items">';
+          region.items.forEach(function (it) { html += '<span>' + it + '</span>'; });
+          html += '</div></div>';
+          d += 90;
+        });
+        outGrid.innerHTML = html;
+        outBuilt = true;
+      }
+
+      function setOutOpen(next) {
+        outOpen = next;
+        if (outOpen) buildFan();
+        diagram.classList.toggle('fan', outOpen);
+        if (wrap) wrap.style.maxWidth = outOpen ? 'min(1640px, 96vw)' : '1000px';
+        if (outHit) outHit.setAttribute('aria-expanded', outOpen ? 'true' : 'false');
+        if (outFan) outFan.setAttribute('aria-hidden', outOpen ? 'false' : 'true');
+        if (outCue) outCue.textContent = outOpen ? 'CLOSE ▴' : 'SEE WHAT IT DELIVERS ▾';
+        if (hint) hint.style.opacity = outOpen ? '0' : '1';
+        animateDraw(650);
+        if (outOpen) setTimeout(function () { diagram.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 280);
+      }
+
+      function toggleOut() { if (!outOpen) setOpen(false); setOutOpen(!outOpen); }
+
+      if (outHit) {
+        outHit.addEventListener('click', function (e) { e.stopPropagation(); toggleOut(); });
+        outHit.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); toggleOut(); }
+        });
+      }
+      if (outClose) {
+        outClose.addEventListener('click', function (e) { e.stopPropagation(); setOutOpen(false); });
+        outClose.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); setOutOpen(false); }
+        });
+      }
+      if (outFan) outFan.addEventListener('click', function (e) { e.stopPropagation(); });
+
+      document.addEventListener('click', function () { if (open) setOpen(false); if (outOpen) setOutOpen(false); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { if (open) setOpen(false); if (outOpen) setOutOpen(false); }
+      });
       window.addEventListener('resize', draw);
       window.addEventListener('load', draw);
       draw();
