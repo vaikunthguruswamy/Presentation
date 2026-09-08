@@ -1,4 +1,4 @@
-# The Manufacturer MX Awards 2026 — Round 2 Presentation
+# The Manufacturer MX Awards 2026: Round 2 Presentation
 
 Round 2 presentation for the **Technology Champion** category, by **Vaikunth Guruswamy**,
 Software Application Engineer at **ZOT Engineering Ltd**.
@@ -31,5 +31,5 @@ assets/             Brand mark
 demos/              Vortex customer-portal demonstration builds
 ```
 
-The page is static HTML, CSS and vanilla JavaScript — no framework, no build tooling and no
+The page is static HTML, CSS and vanilla JavaScript, with no framework, no build tooling and no
 external dependencies beyond the web fonts.

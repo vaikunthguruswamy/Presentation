@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Vortex Customer Portal — PCB Demo</title>
+<title>Vortex Customer Portal: PCB Demo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════════════════════════
-   Vortex Customer Portal — presentation build
+   Vortex Customer Portal: presentation build
    Styles mirror the production Angular component SCSS 1:1.
    ══════════════════════════════════════════════════════════════ */
 
@@ -155,7 +155,7 @@ html.no-icon-font .material-icons { visibility: hidden; }
   font-family: 'Inter', sans-serif; background: #fff; color: #333; outline: none; cursor: pointer;
 }
 .result-count { font-size: 12px; color: #aaa; white-space: nowrap; }
-/* Date-range control — stands in for the Angular Material range picker */
+/* Date-range control: stands in for the Angular Material range picker */
 .date-range-field {
   display: inline-flex; align-items: center; gap: 6px; position: relative;
   border: 1px solid #e0e0e0; border-radius: 6px; background: #fff; padding: 4px 10px; height: 36px;
@@ -703,13 +703,13 @@ html.no-icon-font .material-icons { visibility: hidden; }
 
 <script>
 /* ════════════════════════════════════════════════════════════
-   Vortex Customer Portal — presentation build
+   Vortex Customer Portal: presentation build
    All data below is fictional and generated for demonstration.
    ════════════════════════════════════════════════════════════ */
 
 /* ═════ DEMO DATA START ═════ */
 const DEMO = {
-  pageTitle: 'Vortex Customer Portal — PCB Demo',
+  pageTitle: 'Vortex Customer Portal: PCB Demo',
   customer: {
     company: 'ZOT Instruments Ltd',
     phone: '01234 567890',
@@ -824,7 +824,7 @@ const DEMO = {
 
 
 /* ──────────────────────────────────────────────────────────
-   Formatting helpers — mirror PortalDataService / the panel
+   Formatting helpers: mirror PortalDataService / the panel
    ────────────────────────────────────────────────────────── */
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
@@ -1050,7 +1050,7 @@ function renderDashboard() {
     `Phone: ${DEMO.customer.phone} - Here is your production overview`;
   document.getElementById('kpiActiveCount').textContent = ACTIVE_GROUPS.length;
 
-  // Ring chart — orange (action-required) cannot occur, so only green/red appear.
+  // Ring chart: orange (action-required) cannot occur, so only green/red appear.
   const C = 2 * Math.PI * 28;
   const total = ACTIVE_GROUPS.length;
   const items = [
@@ -1076,7 +1076,7 @@ function renderDashboard() {
        <span class="ring-legend-label">${s.count} ${s.label}</span>
      </div>`).join('');
 
-  // Upcoming deliveries — nearest three group summaries by est. delivery
+  // Upcoming deliveries: nearest three group summaries by est. delivery
   const upcoming = ACTIVE_GROUPS.slice()
     .sort((a, b) => (parseUkDate(a.summary.estDelivery) || 0) - (parseUkDate(b.summary.estDelivery) || 0))
     .slice(0, 3);
@@ -1092,7 +1092,7 @@ function renderDashboard() {
     });
   });
 
-  // Recent activity — five most recent stage completions across all batches
+  // Recent activity: five most recent stage completions across all batches
   const acts = [];
   ACTIVE_GROUPS.forEach((g) => g.batches.forEach((b) => {
     if (b.lastProcessName && b.lastProcessEndDateTime) {
