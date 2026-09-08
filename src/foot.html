@@ -1,0 +1,115 @@
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('dcRoot');
+  if (!root) return;
+  var sections = Array.prototype.slice.call(root.querySelectorAll('section[data-chapter]'));
+  var progress = document.getElementById('dcProgress');
+  var counter = document.getElementById('dcCounter');
+  var rail = document.getElementById('dcRail');
+  var index = 0, dots = [], tween = null;
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Reveal-on-enter
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        io.unobserve(el);
+        var d = parseInt(el.getAttribute('data-delay') || '0', 10);
+        if (el.hasAttribute('data-grow')) {
+          el.style.animation = 'zGrowX 1.5s cubic-bezier(0.22,1,0.36,1) ' + d + 'ms forwards';
+        } else {
+          el.style.animation = 'zRise 0.7s cubic-bezier(0.22,1,0.36,1) ' + d + 'ms forwards';
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+    root.querySelectorAll('[data-reveal],[data-grow]').forEach(function (el) { io.observe(el); });
+
+    var uo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        uo.unobserve(e.target);
+        e.target.style.animation = 'zRule 0.9s cubic-bezier(0.22,1,0.36,1) 250ms both';
+      });
+    }, { threshold: 0.5 });
+    root.querySelectorAll('[data-rule]').forEach(function (el) { uo.observe(el); });
+  }
+
+  // Chapter rail
+  if (rail) {
+    sections.forEach(function (s, i) {
+      var a = document.createElement('button');
+      a.type = 'button';
+      a.title = s.getAttribute('data-chapter') || '';
+      a.setAttribute('aria-label', s.getAttribute('data-chapter') || ('Section ' + (i + 1)));
+      a.style.cssText = 'display:block;width:22px;height:6px;border:0;padding:0;border-radius:3px;cursor:pointer;background:rgba(0,77,77,0.18);transition:all 0.3s ease;';
+      a.addEventListener('click', function () { goTo(i); });
+      rail.appendChild(a);
+      dots.push(a);
+    });
+  }
+
+  function onScroll() {
+    var h = window.innerHeight;
+    var top = window.scrollY || document.documentElement.scrollTop || 0;
+    var i = 0;
+    for (var k = 0; k < sections.length; k++) {
+      if (sections[k].offsetTop <= top + h * 0.4) i = k;
+    }
+    var max = document.documentElement.scrollHeight - h;
+    if (progress) progress.style.width = (max > 0 ? Math.min(100, (top / max) * 100) : 0) + '%';
+    if (i !== index) { index = i; paint(); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  function onKey(ev) {
+    var tag = (ev.target && ev.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+    if (ev.key === 'ArrowRight' || ev.key === 'PageDown' || ev.key === ' ') { ev.preventDefault(); goTo(index + 1); }
+    else if (ev.key === 'ArrowLeft' || ev.key === 'PageUp') { ev.preventDefault(); goTo(index - 1); }
+    else if (ev.key === 'Home') { ev.preventDefault(); goTo(0); }
+    else if (ev.key === 'End') { ev.preventDefault(); goTo(sections.length - 1); }
+  }
+  window.addEventListener('keydown', onKey);
+
+  function goTo(i) {
+    var n = Math.max(0, Math.min(sections.length - 1, i));
+    var target = sections[n].offsetTop;
+    var start = window.scrollY || document.documentElement.scrollTop || 0;
+    var dist = target - start;
+    if (Math.abs(dist) < 2) return;
+    if (reduce) { window.scrollTo(0, target); return; }
+    var dur = 620, t0 = performance.now();
+    if (tween) cancelAnimationFrame(tween);
+    function step(now) {
+      var p = Math.min(1, (now - t0) / dur);
+      var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      window.scrollTo(0, start + dist * e);
+      if (p < 1) tween = requestAnimationFrame(step);
+    }
+    tween = requestAnimationFrame(step);
+  }
+
+  function paint() {
+    var total = sections.length;
+    if (counter) counter.textContent = (index + 1) + ' / ' + total;
+    dots.forEach(function (d, i) {
+      var on = i === index;
+      d.style.background = on ? '#00ff9d' : 'rgba(0,77,77,0.18)';
+      d.style.width = on ? '34px' : '22px';
+    });
+    var cur = sections[index];
+    var dark = cur && (cur.style.background || '').indexOf('004d4d') > -1;
+    if (rail) rail.style.opacity = dark ? '0.75' : '1';
+  }
+
+  onScroll();
+  paint();
+})();
+</script>
+</body>
+</html>

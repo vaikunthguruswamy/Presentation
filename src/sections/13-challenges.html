@@ -1,0 +1,27 @@
+  <!-- 13 CHALLENGES -->
+  <section data-screen-label="13 Challenges" data-chapter="Challenges" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#ffffff;">
+    <div style="width:100%; max-width:1000px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">13</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">What went wrong along the way</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2.2rem;"></div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:36px 48px;">
+        <div data-reveal data-delay="120" style="opacity:1;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.06rem; font-weight:600; color:#004d4d; margin:0 0 10px;">Payroll, under a deadline</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.68; color:#555555; margin:0;">Salaried, hourly and weekly staff, day and night shifts, four-, five- and six-day weeks, several contracted hour patterns. The rules were undocumented and pay day does not move. The heavy read and write load became a bottleneck, and I had to optimise queries and add caching while corrections were still landing. It was the most uncomfortable delivery I have run, and the reason I now write the rules down before I write code.</p>
+        </div>
+        <div data-reveal data-delay="165" style="opacity:1;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.06rem; font-weight:600; color:#004d4d; margin:0 0 10px;">Databases that do not agree</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.68; color:#555555; margin:0;">With no foreign keys and no shared naming, joining across divisions is a judgement call about which loosely-matched columns describe the same thing. I resolved it by checking every mapping with the person who enters that data, rather than by inferring it from the schema. Slower, but the numbers on the dashboards are ones the divisions recognise as their own.</p>
+        </div>
+        <div data-reveal data-delay="210" style="opacity:1;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.06rem; font-weight:600; color:#004d4d; margin:0 0 10px;">A brittle first attempt at supplier data</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.68; color:#555555; margin:0;">The obvious way to search supplier catalogues is to scrape their websites. Scrapers break the moment a page changes, and I did not want a core purchasing tool that failed silently. I went back and arranged proper access with the suppliers instead, which took longer and is still working.</p>
+        </div>
+        <div data-reveal data-delay="255" style="opacity:1;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.06rem; font-weight:600; color:#004d4d; margin:0 0 10px;">Asking the right questions</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.68; color:#555555; margin:0;">The hardest part of the first few months was not technical. It was working out what colleagues actually needed from a system, and how it should be presented. I worried my questions were too complicated or beside the point. People were patient with me, and learning to ask better questions has improved every project since.</p>
+        </div>
+      </div>
+    </div>
+  </section>

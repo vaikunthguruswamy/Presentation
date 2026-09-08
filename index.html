@@ -10,8 +10,8 @@
 <meta property="og:title" content="Digitalising a three-division electronics manufacturer, from the inside">
 <meta property="og:description" content="ZOT Engineering: PCB manufacturing, assembly and sheet metal, unified on one platform. The Manufacturer MX Awards 2026.">
 <meta property="og:type" content="website">
-<link rel="icon" href="assets/logo_zot.ico" sizes="any">
-<link rel="icon" href="assets/logo_zot.svg" type="image/svg+xml">
+<link rel="icon" type="image/x-icon" href="assets/logo_zot.ico">
+<link rel="shortcut icon" type="image/x-icon" href="assets/logo_zot.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -29,6 +29,7 @@
   @keyframes zRule { from { width:0; } to { width:60px; } }
   @keyframes zPulse { 0% { opacity:1; } 12% { opacity:1; } 88% { opacity:1; } 100% { opacity:1; } }
   @keyframes zFlow { from { stroke-dashoffset:24; } to { stroke-dashoffset:0; } }
+  @media (prefers-reduced-motion: reduce) { .flow-dots { display:none; } }
 </style>
 </head>
 <body>
@@ -40,7 +41,7 @@
 
   <header style="position:fixed; top:3px; left:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:0.8rem 5%; background:#ffffff; box-shadow:0 2px 4px rgba(0,0,0,0.1); z-index:110; box-sizing:border-box;">
     <div style="display:flex; align-items:center; gap:16px; min-width:0;">
-      <img src="assets/logo_zot.svg" alt="ZOT Engineering" width="84" height="32" style="height:32px; width:auto; object-fit:contain; display:block;">
+      <a href="https://www.zot.co.uk" target="_blank" rel="noopener noreferrer" aria-label="Visit ZOT Engineering website"><img src="assets/logo_zot.svg" alt="ZOT Engineering" width="84" height="32" style="height:32px; width:auto; object-fit:contain; display:block;"></a>
       <span style="width:1px; height:24px; background:#e0e0e0; flex:0 0 auto;"></span>
       <span style="font-family:'Poppins',sans-serif; font-size:0.82rem; color:#757575; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">The Manufacturer MX Awards 2026 &middot; Technology Champion, Round 2</span>
     </div>
@@ -52,8 +53,8 @@
   <!-- 00 COVER -->
   <section data-screen-label="00 Cover" data-chapter="Cover" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:space-between; padding:120px 5% 48px; background:#ffffff;">
     <div style="width:100%; max-width:1100px; margin:0 auto; flex:1; display:flex; flex-direction:column; justify-content:center;">
-      <p data-reveal style="opacity:1; font-family:'Poppins',sans-serif; font-size:0.95rem; color:#757575; margin:0 0 1.6rem; letter-spacing:0.02em;">Round 2 presentation to the judging panel</p>
-      <h1 data-reveal data-delay="80" style="opacity:1; font-family:'Montserrat','Poppins',sans-serif; font-weight:700; font-size:clamp(2rem,4.4vw,3.5rem); line-height:1.2; color:#004d4d; margin:0 0 1.5rem; max-width:26ch;">Digitalising a three-division electronics manufacturer, from the inside</h1>
+      <p data-reveal style="opacity:1; font-family:'Poppins',sans-serif; font-size:0.95rem; color:#757575; margin:0 0 1.6rem; letter-spacing:0.02em;">Round 2 presentation</p>
+      <h1 data-reveal data-delay="80" style="opacity:1; font-family:'Montserrat','Poppins',sans-serif; font-weight:700; font-size:clamp(2rem,4.4vw,3.5rem); line-height:1.2; color:#004d4d; margin:0 0 1.5rem; max-width:26ch;">Digitization and automation across ZOT's three-divisions </h1>
       <p data-reveal data-delay="150" style="opacity:1; font-family:'Poppins',sans-serif; font-size:clamp(1.02rem,1.4vw,1.25rem); line-height:1.65; color:#333333; max-width:64ch; margin:0;">ZOT Engineering runs PCB manufacturing, assembly and sheet metal fabrication from one site in Musselburgh. Twenty-five years of production data sat in three unconnected databases and a chain of spreadsheets. This is what we did about it, how it was delivered, and what it has been worth.</p>
       <div data-reveal data-delay="230" style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:2.6rem 0 2rem;"></div>
       <div data-reveal data-delay="230" style="opacity:1;">
@@ -61,7 +62,62 @@
         <div style="font-family:'Poppins',sans-serif; font-size:0.98rem; color:#757575; margin-top:5px;">Software Application Engineer, ZOT Engineering Ltd</div>
       </div>
     </div>
-    <div data-reveal data-delay="320" style="opacity:1; width:100%; max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; gap:10px 32px; justify-content:space-between; align-items:center; padding-top:22px; border-top:1px solid #e0e0e0; font-family:'Poppins',sans-serif; font-size:0.85rem; color:#9e9e9e;">
+    <div data-reveal data-delay="300" style="opacity:1; width:100%; max-width:960px; margin:0 auto 6px;">
+      <svg viewBox="0 0 1000 280" role="img" aria-label="Three divisions, PCB, assembly and sheet metal, flowing into one connected ZOT platform and out to live insight for teams and customers" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:block; width:100%; height:auto; overflow:visible;">
+        <defs>
+          <filter id="fbShadow" x="-30%" y="-40%" width="160%" height="200%">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#004d4d" flood-opacity="0.12"/>
+          </filter>
+          <filter id="fbGlow" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="2.6" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <path id="fpTop" d="M186,70 C300,70 300,140 402,140" fill="none"/>
+          <path id="fpMid" d="M186,140 L402,140" fill="none"/>
+          <path id="fpBot" d="M186,210 C300,210 300,140 402,140" fill="none"/>
+          <path id="fpOut" d="M598,140 L790,140" fill="none"/>
+        </defs>
+
+        <g fill="none" stroke="#c2e8d6" stroke-width="2.4" stroke-linecap="round">
+          <use xlink:href="#fpTop"/>
+          <use xlink:href="#fpMid"/>
+          <use xlink:href="#fpBot"/>
+          <use xlink:href="#fpOut"/>
+        </g>
+
+        <g class="flow-dots" fill="#00e08a" filter="url(#fbGlow)">
+          <circle r="4.6"><animateMotion dur="2.8s" begin="0s"    repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpTop"/></animateMotion></circle>
+          <circle r="4.6"><animateMotion dur="2.8s" begin="1.4s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpTop"/></animateMotion></circle>
+          <circle r="4.6"><animateMotion dur="2.6s" begin="0.5s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpMid"/></animateMotion></circle>
+          <circle r="4.6"><animateMotion dur="2.6s" begin="1.9s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpMid"/></animateMotion></circle>
+          <circle r="4.6"><animateMotion dur="2.8s" begin="0.9s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpBot"/></animateMotion></circle>
+          <circle r="4.6"><animateMotion dur="2.8s" begin="2.3s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpBot"/></animateMotion></circle>
+          <circle r="5"><animateMotion dur="2.2s" begin="0.3s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpOut"/></animateMotion></circle>
+          <circle r="5"><animateMotion dur="2.2s" begin="1.3s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpOut"/></animateMotion></circle>
+        </g>
+
+        <g font-family="'Montserrat','Poppins',sans-serif">
+          <g filter="url(#fbShadow)">
+            <rect x="14"  y="42"  width="172" height="56" rx="12" fill="#ffffff" stroke="#e6ecec" stroke-width="1.5"/>
+            <rect x="14"  y="112" width="172" height="56" rx="12" fill="#ffffff" stroke="#e6ecec" stroke-width="1.5"/>
+            <rect x="14"  y="182" width="172" height="56" rx="12" fill="#ffffff" stroke="#e6ecec" stroke-width="1.5"/>
+            <rect x="402" y="92"  width="196" height="96" rx="14" fill="#ffffff" stroke="#05b981" stroke-width="2.4"/>
+            <rect x="790" y="103" width="196" height="74" rx="12" fill="#ffffff" stroke="#e6ecec" stroke-width="1.5"/>
+          </g>
+
+          <text x="100" y="75"  text-anchor="middle" font-size="19" font-weight="700" fill="#004d4d">PCB</text>
+          <text x="100" y="145" text-anchor="middle" font-size="19" font-weight="700" fill="#004d4d">PCB Assembly</text>
+          <text x="100" y="215" text-anchor="middle" font-size="19" font-weight="700" fill="#004d4d">Sheet-metal</text>
+
+          <text x="500" y="134" text-anchor="middle" font-size="21" font-weight="700" fill="#004d4d">ZOT Platform</text>
+          <text x="500" y="158" text-anchor="middle" font-size="13" font-weight="500" fill="#6b7c7c" font-family="'Poppins',sans-serif">one connected system</text>
+
+          <text x="888" y="134" text-anchor="middle" font-size="18" font-weight="700" fill="#004d4d">Live insight</text>
+          <text x="888" y="153" text-anchor="middle" font-size="12" font-weight="500" fill="#6b7c7c" font-family="'Poppins',sans-serif">for teams &amp; customers</text>
+        </g>
+      </svg>
+    </div>
+    <div data-reveal data-delay="360" style="opacity:1; width:100%; max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; gap:10px 32px; justify-content:space-between; align-items:center; padding-top:22px; border-top:1px solid #e0e0e0; font-family:'Poppins',sans-serif; font-size:0.85rem; color:#9e9e9e;">
       <span>Five minutes on me, fifteen on the work, then questions</span>
       <span>Scroll, or use the arrow keys</span>
     </div>
