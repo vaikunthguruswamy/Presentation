@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vaikunth Guruswamy — Digital Transformation at ZOT Engineering</title>
+<meta name="description" content="How one engineer digitalised a three-division electronics manufacturer — ZOT Engineering. Round 2 presentation, The Manufacturer MX Awards 2026, Technology Champion.">
+<meta name="author" content="Vaikunth Guruswamy">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Digitalising a three-division electronics manufacturer, from the inside">
+<meta property="og:description" content="ZOT Engineering — PCB manufacturing, assembly and sheet metal, unified on one platform. The Manufacturer MX Awards 2026.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/logo_zot.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  html, body { margin:0; padding:0; height:100%; background:#ffffff; }
+  body { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; font-family:'Poppins', system-ui, sans-serif; color:#333333; }
+  a { color:#007a55; text-decoration:underline; text-decoration-color:rgba(0,122,85,0.3); text-underline-offset:3px; }
+  a:hover { color:#004d4d; text-decoration-color:#00ff9d; }
+  ::selection { background:rgba(0,255,157,0.35); }
+  @keyframes zRise { from { opacity:1; transform:translateY(14px); } to { opacity:1; transform:none; } }
+  @keyframes zFade { from { opacity:1; } to { opacity:1; } }
+  @keyframes zDraw { to { stroke-dashoffset:0; } }
+  @keyframes zGrowX { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+  @keyframes zRule { from { width:0; } to { width:60px; } }
+  @keyframes zPulse { 0% { opacity:1; } 12% { opacity:1; } 88% { opacity:1; } 100% { opacity:1; } }
+  @keyframes zFlow { from { stroke-dashoffset:24; } to { stroke-dashoffset:0; } }
+</style>
+</head>
+<body>
+<div id="dcRoot" style="background:#ffffff; position:relative; overflow-x:hidden;">
+
+  <div style="position:fixed; top:0; left:0; right:0; height:3px; background:rgba(0,77,77,0.07); z-index:120;">
+    <div id="dcProgress" style="height:100%; width:0%; background:#00ff9d;"></div>
+  </div>
+
+  <header style="position:fixed; top:3px; left:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:0.8rem 5%; background:#ffffff; box-shadow:0 2px 4px rgba(0,0,0,0.1); z-index:110; box-sizing:border-box;">
+    <div style="display:flex; align-items:center; gap:16px; min-width:0;">
+      <img src="assets/logo_zot.svg" alt="ZOT" width="120" height="40" style="height:32px; width:auto; object-fit:contain; display:block;">
+      <span style="width:1px; height:24px; background:#e0e0e0; flex:0 0 auto;"></span>
+      <span style="font-family:'Poppins',sans-serif; font-size:0.82rem; color:#757575; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">The Manufacturer MX Awards 2026 &mdash; Technology Champion, Round 2</span>
+    </div>
+    <div id="dcCounter" style="font-family:'Inter',system-ui,sans-serif; font-size:0.78rem; color:#9e9e9e; flex:0 0 auto; padding-left:16px;">1 / 18</div>
+  </header>
+
+  <nav id="dcRail" style="position:fixed; right:20px; top:50%; transform:translateY(-50%); z-index:105; display:flex; flex-direction:column; gap:10px; align-items:flex-end;"></nav>
+
+  <!-- 00 COVER -->
+  <section data-screen-label="00 Cover" data-chapter="Cover" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:space-between; padding:120px 5% 48px; background:#ffffff;">
+    <div style="width:100%; max-width:1100px; margin:0 auto; flex:1; display:flex; flex-direction:column; justify-content:center;">
+      <p data-reveal style="opacity:1; font-family:'Poppins',sans-serif; font-size:0.95rem; color:#757575; margin:0 0 1.6rem; letter-spacing:0.02em;">Round 2 presentation to the judging panel</p>
+      <h1 data-reveal data-delay="80" style="opacity:1; font-family:'Montserrat','Poppins',sans-serif; font-weight:700; font-size:clamp(2rem,4.4vw,3.5rem); line-height:1.2; color:#004d4d; margin:0 0 1.5rem; max-width:26ch;">Digitalising a three-division electronics manufacturer, from the inside</h1>
+      <p data-reveal data-delay="150" style="opacity:1; font-family:'Poppins',sans-serif; font-size:clamp(1.02rem,1.4vw,1.25rem); line-height:1.65; color:#333333; max-width:64ch; margin:0;">ZOT Engineering runs PCB manufacturing, assembly and sheet metal fabrication from one site in Musselburgh. Twenty-five years of production data sat in three unconnected databases and a chain of spreadsheets. This is what we did about it, how it was delivered, and what it has been worth.</p>
+      <div data-reveal data-delay="230" style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:2.6rem 0 2rem;"></div>
+      <div data-reveal data-delay="230" style="opacity:1;">
+        <div style="font-family:'Montserrat',sans-serif; font-size:1.3rem; font-weight:700; color:#004d4d;">Vaikunth Guruswamy</div>
+        <div style="font-family:'Poppins',sans-serif; font-size:0.98rem; color:#757575; margin-top:5px;">Software Application Engineer, ZOT Engineering Ltd</div>
+      </div>
+    </div>
+    <div data-reveal data-delay="320" style="opacity:1; width:100%; max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; gap:10px 32px; justify-content:space-between; align-items:center; padding-top:22px; border-top:1px solid #e0e0e0; font-family:'Poppins',sans-serif; font-size:0.85rem; color:#9e9e9e;">
+      <span>Five minutes on me, fifteen on the work, then questions</span>
+      <span>Scroll, or use the arrow keys</span>
+    </div>
+  </section>
+
+  <!-- 01 ABOUT ME -->
+  <section data-screen-label="01 About me" data-chapter="About me" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#ffffff;">
+    <div style="width:100%; max-width:1100px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">01</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">A little about me</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2.4rem;"></div>
+
+      <div style="display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:56px; align-items:start;">
+        <div>
+          <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; margin:0 0 1.15rem;">I studied electronics for my undergraduate degree and artificial intelligence for my master's. ZOT is my first full-time job in the United Kingdom. I joined in February 2025 as an intern through the company's placement partnership with Bright Green Business, and I am still the only software engineer here.</p>
+          <p data-reveal data-delay="170" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; margin:0 0 1.15rem;">The electronics background matters more than it might sound. It means I can sit down with a process engineer and understand what a layer, an etch bath or an impedance reading actually is, before trying to put it in a database. Most of my work has started as a conversation on the factory floor rather than a specification handed to me.</p>
+          <p data-reveal data-delay="220" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; margin:0;">I am conscious that I have been here eighteen months, and that some of the people I work alongside have been in electronics manufacturing for thirty years. What I have tried to contribute is the part they did not have in the building: someone whose whole job is to notice where the work is being made harder than it needs to be, and then fix it.</p>
+        </div>
+
+        <div data-reveal data-delay="260" style="opacity:1;">
+          <dl style="margin:0; font-family:'Poppins',sans-serif;">
+            <div style="padding:14px 0; border-bottom:1px solid #e0e0e0;">
+              <dt style="font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:#9e9e9e; margin-bottom:5px;">Education</dt>
+              <dd style="margin:0; font-size:0.98rem; color:#333333; line-height:1.5;">BEng Electronics<br>MSc Artificial Intelligence</dd>
+            </div>
+            <div style="padding:14px 0; border-bottom:1px solid #e0e0e0;">
+              <dt style="font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:#9e9e9e; margin-bottom:5px;">At ZOT</dt>
+              <dd style="margin:0; font-size:0.98rem; color:#333333; line-height:1.5;">Intern, February 2025<br>Software Application Engineer, August 2025</dd>
+            </div>
+            <div style="padding:14px 0; border-bottom:1px solid #e0e0e0;">
+              <dt style="font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:#9e9e9e; margin-bottom:5px;">Remit</dt>
+              <dd style="margin:0; font-size:0.98rem; color:#333333; line-height:1.5;">First software hire. No existing codebase, no prior software function.</dd>
+            </div>
+            <div style="padding:14px 0;">
+              <dt style="font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:#9e9e9e; margin-bottom:5px;">Scope of work</dt>
+              <dd style="margin:0; font-size:0.98rem; color:#333333; line-height:1.5;">Schema, backend, interface, cloud and support &mdash; end to end, on each project.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <blockquote data-reveal data-delay="320" style="opacity:1; margin:3rem 0 0; padding:24px 28px; background:#f5f9fc; border-left:4px solid #00ff9d; max-width:76ch;">
+        <p style="font-family:'Poppins',sans-serif; font-size:1.15rem; line-height:1.6; color:#004d4d; margin:0;">&ldquo;Wanting to help someone is the very first thing that drove me towards it. I see a problem, and I see that people are in that ecosystem, and that it is creating a bottleneck in their day-to-day work.&rdquo;</p>
+        <footer style="font-family:'Poppins',sans-serif; font-size:0.85rem; color:#757575; margin-top:12px;">Answering &ldquo;what keeps you going?&rdquo; in my nomination interview</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- 02 SECTOR CONTEXT -->
+  <section data-screen-label="02 Sector context" data-chapter="The sector" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#f5f9fc;">
+    <div style="width:100%; max-width:1100px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">02</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">Where this sits in the sector</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2.2rem;"></div>
+
+      <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:74ch; margin:0 0 2.4rem;">UK manufacturing is not short of enthusiasm for digital technology. It is short of three specific things: the skills to implement it, the capital to buy it, and systems old enough to make integration the hard part. Published sector research puts numbers on all three.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1px; background:#e0e0e0; border:1px solid #e0e0e0; margin-bottom:1.1rem;">
+        <div data-reveal data-delay="170" style="opacity:1; background:#ffffff; padding:24px;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:2.4rem; font-weight:700; color:#004d4d; line-height:1;">60%</div>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.92rem; line-height:1.55; color:#555555; margin:12px 0 0;">of manufacturers say skills are the major barrier to adopting AI and automation.</p>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.78rem; color:#9e9e9e; margin:10px 0 0;">Make UK / PwC Executive Survey 2026</p>
+        </div>
+        <div data-reveal data-delay="220" style="opacity:1; background:#ffffff; padding:24px;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:2.4rem; font-weight:700; color:#004d4d; line-height:1;">40%</div>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.92rem; line-height:1.55; color:#555555; margin:12px 0 0;">cite financial constraints as the primary reason digital adoption is delayed.</p>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.78rem; color:#9e9e9e; margin:10px 0 0;">Made Smarter, reported in The Manufacturer</p>
+        </div>
+        <div data-reveal data-delay="270" style="opacity:1; background:#ffffff; padding:24px;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:2.4rem; font-weight:700; color:#004d4d; line-height:1;">55%</div>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.92rem; line-height:1.55; color:#555555; margin:12px 0 0;">have embedded multiple digital technologies in some form &mdash; adoption is real, but uneven.</p>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.78rem; color:#9e9e9e; margin:10px 0 0;">Beaming / FourJaw, reported in The Manufacturer</p>
+        </div>
+        <div data-reveal data-delay="320" style="opacity:1; background:#ffffff; padding:24px;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:2.4rem; font-weight:700; color:#004d4d; line-height:1;">44%</div>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.92rem; line-height:1.55; color:#555555; margin:12px 0 0;">of SME manufacturers name data and systems integration as the technology they want most.</p>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.78rem; color:#9e9e9e; margin:10px 0 0;">Made Smarter SME market research</p>
+        </div>
+      </div>
+
+      <p data-reveal data-delay="380" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:74ch; margin:1.4rem 0 0;">ZOT had exactly that profile: keen, cash-disciplined, and running production on systems that pre-dated the cloud. The route we took was to build the capability inside the business rather than buy it &mdash; one engineer, open-source and cloud consumption costs, and no licence per seat. That is a route more SMEs can afford than the sector's spending figures suggest, and it is the part of this story I think generalises.</p>
+    </div>
+  </section>
+
+  <!-- 03 STARTING POINT -->
+  <section data-screen-label="03 The starting point" data-chapter="The starting point" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#ffffff;">
+    <div style="width:100%; max-width:1100px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">03</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">What I found in February 2025</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2.2rem;"></div>
+
+      <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:52px; align-items:center;">
+        <div>
+          <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; margin:0 0 1.15rem;">Each division ran its own order-management system on its own SQL Server, maintained for twenty to twenty-five years. Thousands of tables, hundreds of columns, no foreign keys, no documentation, and naming that did not agree between servers &mdash; the same field appears as <code style="font-family:'Consolas','Courier New',monospace; font-size:0.92em; background:#f5f9fc; padding:1px 5px;">no.</code>, <code style="font-family:'Consolas','Courier New',monospace; font-size:0.92em; background:#f5f9fc; padding:1px 5px;">prod_no</code> and <code style="font-family:'Consolas','Courier New',monospace; font-size:0.92em; background:#f5f9fc; padding:1px 5px;">productNo</code>.</p>
+          <p data-reveal data-delay="170" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; margin:0 0 1.15rem;">Anything the systems did not cover was kept in spreadsheets. In the PCB division one workbook had been running since around 2005, on a machine that had not been switched off in years. It linked out to roughly a dozen more, each with twenty or thirty sheets, some ending in 2009, some in 2019, some starting in 2024, all tracking more or less the same thing in different formats. Thirty thousand rows, no schema, no backup, and no graph at the end of it.</p>
+          <p data-reveal data-delay="220" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; margin:0;">Directors who wanted a view of performance exported from those systems by hand and rebuilt charts in Excel each time they needed them. The data existed. Nobody could see it.</p>
+        </div>
+
+        <figure data-reveal data-delay="260" style="opacity:1; margin:0;">
+          <div style="background:#f5f9fc; padding:28px 24px; border:1px solid #e0e0e0;">
+            <svg viewBox="0 0 460 320" style="width:100%; height:auto; display:block; font-family:'Inter',system-ui,sans-serif;">
+              <g>
+                <rect x="8" y="14" width="128" height="52" rx="4" fill="#ffffff" stroke="#bdbdbd"></rect>
+                <text x="72" y="38" text-anchor="middle" font-size="12" font-weight="600" fill="#333333">PCB</text>
+                <text x="72" y="54" text-anchor="middle" font-size="10" fill="#9e9e9e">SQL Server</text>
+
+                <rect x="166" y="14" width="128" height="52" rx="4" fill="#ffffff" stroke="#bdbdbd"></rect>
+                <text x="230" y="38" text-anchor="middle" font-size="12" font-weight="600" fill="#333333">Assembly</text>
+                <text x="230" y="54" text-anchor="middle" font-size="10" fill="#9e9e9e">SQL Server</text>
+
+                <rect x="324" y="14" width="128" height="52" rx="4" fill="#ffffff" stroke="#bdbdbd"></rect>
+                <text x="388" y="38" text-anchor="middle" font-size="12" font-weight="600" fill="#333333">Sheet Metal</text>
+                <text x="388" y="54" text-anchor="middle" font-size="10" fill="#9e9e9e">SQL Server</text>
+              </g>
+              <g stroke="#e0e0e0" stroke-width="1" stroke-dasharray="3 4">
+                <path d="M136 40 H166" fill="none"></path>
+                <path d="M294 40 H324" fill="none"></path>
+              </g>
+              <text x="230" y="88" text-anchor="middle" font-size="9.5" fill="#c62828" letter-spacing="0.06em">NO SHARED KEYS &middot; NO COMMON NAMING</text>
+
+              <g>
+                <rect x="150" y="118" width="160" height="40" rx="3" fill="#ffffff" stroke="#757575"></rect>
+                <text x="230" y="137" text-anchor="middle" font-size="11" font-weight="600" fill="#333333">Master workbook</text>
+                <text x="230" y="150" text-anchor="middle" font-size="9.5" fill="#9e9e9e">running since c. 2005</text>
+              </g>
+              <g stroke="#bdbdbd" stroke-width="1" fill="none">
+                <path d="M230 158 V176"></path>
+                <path d="M56 196 H404"></path>
+                <path d="M56 176 V196 M132 176 V196 M208 176 V196 M284 176 V196 M360 176 V196 M404 176 V196"></path>
+                <path d="M56 196 V212 M132 196 V212 M208 196 V212 M284 196 V212 M360 196 V212 M404 196 V212"></path>
+              </g>
+              <g fill="#ffffff" stroke="#bdbdbd">
+                <rect x="30" y="212" width="52" height="30" rx="2"></rect>
+                <rect x="106" y="212" width="52" height="30" rx="2"></rect>
+                <rect x="182" y="212" width="52" height="30" rx="2"></rect>
+                <rect x="258" y="212" width="52" height="30" rx="2"></rect>
+                <rect x="334" y="212" width="52" height="30" rx="2"></rect>
+              </g>
+              <g fill="#9e9e9e" font-size="8.5" text-anchor="middle">
+                <text x="56" y="231">2009</text><text x="132" y="231">2011</text><text x="208" y="231">2019</text>
+                <text x="284" y="231">2024</text><text x="360" y="231">2026</text>
+              </g>
+              <text x="404" y="231" font-size="9" fill="#bdbdbd">+8</text>
+              <g stroke="#e0e0e0" stroke-width="1" fill="none">
+                <path d="M56 242 V262 M132 242 V262 M208 242 V262 M284 242 V262 M360 242 V262"></path>
+              </g>
+              <g fill="#fafafa" stroke="#e0e0e0">
+                <rect x="38" y="262" width="36" height="18" rx="1"></rect><rect x="114" y="262" width="36" height="18" rx="1"></rect>
+                <rect x="190" y="262" width="36" height="18" rx="1"></rect><rect x="266" y="262" width="36" height="18" rx="1"></rect>
+                <rect x="342" y="262" width="36" height="18" rx="1"></rect>
+              </g>
+              <text x="230" y="302" text-anchor="middle" font-size="9.5" fill="#9e9e9e" letter-spacing="0.05em">20&ndash;30 SHEETS EACH &middot; NO BACKUP &middot; NO SCHEMA</text>
+            </svg>
+          </div>
+          <figcaption style="font-family:'Poppins',sans-serif; font-size:0.85rem; color:#757575; margin-top:12px; line-height:1.5;">The reporting layer as it stood: three isolated production databases, and a spreadsheet chain doing the work an ERP should do.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 WHY NOT BUY -->
+  <section data-screen-label="04 Why not buy" data-chapter="Why build" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#f5f9fc;">
+    <div style="width:100%; max-width:1100px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">04</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">Why we could not simply buy it</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2.2rem;"></div>
+
+      <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:74ch; margin:0 0 2.6rem;">This was the first question the board asked, and it is a fair one. We looked at the market properly. The problem is structural, not commercial: the ERP market is organised around single lines of business, and ZOT runs three.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; margin-bottom:2.2rem;">
+        <div data-reveal data-delay="170" style="opacity:1; background:#ffffff; padding:26px 28px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.1rem; font-weight:600; color:#333333; margin:0 0 12px;">Sector-specific ERPs</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.96rem; line-height:1.65; color:#555555; margin:0;">Deep and granular for one discipline. Buying three means buying three silos, three integrations and three sets of terminology &mdash; which is what we already had.</p>
+        </div>
+        <div data-reveal data-delay="220" style="opacity:1; background:#ffffff; padding:26px 28px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.1rem; font-weight:600; color:#333333; margin:0 0 12px;">Multi-division ERPs</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.96rem; line-height:1.65; color:#555555; margin:0;">Broad enough to cover all three, but shallow. They lose the process detail &mdash; plating, etch, impedance, bow and twist &mdash; that is exactly where our quality and cost live.</p>
+        </div>
+        <div data-reveal data-delay="270" style="opacity:1; background:#ffffff; padding:26px 28px; box-shadow:0 2px 10px rgba(0,0,0,0.1); border-left:4px solid #00ff9d;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.1rem; font-weight:600; color:#004d4d; margin:0 0 12px;">What we needed</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.96rem; line-height:1.65; color:#555555; margin:0;">Process-level detail per division and a single aggregated view across them. No vendor sells that combination, because almost nobody needs it. We do.</p>
+        </div>
+      </div>
+
+      <p data-reveal data-delay="330" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:74ch; margin:0;">So the decision was not &ldquo;build rather than buy&rdquo; on principle. It was that the aggregated view &mdash; the thing the directors actually wanted &mdash; could only be assembled on top of the granular systems we already ran. Everything after this follows from that.</p>
+    </div>
+  </section>
+
+  <!-- 05 TIMELINE -->
+  <section data-screen-label="05 Sequence" data-chapter="Sequence" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#ffffff;">
+    <div style="width:100%; max-width:1200px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">05</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">Foundation first, features second</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2rem;"></div>
+
+      <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:78ch; margin:0 0 3rem;">I had the idea for plain-English querying of the databases in May 2025 and deliberately did not build it. There was nowhere to put it: no structured data layer, no authentication, no deployment, nothing to branch from. Getting the foundation right cost several months and is the reason everything since has taken weeks rather than quarters.</p>
+
+      <div data-reveal data-delay="180" style="opacity:1; position:relative; padding-top:8px;">
+        <div style="position:relative; height:2px; background:#e0e0e0; margin:0 0 0;">
+          <div data-grow style="position:absolute; inset:0; background:#00ff9d; transform:scaleX(0); transform-origin:left;"></div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:18px; margin-top:0;">
+          <div style="padding-top:0;">
+            <div style="width:9px; height:9px; border-radius:50%; background:#00ff9d; margin:-5.5px 0 16px;"></div>
+            <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.76rem; font-weight:600; letter-spacing:0.06em; color:#004d4d; margin-bottom:8px;">FEB &ndash; MAR 2025</div>
+            <p style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#555555; margin:0;">Mapped the three divisional databases by interviewing staff, field by field. First database map the company had. Data-access layer in Python, first dashboards.</p>
+          </div>
+          <div>
+            <div style="width:9px; height:9px; border-radius:50%; background:#00ff9d; margin:-5.5px 0 16px;"></div>
+            <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.76rem; font-weight:600; letter-spacing:0.06em; color:#004d4d; margin-bottom:8px;">APR &ndash; AUG 2025</div>
+            <p style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#555555; margin:0;">Website rebuilt with marketing and sales. Division KPI dashboards. Quotation schema replacing the assembly spreadsheets. CRM and pipeline foundations.</p>
+          </div>
+          <div>
+            <div style="width:9px; height:9px; border-radius:50%; background:#00ff9d; margin:-5.5px 0 16px;"></div>
+            <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.76rem; font-weight:600; letter-spacing:0.06em; color:#004d4d; margin-bottom:8px;">OCT &ndash; DEC 2025</div>
+            <p style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#555555; margin:0;">Azure estate built with the network and cyber-security partners. Site deployed to the domain. Recruitment pipeline. Payslip automation begun.</p>
+          </div>
+          <div>
+            <div style="width:9px; height:9px; border-radius:50%; background:#00ff9d; margin:-5.5px 0 16px;"></div>
+            <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.76rem; font-weight:600; letter-spacing:0.06em; color:#004d4d; margin-bottom:8px;">JAN &ndash; FEB 2026</div>
+            <p style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#555555; margin:0;">VPN gateway links the cloud to the on-premise servers. Live production dashboards across all three divisions. Role-based access. Forecasting and invoice extraction.</p>
+          </div>
+          <div>
+            <div style="width:9px; height:9px; border-radius:50%; background:#00ff9d; margin:-5.5px 0 16px;"></div>
+            <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.76rem; font-weight:600; letter-spacing:0.06em; color:#004d4d; margin-bottom:8px;">MAR &ndash; APR 2026</div>
+            <p style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#555555; margin:0;">Vortex customer order portal. Internal customer profiles. Flow meters connected to the cloud. Invoice tallying and BoM component matching.</p>
+          </div>
+          <div>
+            <div style="width:9px; height:9px; border-radius:50%; background:#004d4d; margin:-5.5px 0 16px;"></div>
+            <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.76rem; font-weight:600; letter-spacing:0.06em; color:#004d4d; margin-bottom:8px;">MAY &ndash; JUN 2026</div>
+            <p style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#555555; margin:0;">Automated optical inspection pipeline. Digital job cards on the PCB floor. Vortex cluster redesign. Azure cost optimisation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 HOW IT WAS DELIVERED -->
+  <section data-screen-label="06 Method" data-chapter="Method" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#f5f9fc;">
+    <div style="width:100%; max-width:1100px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">06</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">How the work actually gets delivered</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2.2rem;"></div>
+
+      <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:74ch; margin:0 0 2.6rem;">Every project has run through the same five steps. It is not a formal framework; it is what works when you are one engineer serving eight departments and cannot afford to build the wrong thing.</p>
+
+      <ol style="list-style:none; margin:0; padding:0; counter-reset:step;">
+        <li data-reveal data-delay="170" style="opacity:1; display:grid; grid-template-columns:56px minmax(0,1fr); gap:24px; padding:20px 0; border-top:1px solid #e0e0e0;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:1.5rem; font-weight:700; color:#00c97b;">01</div>
+          <div>
+            <h3 style="font-family:'Poppins',sans-serif; font-size:1.08rem; font-weight:600; color:#333333; margin:0 0 6px;">Find it on the floor, not in a backlog</h3>
+            <p style="font-family:'Poppins',sans-serif; font-size:0.98rem; line-height:1.6; color:#555555; margin:0;">I spend time in each division and in accounts, HR and sales. Almost every project on the timeline started as somebody describing a task they disliked, not as an assigned requirement.</p>
+          </div>
+        </li>
+        <li data-reveal data-delay="215" style="opacity:1; display:grid; grid-template-columns:56px minmax(0,1fr); gap:24px; padding:20px 0; border-top:1px solid #e0e0e0;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:1.5rem; font-weight:700; color:#00c97b;">02</div>
+          <div>
+            <h3 style="font-family:'Poppins',sans-serif; font-size:1.08rem; font-weight:600; color:#333333; margin:0 0 6px;">Reverse-engineer the rules before writing any code</h3>
+            <p style="font-family:'Poppins',sans-serif; font-size:0.98rem; line-height:1.6; color:#555555; margin:0;">Payroll had no rule book &mdash; the logic lived with one or two people. I ran repeated sessions with HR, accounts and payroll, wrote the rules down, and had them corrected until they were right. That document now belongs to the company, not to individuals.</p>
+          </div>
+        </li>
+        <li data-reveal data-delay="260" style="opacity:1; display:grid; grid-template-columns:56px minmax(0,1fr); gap:24px; padding:20px 0; border-top:1px solid #e0e0e0;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:1.5rem; font-weight:700; color:#00c97b;">03</div>
+          <div>
+            <h3 style="font-family:'Poppins',sans-serif; font-size:1.08rem; font-weight:600; color:#333333; margin:0 0 6px;">Prioritise openly on a shared board</h3>
+            <p style="font-family:'Poppins',sans-serif; font-size:0.98rem; line-height:1.6; color:#555555; margin:0;">Requests from directors and engineers alike go onto one board in ClickUp, categorised and ranked. When two departments both want something first, the trade-off is visible rather than a private judgement of mine.</p>
+          </div>
+        </li>
+        <li data-reveal data-delay="305" style="opacity:1; display:grid; grid-template-columns:56px minmax(0,1fr); gap:24px; padding:20px 0; border-top:1px solid #e0e0e0;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:1.5rem; font-weight:700; color:#00c97b;">04</div>
+          <div>
+            <h3 style="font-family:'Poppins',sans-serif; font-size:1.08rem; font-weight:600; color:#333333; margin:0 0 6px;">Build on a branch, demo, correct, repeat</h3>
+            <p style="font-family:'Poppins',sans-serif; font-size:0.98rem; line-height:1.6; color:#555555; margin:0;">Each feature is developed in isolation and shown back to the people who asked for it in short cycles &mdash; the same verification loop each time, against what they said they needed. Production is never the place where an idea gets tested.</p>
+          </div>
+        </li>
+        <li data-reveal data-delay="350" style="opacity:1; display:grid; grid-template-columns:56px minmax(0,1fr); gap:24px; padding:20px 0; border-top:1px solid #e0e0e0; border-bottom:1px solid #e0e0e0;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:1.5rem; font-weight:700; color:#00c97b;">05</div>
+          <div>
+            <h3 style="font-family:'Poppins',sans-serif; font-size:1.08rem; font-weight:600; color:#333333; margin:0 0 6px;">Ship it, then keep owning it</h3>
+            <p style="font-family:'Poppins',sans-serif; font-size:0.98rem; line-height:1.6; color:#555555; margin:0;">Automated tests and code review run on every change, deployment is automated, and the desktop application on the PCB floor updates itself so nobody has to install anything. I remain the support line for all of it.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 07 GOVERNANCE -->
+  <section data-screen-label="07 Governance" data-chapter="Governance" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#ffffff;">
+    <div style="width:100%; max-width:1100px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">07</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">Governance, security and spending discipline</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2.2rem;"></div>
+
+      <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:74ch; margin:0 0 2.4rem;">A single engineer with access to every production database is a risk to the business unless the controls around them are explicit. These are the arrangements we put in place, and they were agreed with the people accountable for each area rather than decided by me.</p>
+
+      <div style="border:1px solid #e0e0e0;">
+        <div data-reveal data-delay="170" style="opacity:1; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.6fr) minmax(0,1fr); gap:0; background:#f5f9fc; border-bottom:1px solid #e0e0e0;">
+          <div style="padding:12px 20px; font-family:'Inter',system-ui,sans-serif; font-size:0.74rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#757575;">Area</div>
+          <div style="padding:12px 20px; font-family:'Inter',system-ui,sans-serif; font-size:0.74rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#757575;">Arrangement</div>
+          <div style="padding:12px 20px; font-family:'Inter',system-ui,sans-serif; font-size:0.74rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#757575;">Accountable with</div>
+        </div>
+        <div data-reveal data-delay="205" style="opacity:1; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.6fr) minmax(0,1fr); border-bottom:1px solid #e0e0e0;">
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Access control</div>
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.55; color:#555555;">Per-route read, write and admin permissions, configurable per person; single sign-on for staff and a separate external identity tier for customers.</div>
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.9rem; color:#757575;">Directors, department heads</div>
+        </div>
+        <div data-reveal data-delay="235" style="opacity:1; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.6fr) minmax(0,1fr); border-bottom:1px solid #e0e0e0;">
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Network and cloud</div>
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.55; color:#555555;">On-premise databases reached only through a private gateway with end-to-end encryption. No production database is exposed to the internet.</div>
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.9rem; color:#757575;">Azure admin, cyber-security partner</div>
+        </div>
+        <div data-reveal data-delay="265" style="opacity:1; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.6fr) minmax(0,1fr); border-bottom:1px solid #e0e0e0;">
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Personal data</div>
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.55; color:#555555;">Names, addresses and contact details are stripped from CVs before any model sees them, so screening cannot act on identity. Consent, cookies and privacy handled with legal input.</div>
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.9rem; color:#757575;">HR, legal</div>
+        </div>
+        <div data-reveal data-delay="295" style="opacity:1; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.6fr) minmax(0,1fr); border-bottom:1px solid #e0e0e0;">
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Change control</div>
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.55; color:#555555;">Automated build, test and deployment on every change, with automated code review. Unit, end-to-end, accessibility and performance suites all run before release.</div>
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.9rem; color:#757575;">Owned by me, auditable</div>
+        </div>
+        <div data-reveal data-delay="325" style="opacity:1; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.6fr) minmax(0,1fr);">
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Spend</div>
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.55; color:#555555;">This is a manufacturer; capital belongs on the shop floor. I only ask for budget where I genuinely cannot build it. The water-flow logger is the example: a commercial unit was around &pound;200 each, ours cost roughly &pound;7 in parts.</div>
+          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.9rem; color:#757575;">Managing Director sign-off</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 ARCHITECTURE -->
+  <section data-screen-label="08 The platform" data-chapter="The platform" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#f5f9fc;">
+    <div style="width:100%; max-width:1200px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">08</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">The platform as it runs today</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2rem;"></div>
+
+      <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:78ch; margin:0 0 2.4rem;">One codebase serves three audiences: the public website, the internal ERP, and the customer portal. The legacy systems stay exactly where they are and keep running production &mdash; nothing was ripped out.</p>
+
+      <figure data-reveal data-delay="170" style="opacity:1; margin:0;">
+        <div style="background:#ffffff; border:1px solid #e0e0e0; padding:30px 26px;">
+          <svg viewBox="0 0 1060 330" style="width:100%; height:auto; display:block; font-family:'Inter',system-ui,sans-serif;">
+            <g font-size="9.5" fill="#bdbdbd" letter-spacing="0.1em">
+              <text x="10" y="14">ON PREMISE</text>
+              <text x="330" y="14">AZURE</text>
+              <text x="836" y="14">SURFACES</text>
+            </g>
+
+            <g>
+              <rect x="10" y="34" width="150" height="46" rx="4" fill="#f5f9fc" stroke="#bdbdbd"></rect>
+              <text x="85" y="54" text-anchor="middle" font-size="11" font-weight="600" fill="#333333">PCB database</text>
+              <text x="85" y="69" text-anchor="middle" font-size="9" fill="#9e9e9e">SQL Server</text>
+
+              <rect x="10" y="94" width="150" height="46" rx="4" fill="#f5f9fc" stroke="#bdbdbd"></rect>
+              <text x="85" y="114" text-anchor="middle" font-size="11" font-weight="600" fill="#333333">Assembly database</text>
+              <text x="85" y="129" text-anchor="middle" font-size="9" fill="#9e9e9e">SQL Server</text>
+
+              <rect x="10" y="154" width="150" height="46" rx="4" fill="#f5f9fc" stroke="#bdbdbd"></rect>
+              <text x="85" y="174" text-anchor="middle" font-size="11" font-weight="600" fill="#333333">Sheet metal database</text>
+              <text x="85" y="189" text-anchor="middle" font-size="9" fill="#9e9e9e">SQL Server</text>
+
+              <rect x="10" y="214" width="150" height="46" rx="4" fill="#f5f9fc" stroke="#bdbdbd"></rect>
+              <text x="85" y="234" text-anchor="middle" font-size="11" font-weight="600" fill="#333333">Flow meters</text>
+              <text x="85" y="249" text-anchor="middle" font-size="9" fill="#9e9e9e">ESP32 sensors</text>
+
+              <rect x="10" y="274" width="150" height="46" rx="4" fill="#f5f9fc" stroke="#bdbdbd"></rect>
+              <text x="85" y="294" text-anchor="middle" font-size="11" font-weight="600" fill="#333333">Utility invoices</text>
+              <text x="85" y="309" text-anchor="middle" font-size="9" fill="#9e9e9e">Third-party feeds</text>
+            </g>
+
+            <g>
+              <rect x="222" y="120" width="86" height="74" rx="4" fill="#004d4d"></rect>
+              <text x="265" y="150" text-anchor="middle" font-size="10.5" font-weight="600" fill="#ffffff">VPN</text>
+              <text x="265" y="164" text-anchor="middle" font-size="10.5" font-weight="600" fill="#ffffff">gateway</text>
+              <text x="265" y="180" text-anchor="middle" font-size="8.5" fill="#00ff9d">AES-256-GCM</text>
+            </g>
+
+            <g stroke="#bdbdbd" stroke-width="1.2" fill="none">
+              <path d="M160 57 H192 V150 H222"></path>
+              <path d="M160 117 H192 V157 H222"></path>
+              <path d="M160 177 H192 V164 H222"></path>
+              <path d="M160 237 H192 V171 H222"></path>
+              <path d="M160 297 H192 V178 H222"></path>
+            </g>
+            <g stroke="#00ff9d" stroke-width="2" fill="none" stroke-dasharray="6 18" style="animation:zFlow 1.6s linear infinite;">
+              <path d="M160 57 H192 V150 H222"></path>
+              <path d="M160 117 H192 V157 H222"></path>
+              <path d="M160 177 H192 V164 H222"></path>
+            </g>
+
+            <g>
+              <rect x="352" y="60" width="196" height="60" rx="4" fill="#ffffff" stroke="#004d4d" stroke-width="1.4"></rect>
+              <text x="450" y="84" text-anchor="middle" font-size="11" font-weight="600" fill="#004d4d">Serverless API</text>
+              <text x="450" y="100" text-anchor="middle" font-size="9" fill="#757575">25 blueprints, 114+ endpoints</text>
+
+              <rect x="352" y="134" width="196" height="60" rx="4" fill="#ffffff" stroke="#bdbdbd"></rect>
+              <text x="450" y="158" text-anchor="middle" font-size="11" font-weight="600" fill="#333333">AI services</text>
+              <text x="450" y="174" text-anchor="middle" font-size="9" fill="#757575">Local LLMs, vision, forecasting</text>
+
+              <rect x="352" y="208" width="196" height="60" rx="4" fill="#ffffff" stroke="#bdbdbd"></rect>
+              <text x="450" y="232" text-anchor="middle" font-size="11" font-weight="600" fill="#333333">Permissions store</text>
+              <text x="450" y="248" text-anchor="middle" font-size="9" fill="#757575">Per-route role-based access</text>
+            </g>
+
+            <g stroke="#bdbdbd" stroke-width="1.2" fill="none">
+              <path d="M308 143 H330 V90 H352"></path>
+              <path d="M308 157 H330 V164 H352"></path>
+              <path d="M330 164 V238 H352"></path>
+            </g>
+
+            <g>
+              <rect x="592" y="120" width="118" height="74" rx="4" fill="#ffffff" stroke="#004d4d" stroke-width="1.4"></rect>
+              <text x="651" y="147" text-anchor="middle" font-size="11" font-weight="600" fill="#004d4d">Angular 19</text>
+              <text x="651" y="162" text-anchor="middle" font-size="9" fill="#757575">Server-rendered</text>
+              <text x="651" y="177" text-anchor="middle" font-size="9" fill="#757575">40+ components</text>
+            </g>
+            <g stroke="#bdbdbd" stroke-width="1.2" fill="none">
+              <path d="M548 90 H570 V150 H592"></path>
+              <path d="M548 164 H592"></path>
+              <path d="M548 238 H570 V178 H592"></path>
+            </g>
+            <g stroke="#00ff9d" stroke-width="2" fill="none" stroke-dasharray="6 18" style="animation:zFlow 1.6s linear infinite;">
+              <path d="M548 90 H570 V150 H592"></path>
+              <path d="M548 164 H592"></path>
+            </g>
+
+            <g>
+              <rect x="754" y="34" width="296" height="60" rx="4" fill="#ffffff" stroke="#bdbdbd"></rect>
+              <text x="774" y="58" font-size="11" font-weight="600" fill="#333333">Public website &mdash; zot.co.uk</text>
+              <text x="774" y="76" font-size="9" fill="#757575">Marketing, careers, quotation and enquiry forms, blog</text>
+
+              <rect x="754" y="108" width="296" height="88" rx="4" fill="#ffffff" stroke="#004d4d" stroke-width="1.4"></rect>
+              <text x="774" y="132" font-size="11" font-weight="600" fill="#004d4d">Internal ERP</text>
+              <text x="774" y="150" font-size="9" fill="#757575">Executive and division dashboards, CRM, procurement,</text>
+              <text x="774" y="164" font-size="9" fill="#757575">quality, finance, HR and payslips, quotation and costed</text>
+              <text x="774" y="178" font-size="9" fill="#757575">BoM, job cards, environmental KPIs, custom reports</text>
+
+              <rect x="754" y="210" width="296" height="60" rx="4" fill="#ffffff" stroke="#bdbdbd"></rect>
+              <text x="774" y="234" font-size="11" font-weight="600" fill="#333333">Vortex customer portal</text>
+              <text x="774" y="252" font-size="9" fill="#757575">Live order tracking, delivery performance, history</text>
+
+              <rect x="754" y="284" width="296" height="40" rx="4" fill="#ffffff" stroke="#bdbdbd"></rect>
+              <text x="774" y="309" font-size="11" font-weight="600" fill="#333333">Shop-floor desktop app</text>
+            </g>
+            <g stroke="#bdbdbd" stroke-width="1.2" fill="none">
+              <path d="M710 150 H732 V64 H754"></path>
+              <path d="M710 157 H732 V152 H754"></path>
+              <path d="M710 164 H732 V240 H754"></path>
+              <path d="M732 240 V304 H754"></path>
+            </g>
+          </svg>
+        </div>
+        <figcaption style="font-family:'Poppins',sans-serif; font-size:0.85rem; color:#757575; margin-top:12px; line-height:1.5;">Twenty-five years of production data now reaches a browser without anyone exporting a spreadsheet. The legacy systems remain the system of record for their own division.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 09 WHAT IT REPLACED -->
+  <section data-screen-label="09 What it replaced" data-chapter="What changed" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#ffffff;">
+    <div style="width:100%; max-width:1100px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">09</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">What it replaced, task by task</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2rem;"></div>
+
+      <p data-reveal data-delay="110" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:74ch; margin:0 0 2.2rem;">The platform is easier to judge one process at a time. In each case the old method still worked &mdash; it just consumed skilled people's days.</p>
+
+      <div style="border-top:1px solid #e0e0e0;">
+        <div data-reveal data-delay="150" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.15fr); gap:0; border-bottom:1px solid #e0e0e0; background:#f5f9fc;">
+          <div style="padding:11px 18px; font-family:'Inter',system-ui,sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#757575;">Process</div>
+          <div style="padding:11px 18px; font-family:'Inter',system-ui,sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#757575;">Before</div>
+          <div style="padding:11px 18px; font-family:'Inter',system-ui,sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#757575;">Now</div>
+        </div>
+        <div data-reveal data-delay="180" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.15fr); border-bottom:1px solid #e0e0e0;">
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Management reporting</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#757575;">Manual exports rebuilt into Excel charts each time a figure was needed</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#333333;">Live dashboards across all three divisions, over 100 graphs, no export step</div>
+        </div>
+        <div data-reveal data-delay="205" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.15fr); border-bottom:1px solid #e0e0e0;">
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Payroll verification</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#757575;">Roughly a week, several people cross-checking every clock-in by hand</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#333333;">Generated in a few clicks, with anomalies flagged automatically</div>
+        </div>
+        <div data-reveal data-delay="230" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.15fr); border-bottom:1px solid #e0e0e0;">
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Invoice tallying</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#757575;">Days of reading PDFs and reconciling against the system by hand</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#333333;">Batch upload, extraction and cross-check against stock in minutes</div>
+        </div>
+        <div data-reveal data-delay="255" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.15fr); border-bottom:1px solid #e0e0e0;">
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Component matching</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#757575;">Hours per bill of materials, switching between supplier sites row by row</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#333333;">One upload, ranked matches from stock and suppliers on a single screen</div>
+        </div>
+        <div data-reveal data-delay="280" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.15fr); border-bottom:1px solid #e0e0e0;">
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Customer order updates</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#757575;">Staff emailing each customer with the day's status</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#333333;">Customers see their own live position and delivery performance themselves</div>
+        </div>
+        <div data-reveal data-delay="305" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.15fr); border-bottom:1px solid #e0e0e0;">
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">PCB job cards</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#757575;">Hundreds of printed sheets a day, untraceable once filed</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#333333;">Signed on a tablet, full paper trail per board, searchable months later</div>
+        </div>
+        <div data-reveal data-delay="330" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.15fr); border-bottom:1px solid #e0e0e0;">
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Recruitment screening</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#757575;">Every CV read by hand; applications arriving by email</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#333333;">Anonymised scoring with a written analysis, inside a hiring pipeline</div>
+        </div>
+        <div data-reveal data-delay="355" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.15fr);">
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Water use</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#757575;">Meters displayed a reading and stored nothing</div>
+          <div style="padding:15px 18px; font-family:'Poppins',sans-serif; font-size:0.93rem; line-height:1.55; color:#333333;">Logged continuously to the ERP with high-flow alerting</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 VORTEX -->
+  <section data-screen-label="10 Vortex" data-chapter="Vortex" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 60px; background:#f5f9fc;">
+    <div style="width:100%; max-width:1240px; margin:0 auto;">
+      <div style="display:grid; grid-template-columns:minmax(0,0.85fr) minmax(0,2fr); gap:44px; align-items:center;">
+        <div>
+          <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">10</div>
+          <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.65rem,2.6vw,2.2rem); line-height:1.25; color:#333333; margin:0;">Vortex, the customer portal</h2>
+          <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 1.8rem;"></div>
+          <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.7; color:#333333; margin:0 0 1.1rem;">Our customers are other manufacturers placing bulk orders that split across batches, divisions and process stages. Keeping them informed used to mean somebody writing emails.</p>
+          <p data-reveal data-delay="160" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.7; color:#333333; margin:0 0 1.1rem;">Vortex gives them a secure login to their own live position: which stage each order is at, expected dates, whether it is on time, and their delivery performance over any period. For our larger accounts there is a cluster view covering every site they buy from.</p>
+          <p data-reveal data-delay="200" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.7; color:#555555; margin:0 0 1.6rem;">It is the piece I am least aware of a direct competitor offering at our scale, and the one customers react to most.</p>
+          <div data-reveal data-delay="240" style="opacity:1; display:flex; flex-wrap:wrap; gap:12px;">
+            <a href="demos/vortex-pcb.html" target="_blank" style="display:inline-block; padding:0.7rem 1.3rem; border-radius:4px; background:#00ff9d; color:#004d4d; font-family:'Poppins',sans-serif; font-size:0.9rem; font-weight:500; text-decoration:none;">Open PCB portal</a>
+            <a href="demos/vortex-pcba.html" target="_blank" style="display:inline-block; padding:0.7rem 1.3rem; border-radius:4px; background:#004d4d; color:#ffffff; font-family:'Poppins',sans-serif; font-size:0.9rem; font-weight:500; text-decoration:none;">Assembly</a>
+            <a href="demos/vortex-sheetmetal.html" target="_blank" style="display:inline-block; padding:0.7rem 1.3rem; border-radius:4px; background:#004d4d; color:#ffffff; font-family:'Poppins',sans-serif; font-size:0.9rem; font-weight:500; text-decoration:none;">Sheet metal</a>
+          </div>
+        </div>
+
+        <figure data-reveal data-delay="200" style="opacity:1; margin:0;">
+          <div style="background:#ffffff; border-radius:8px; box-shadow:0 8px 25px rgba(0,0,0,0.15); overflow:hidden;">
+            <div style="display:flex; align-items:center; gap:7px; padding:9px 14px; background:#f5f5f5; border-bottom:1px solid #e0e0e0;">
+              <span style="width:9px; height:9px; border-radius:50%; background:#e0e0e0; display:block;"></span>
+              <span style="width:9px; height:9px; border-radius:50%; background:#e0e0e0; display:block;"></span>
+              <span style="width:9px; height:9px; border-radius:50%; background:#e0e0e0; display:block;"></span>
+              <span style="margin-left:12px; font-family:'Inter',system-ui,sans-serif; font-size:11px; color:#9e9e9e;">zot.co.uk/vortex</span>
+            </div>
+            <iframe src="demos/vortex-pcb.html" title="Vortex customer portal" loading="lazy" style="width:100%; height:min(58vh,560px); border:0; display:block; background:#f5f9fc;"></iframe>
+          </div>
+          <figcaption style="font-family:'Poppins',sans-serif; font-size:0.82rem; color:#757575; margin-top:10px;">Live demonstration build of the portal. Navigate it directly, or open it full screen using the buttons.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 AOI -->
+  <section data-screen-label="11 Inspection" data-chapter="Inspection" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#ffffff;">
+    <div style="width:100%; max-width:1140px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">11</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">Inspecting assembled boards by comparison</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2rem;"></div>
+
+      <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:48px; align-items:start; margin-bottom:2.4rem;">
+        <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.05rem; line-height:1.7; color:#333333; margin:0;">New board designs arrive constantly, and each one needs its optical inspection programmed before it can be checked. The assembly team's first approach was a single end-to-end vision model, run locally for security. It was expensive to set up and slow in use, because full-resolution board images either overwhelmed the model or lost the detail that mattered when scaled down.</p>
+        <p data-reveal data-delay="160" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.05rem; line-height:1.7; color:#333333; margin:0;">Working with the assembly engineer who raised it, I proposed treating it as an alignment and difference problem rather than a recognition problem. The reference board and the manufactured board are aligned, components are detected and masked on both, and only the differences are scored. It is robust to how the board is placed under the camera and to changes in lighting.</p>
+      </div>
+
+      <figure data-reveal data-delay="200" style="opacity:1; margin:0 0 1.8rem;">
+        <div style="background:#f5f9fc; border:1px solid #e0e0e0; padding:30px 24px;">
+          <svg viewBox="0 0 1000 180" style="width:100%; height:auto; display:block; font-family:'Inter',system-ui,sans-serif;">
+            <g>
+              <rect x="6" y="30" width="118" height="46" rx="4" fill="#ffffff" stroke="#bdbdbd"></rect>
+              <text x="65" y="52" text-anchor="middle" font-size="10.5" font-weight="600" fill="#333333">Reference board</text>
+              <text x="65" y="66" text-anchor="middle" font-size="9" fill="#9e9e9e">known good</text>
+              <rect x="6" y="104" width="118" height="46" rx="4" fill="#ffffff" stroke="#bdbdbd"></rect>
+              <text x="65" y="126" text-anchor="middle" font-size="10.5" font-weight="600" fill="#333333">Manufactured board</text>
+              <text x="65" y="140" text-anchor="middle" font-size="9" fill="#9e9e9e">off the line</text>
+            </g>
+            <g stroke="#bdbdbd" stroke-width="1.2" fill="none">
+              <path d="M124 53 H156 V85 H180"></path>
+              <path d="M124 127 H156 V95 H180"></path>
+            </g>
+
+            <rect x="180" y="60" width="152" height="60" rx="4" fill="#ffffff" stroke="#004d4d" stroke-width="1.3"></rect>
+            <text x="256" y="84" text-anchor="middle" font-size="10.5" font-weight="600" fill="#004d4d">Align</text>
+            <text x="256" y="100" text-anchor="middle" font-size="9" fill="#757575">RANSAC homography</text>
+            <text x="256" y="112" text-anchor="middle" font-size="9" fill="#757575">orientation, scale, lighting</text>
+
+            <path d="M332 90 H372" stroke="#bdbdbd" stroke-width="1.2" fill="none"></path>
+            <path d="M366 86 l8 4 -8 4z" fill="#bdbdbd"></path>
+
+            <rect x="376" y="60" width="152" height="60" rx="4" fill="#ffffff" stroke="#004d4d" stroke-width="1.3"></rect>
+            <text x="452" y="84" text-anchor="middle" font-size="10.5" font-weight="600" fill="#004d4d">Detect</text>
+            <text x="452" y="100" text-anchor="middle" font-size="9" fill="#757575">DETR, DINOv3</text>
+            <text x="452" y="112" text-anchor="middle" font-size="9" fill="#757575">component regions</text>
+
+            <path d="M528 90 H568" stroke="#bdbdbd" stroke-width="1.2" fill="none"></path>
+            <path d="M562 86 l8 4 -8 4z" fill="#bdbdbd"></path>
+
+            <rect x="572" y="60" width="152" height="60" rx="4" fill="#ffffff" stroke="#004d4d" stroke-width="1.3"></rect>
+            <text x="648" y="84" text-anchor="middle" font-size="10.5" font-weight="600" fill="#004d4d">Mask</text>
+            <text x="648" y="100" text-anchor="middle" font-size="9" fill="#757575">SAM2 segmentation</text>
+            <text x="648" y="112" text-anchor="middle" font-size="9" fill="#757575">per component</text>
+
+            <path d="M724 90 H764" stroke="#bdbdbd" stroke-width="1.2" fill="none"></path>
+            <path d="M758 86 l8 4 -8 4z" fill="#bdbdbd"></path>
+
+            <rect x="768" y="60" width="152" height="60" rx="4" fill="#004d4d"></rect>
+            <text x="844" y="84" text-anchor="middle" font-size="10.5" font-weight="600" fill="#ffffff">Score the difference</text>
+            <text x="844" y="100" text-anchor="middle" font-size="9" fill="#00ff9d">missing &middot; misplaced</text>
+            <text x="844" y="112" text-anchor="middle" font-size="9" fill="#00ff9d">misaligned</text>
+
+            <g stroke="#00ff9d" stroke-width="2.4" fill="none" stroke-dasharray="7 21" style="animation:zFlow 1.4s linear infinite;">
+              <path d="M332 90 H372 M528 90 H568 M724 90 H764"></path>
+            </g>
+          </svg>
+        </div>
+      </figure>
+
+      <div data-reveal data-delay="260" style="opacity:1; display:flex; gap:14px; align-items:flex-start; max-width:82ch; padding:18px 22px; background:#fff8e1; border-left:4px solid #ff9800;">
+        <p style="font-family:'Poppins',sans-serif; font-size:0.96rem; line-height:1.65; color:#5d4037; margin:0;"><strong style="font-weight:600;">Being precise about status.</strong> The pipeline is designed to reduce the current inspection setup from days to seconds, and that is the figure in my first-round entry. It is not yet in full production use, so I would describe it as designed and demonstrated rather than measured. The judges should hold me to the difference.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 AI IN OPERATIONS -->
+  <section data-screen-label="12 AI in operations" data-chapter="AI at work" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#f5f9fc;">
+    <div style="width:100%; max-width:1140px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">12</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">Where AI is doing real work</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2rem;"></div>
+
+      <p data-reveal data-delay="110" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:76ch; margin:0 0 2.4rem;">Each of these sits inside a process someone was already doing by hand. None of them was adopted because it was interesting; every one removed a specific task. Where the data is sensitive, the models run on our own infrastructure.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:24px;">
+        <div data-reveal data-delay="150" style="opacity:1; background:#ffffff; box-shadow:0 2px 10px rgba(0,0,0,0.1); padding:24px 26px;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.05rem; font-weight:600; color:#004d4d; margin:0 0 8px;">Plain English to a chart</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.6; color:#555555; margin:0;">A manager describes what they want to see; a local model turns it into a query across the divisional databases and returns the data to plot. Dynamic questions get answered without waiting for me to build a dashboard.</p>
+        </div>
+        <div data-reveal data-delay="190" style="opacity:1; background:#ffffff; box-shadow:0 2px 10px rgba(0,0,0,0.1); padding:24px 26px;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.05rem; font-weight:600; color:#004d4d; margin:0 0 8px;">Recruitment screening</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.6; color:#555555; margin:0;">Identifying details are removed first. Several agents then argue the candidate's strengths and weaknesses against the job description and converge on a score with a written rationale HR can challenge.</p>
+        </div>
+        <div data-reveal data-delay="230" style="opacity:1; background:#ffffff; box-shadow:0 2px 10px rgba(0,0,0,0.1); padding:24px 26px;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.05rem; font-weight:600; color:#004d4d; margin:0 0 8px;">Document extraction</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.6; color:#555555; margin:0;">Supplier, utility and landfill invoices are read automatically into the ERP at around 94% extraction accuracy, feeding the environmental and cost dashboards without manual entry.</p>
+        </div>
+        <div data-reveal data-delay="270" style="opacity:1; background:#ffffff; box-shadow:0 2px 10px rgba(0,0,0,0.1); padding:24px 26px;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.05rem; font-weight:600; color:#004d4d; margin:0 0 8px;">Bill of materials matching</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.6; color:#555555; margin:0;">Customers describe the same component in different ways. A fine-tuned model normalises each description, then the system searches stock and supplier catalogues and ranks candidates by how well they match.</p>
+        </div>
+        <div data-reveal data-delay="310" style="opacity:1; background:#ffffff; box-shadow:0 2px 10px rgba(0,0,0,0.1); padding:24px 26px;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.05rem; font-weight:600; color:#004d4d; margin:0 0 8px;">Forecasting</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.6; color:#555555; margin:0;">Time-series models project sales trends and electricity, water and waste usage into the next month, quarter and financial year, so environmental and cost planning starts from a projection rather than last year's number.</p>
+        </div>
+        <div data-reveal data-delay="350" style="opacity:1; background:#ffffff; box-shadow:0 2px 10px rgba(0,0,0,0.1); padding:24px 26px;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.05rem; font-weight:600; color:#004d4d; margin:0 0 8px;">Payroll assistant</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.6; color:#555555; margin:0;">HR can ask why a particular payslip looks the way it does. The assistant knows the payroll rules, decides which rules and records apply, and answers from the data rather than guessing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 CHALLENGES -->
+  <section data-screen-label="13 Challenges" data-chapter="Challenges" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#ffffff;">
+    <div style="width:100%; max-width:1000px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">13</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">What went wrong along the way</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2.2rem;"></div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:36px 48px;">
+        <div data-reveal data-delay="120" style="opacity:1;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.06rem; font-weight:600; color:#004d4d; margin:0 0 10px;">Payroll, under a deadline</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.68; color:#555555; margin:0;">Salaried, hourly and weekly staff, day and night shifts, four-, five- and six-day weeks, several contracted hour patterns. The rules were undocumented and pay day does not move. The heavy read and write load became a bottleneck, and I had to optimise queries and add caching while corrections were still landing. It was the most uncomfortable delivery I have run, and the reason I now write the rules down before I write code.</p>
+        </div>
+        <div data-reveal data-delay="165" style="opacity:1;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.06rem; font-weight:600; color:#004d4d; margin:0 0 10px;">Databases that do not agree</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.68; color:#555555; margin:0;">With no foreign keys and no shared naming, joining across divisions is a judgement call about which loosely-matched columns describe the same thing. I resolved it by checking every mapping with the person who enters that data, rather than by inferring it from the schema. Slower, but the numbers on the dashboards are ones the divisions recognise as their own.</p>
+        </div>
+        <div data-reveal data-delay="210" style="opacity:1;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.06rem; font-weight:600; color:#004d4d; margin:0 0 10px;">A brittle first attempt at supplier data</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.68; color:#555555; margin:0;">The obvious way to search supplier catalogues is to scrape their websites. Scrapers break the moment a page changes, and I did not want a core purchasing tool that failed silently. I went back and arranged proper access with the suppliers instead, which took longer and is still working.</p>
+        </div>
+        <div data-reveal data-delay="255" style="opacity:1;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.06rem; font-weight:600; color:#004d4d; margin:0 0 10px;">Asking the right questions</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.68; color:#555555; margin:0;">The hardest part of the first few months was not technical. It was working out what colleagues actually needed from a system, and how it should be presented. I worried my questions were too complicated or beside the point. People were patient with me, and learning to ask better questions has improved every project since.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 RESULTS -->
+  <section data-screen-label="14 Results" data-chapter="Results" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#f5f9fc;">
+    <div style="width:100%; max-width:1140px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">14</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">Results, and how confident I am in each</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2rem;"></div>
+
+      <p data-reveal data-delay="110" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:76ch; margin:0 0 1.6rem;">There was no software function before I arrived, so for much of this there is no earlier baseline to measure against. Rather than present estimates as measurements, everything below carries a label. I would rather be trusted on the smaller numbers than challenged on the large ones.</p>
+
+      <div data-reveal data-delay="150" style="opacity:1; display:flex; flex-wrap:wrap; gap:8px 22px; margin-bottom:2rem; font-family:'Poppins',sans-serif; font-size:0.85rem; color:#757575;">
+        <span style="display:inline-flex; align-items:center; gap:7px;"><span style="width:9px; height:9px; background:#4caf50; display:block;"></span>Verifiable from the system</span>
+        <span style="display:inline-flex; align-items:center; gap:7px;"><span style="width:9px; height:9px; background:#2196f3; display:block;"></span>Reported by the team who do the work</span>
+        <span style="display:inline-flex; align-items:center; gap:7px;"><span style="width:9px; height:9px; background:#ff9800; display:block;"></span>Designed for, not yet measured</span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(212px,1fr)); gap:1px; background:#e0e0e0; border:1px solid #e0e0e0;">
+        <div data-reveal data-delay="190" style="opacity:1; background:#ffffff; padding:22px; border-top:3px solid #4caf50;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:2.1rem; font-weight:700; color:#004d4d; line-height:1;">100</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:0.92rem; line-height:1.5; color:#333333; margin-top:10px;">PageSpeed score on the rebuilt website, from 78 on the outsourced site it replaced.</div>
+        </div>
+        <div data-reveal data-delay="215" style="opacity:1; background:#ffffff; padding:22px; border-top:3px solid #4caf50;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:2.1rem; font-weight:700; color:#004d4d; line-height:1;">500+</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:0.92rem; line-height:1.5; color:#333333; margin-top:10px;">legacy tables migrated into normalised schemas across five databases.</div>
+        </div>
+        <div data-reveal data-delay="240" style="opacity:1; background:#ffffff; padding:22px; border-top:3px solid #4caf50;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:2.1rem; font-weight:700; color:#004d4d; line-height:1;">100+</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:0.92rem; line-height:1.5; color:#333333; margin-top:10px;">live graphs and insights in production, across all three divisions.</div>
+        </div>
+        <div data-reveal data-delay="265" style="opacity:1; background:#ffffff; padding:22px; border-top:3px solid #4caf50;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:2.1rem; font-weight:700; color:#004d4d; line-height:1;">98%</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:0.92rem; line-height:1.5; color:#333333; margin-top:10px;">automated test coverage, with accessibility and performance suites in the pipeline.</div>
+        </div>
+        <div data-reveal data-delay="290" style="opacity:1; background:#ffffff; padding:22px; border-top:3px solid #2196f3;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:2.1rem; font-weight:700; color:#004d4d; line-height:1;">80%</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:0.92rem; line-height:1.5; color:#333333; margin-top:10px;">reduction in PCB paper use once digital job cards are fully rolled out.</div>
+        </div>
+        <div data-reveal data-delay="315" style="opacity:1; background:#ffffff; padding:22px; border-top:3px solid #2196f3;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:2.1rem; font-weight:700; color:#004d4d; line-height:1;">1 week</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:0.92rem; line-height:1.5; color:#333333; margin-top:10px;">of multi-person payroll checking, now a few clicks each cycle.</div>
+        </div>
+        <div data-reveal data-delay="340" style="opacity:1; background:#ffffff; padding:22px; border-top:3px solid #2196f3;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:2.1rem; font-weight:700; color:#004d4d; line-height:1;">~2</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:0.92rem; line-height:1.5; color:#333333; margin-top:10px;">new customer enquiries a month arriving passively through the new website.</div>
+        </div>
+        <div data-reveal data-delay="365" style="opacity:1; background:#ffffff; padding:22px; border-top:3px solid #ff9800;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:2.1rem; font-weight:700; color:#004d4d; line-height:1;">Days &rarr; seconds</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:0.92rem; line-height:1.5; color:#333333; margin-top:10px;">inspection set-up time the new pipeline is designed to deliver, not yet in production.</div>
+        </div>
+      </div>
+
+      <p data-reveal data-delay="400" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.7; color:#555555; max-width:76ch; margin:1.8rem 0 0;">The honest headline is harder to put in a box. Before, decisions about pricing, capacity and lead time were made from experience and partial data. Now they are made from the record. My directors are better placed than I am to value that, and I would rather they were the ones to put a figure on it.</p>
+    </div>
+  </section>
+
+  <!-- 15 WIDER INFLUENCE -->
+  <section data-screen-label="15 Wider influence" data-chapter="Influence" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#ffffff;">
+    <div style="width:100%; max-width:1100px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">15</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">Beyond my own remit</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2.2rem;"></div>
+
+      <div style="display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:52px; align-items:start;">
+        <div>
+          <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.06rem; line-height:1.7; color:#333333; margin:0 0 1.15rem;">The part I am most pleased about is not a system. It is that colleagues now bring me ideas. Marketing worked with me on the website. HR asked for the recruitment pipeline and now uses it for everything. Sales use the costed bill of materials for pricing. The job cards started as a conversation with a colleague on the PCB floor, and we took the proposal to the Managing Director together.</p>
+          <p data-reveal data-delay="165" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.06rem; line-height:1.7; color:#333333; margin:0 0 1.15rem;">Some of it is quieter capability building. The payroll rules and the database map existed only in one or two people's heads. Writing them down and putting them in a system means the company owns that knowledge now, and it does not leave when someone does.</p>
+          <p data-reveal data-delay="210" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.06rem; line-height:1.7; color:#333333; margin:0;">Outside the business, ZOT encouraged me to attend research conferences and technical meetups, where I could learn from engineers with far more experience than me. My placement was published as a case study by the Midlothian and East Lothian Chamber of Commerce, and I am glad it is being used to make the case for taking on technical interns in manufacturing &mdash; that route is how I got here.</p>
+        </div>
+
+        <div data-reveal data-delay="250" style="opacity:1; background:#f5f9fc; padding:26px 28px;">
+          <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.74rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#757575; margin-bottom:16px;">Teams now using something I built</div>
+          <ul style="list-style:none; margin:0; padding:0; font-family:'Poppins',sans-serif;">
+            <li style="padding:10px 0 10px 18px; border-bottom:1px solid #e0e0e0; font-size:0.96rem; color:#333333; position:relative;"><span style="position:absolute; left:0; top:16px; width:7px; height:7px; background:#00ff9d; display:block;"></span>Directors and department heads</li>
+            <li style="padding:10px 0 10px 18px; border-bottom:1px solid #e0e0e0; font-size:0.96rem; color:#333333; position:relative;"><span style="position:absolute; left:0; top:16px; width:7px; height:7px; background:#00ff9d; display:block;"></span>PCB, assembly and sheet metal floors</li>
+            <li style="padding:10px 0 10px 18px; border-bottom:1px solid #e0e0e0; font-size:0.96rem; color:#333333; position:relative;"><span style="position:absolute; left:0; top:16px; width:7px; height:7px; background:#00ff9d; display:block;"></span>Sales and marketing</li>
+            <li style="padding:10px 0 10px 18px; border-bottom:1px solid #e0e0e0; font-size:0.96rem; color:#333333; position:relative;"><span style="position:absolute; left:0; top:16px; width:7px; height:7px; background:#00ff9d; display:block;"></span>Human resources and recruitment</li>
+            <li style="padding:10px 0 10px 18px; border-bottom:1px solid #e0e0e0; font-size:0.96rem; color:#333333; position:relative;"><span style="position:absolute; left:0; top:16px; width:7px; height:7px; background:#00ff9d; display:block;"></span>Accounts and payroll</li>
+            <li style="padding:10px 0 10px 18px; border-bottom:1px solid #e0e0e0; font-size:0.96rem; color:#333333; position:relative;"><span style="position:absolute; left:0; top:16px; width:7px; height:7px; background:#00ff9d; display:block;"></span>Procurement and quality</li>
+            <li style="padding:10px 0 10px 18px; font-size:0.96rem; color:#333333; position:relative;"><span style="position:absolute; left:0; top:16px; width:7px; height:7px; background:#00ff9d; display:block;"></span>Customers, through Vortex</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 WHAT'S NEXT -->
+  <section data-screen-label="16 What is next" data-chapter="What is next" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#f5f9fc;">
+    <div style="width:100%; max-width:1060px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">16</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">What comes next</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2.2rem;"></div>
+
+      <p data-reveal data-delay="110" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:74ch; margin:0 0 2.2rem;">The foundation is in place, which means the next twelve months are about depth rather than plumbing.</p>
+
+      <div style="border-top:1px solid #e0e0e0;">
+        <div data-reveal data-delay="150" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.9fr); gap:28px; padding:20px 0; border-bottom:1px solid #e0e0e0;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.02rem; font-weight:600; color:#004d4d; margin:0;">Job cards, end to end</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.65; color:#555555; margin:0;">Complete the PCB rollout so every board carries a full digital paper trail, then feed that process timing back into lead-time and capacity planning.</p>
+        </div>
+        <div data-reveal data-delay="185" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.9fr); gap:28px; padding:20px 0; border-bottom:1px solid #e0e0e0;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.02rem; font-weight:600; color:#004d4d; margin:0;">Inspection into production</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.65; color:#555555; margin:0;">Take the inspection pipeline from demonstrated to running on the line, with the assembly team, and start measuring it properly instead of projecting.</p>
+        </div>
+        <div data-reveal data-delay="220" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.9fr); gap:28px; padding:20px 0; border-bottom:1px solid #e0e0e0;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.02rem; font-weight:600; color:#004d4d; margin:0;">Machine data</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.65; color:#555555; margin:0;">The flow meters proved the pattern cheaply. Extending live machine data into the ERP is the logical next step, and the one that turns reporting into monitoring.</p>
+        </div>
+        <div data-reveal data-delay="255" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.9fr); gap:28px; padding:20px 0; border-bottom:1px solid #e0e0e0;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.02rem; font-weight:600; color:#004d4d; margin:0;">A deeper Vortex tier</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.65; color:#555555; margin:0;">A richer portal for our largest accounts, with more of the quality and delivery evidence they currently have to ask us for.</p>
+        </div>
+        <div data-reveal data-delay="290" style="opacity:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.9fr); gap:28px; padding:20px 0;">
+          <h3 style="font-family:'Poppins',sans-serif; font-size:1.02rem; font-weight:600; color:#004d4d; margin:0;">Not being the only engineer</h3>
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.65; color:#555555; margin:0;">One person is a risk to a platform this load-bearing. Documenting it properly, and eventually having someone alongside me, matters more than any single feature on this list.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17 CLOSE -->
+  <section data-screen-label="17 Close" data-chapter="Close" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 60px; background:#ffffff;">
+    <div style="width:100%; max-width:1100px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">17</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Montserrat','Poppins',sans-serif; font-weight:700; font-size:clamp(1.7rem,2.8vw,2.4rem); line-height:1.3; color:#004d4d; margin:0 0 1.4rem; max-width:34ch;">Thank you &mdash; I am happy to go into any of this in detail</h2>
+      <p data-reveal data-delay="110" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:70ch; margin:0 0 3rem;">I have been at ZOT for eighteen months and there is a great deal I am still learning. What I can say is that the company now runs on a record of what it actually does, and that the people who make it were involved in building every part of that.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:28px;">
+        <blockquote data-reveal data-delay="160" style="opacity:1; margin:0; padding:24px 26px; background:#f5f9fc; border-left:4px solid #00ff9d;">
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.65; color:#333333; margin:0 0 14px;">&ldquo;From day one he has demonstrated his eagerness to learn, strong problem solving skills, and ability to learn and adapt to new challenges. A fantastic &lsquo;can do&rsquo; attitude, working quickly and efficiently to solve problems and handle task given to him, showing creativity and initiative to find solutions.&rdquo;</p>
+          <footer style="font-family:'Poppins',sans-serif; font-size:0.86rem; color:#007a55;">Gordon Falconer &mdash; Managing Director, ZOT</footer>
+        </blockquote>
+        <blockquote data-reveal data-delay="200" style="opacity:1; margin:0; padding:24px 26px; background:#f5f9fc; border-left:4px solid #00ff9d;">
+          <p style="font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.65; color:#333333; margin:0 0 14px;">&ldquo;His proactive, can-do attitude and skills allow me to come to him with any project and be sure that it will get done as soon as possible. His expertise saved us thousands of pounds on a CRM solution and the website we built together already generated business enquiries from almost 30 new customers.&rdquo;</p>
+          <footer style="font-family:'Poppins',sans-serif; font-size:0.86rem; color:#007a55;">Antoni Masny &mdash; Sales and Marketing Assistant, ZOT</footer>
+        </blockquote>
+      </div>
+
+      <div data-reveal data-delay="250" style="opacity:1; margin-top:3rem; padding-top:22px; border-top:1px solid #e0e0e0; display:flex; flex-wrap:wrap; gap:10px 32px; justify-content:space-between; font-family:'Poppins',sans-serif; font-size:0.88rem; color:#9e9e9e;">
+        <span>Vaikunth Guruswamy &middot; ZOT Engineering Ltd &middot; zot.co.uk</span>
+        <span>The Manufacturer MX Awards 2026 &mdash; Technology Champion</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('dcRoot');
+  if (!root) return;
+  var sections = Array.prototype.slice.call(root.querySelectorAll('section[data-chapter]'));
+  var progress = document.getElementById('dcProgress');
+  var counter = document.getElementById('dcCounter');
+  var rail = document.getElementById('dcRail');
+  var index = 0, dots = [], tween = null;
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Reveal-on-enter
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        io.unobserve(el);
+        var d = parseInt(el.getAttribute('data-delay') || '0', 10);
+        if (el.hasAttribute('data-grow')) {
+          el.style.animation = 'zGrowX 1.5s cubic-bezier(0.22,1,0.36,1) ' + d + 'ms forwards';
+        } else {
+          el.style.animation = 'zRise 0.7s cubic-bezier(0.22,1,0.36,1) ' + d + 'ms forwards';
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+    root.querySelectorAll('[data-reveal],[data-grow]').forEach(function (el) { io.observe(el); });
+
+    var uo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        uo.unobserve(e.target);
+        e.target.style.animation = 'zRule 0.9s cubic-bezier(0.22,1,0.36,1) 250ms both';
+      });
+    }, { threshold: 0.5 });
+    root.querySelectorAll('[data-rule]').forEach(function (el) { uo.observe(el); });
+  }
+
+  // Chapter rail
+  if (rail) {
+    sections.forEach(function (s, i) {
+      var a = document.createElement('button');
+      a.type = 'button';
+      a.title = s.getAttribute('data-chapter') || '';
+      a.setAttribute('aria-label', s.getAttribute('data-chapter') || ('Section ' + (i + 1)));
+      a.style.cssText = 'display:block;width:22px;height:6px;border:0;padding:0;border-radius:3px;cursor:pointer;background:rgba(0,77,77,0.18);transition:all 0.3s ease;';
+      a.addEventListener('click', function () { goTo(i); });
+      rail.appendChild(a);
+      dots.push(a);
+    });
+  }
+
+  function onScroll() {
+    var h = window.innerHeight;
+    var top = window.scrollY || document.documentElement.scrollTop || 0;
+    var i = 0;
+    for (var k = 0; k < sections.length; k++) {
+      if (sections[k].offsetTop <= top + h * 0.4) i = k;
+    }
+    var max = document.documentElement.scrollHeight - h;
+    if (progress) progress.style.width = (max > 0 ? Math.min(100, (top / max) * 100) : 0) + '%';
+    if (i !== index) { index = i; paint(); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  function onKey(ev) {
+    var tag = (ev.target && ev.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+    if (ev.key === 'ArrowRight' || ev.key === 'PageDown' || ev.key === ' ') { ev.preventDefault(); goTo(index + 1); }
+    else if (ev.key === 'ArrowLeft' || ev.key === 'PageUp') { ev.preventDefault(); goTo(index - 1); }
+    else if (ev.key === 'Home') { ev.preventDefault(); goTo(0); }
+    else if (ev.key === 'End') { ev.preventDefault(); goTo(sections.length - 1); }
+  }
+  window.addEventListener('keydown', onKey);
+
+  function goTo(i) {
+    var n = Math.max(0, Math.min(sections.length - 1, i));
+    var target = sections[n].offsetTop;
+    var start = window.scrollY || document.documentElement.scrollTop || 0;
+    var dist = target - start;
+    if (Math.abs(dist) < 2) return;
+    if (reduce) { window.scrollTo(0, target); return; }
+    var dur = 620, t0 = performance.now();
+    if (tween) cancelAnimationFrame(tween);
+    function step(now) {
+      var p = Math.min(1, (now - t0) / dur);
+      var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      window.scrollTo(0, start + dist * e);
+      if (p < 1) tween = requestAnimationFrame(step);
+    }
+    tween = requestAnimationFrame(step);
+  }
+
+  function paint() {
+    var total = sections.length;
+    if (counter) counter.textContent = (index + 1) + ' / ' + total;
+    dots.forEach(function (d, i) {
+      var on = i === index;
+      d.style.background = on ? '#00ff9d' : 'rgba(0,77,77,0.18)';
+      d.style.width = on ? '34px' : '22px';
+    });
+    var cur = sections[index];
+    var dark = cur && (cur.style.background || '').indexOf('004d4d') > -1;
+    if (rail) rail.style.opacity = dark ? '0.75' : '1';
+  }
+
+  onScroll();
+  paint();
+})();
+</script>
+</body>
+</html>

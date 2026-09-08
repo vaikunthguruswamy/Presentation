@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Vortex Customer Portal — Sheet Metal Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Vortex Customer Portal — presentation build
+   Styles mirror the production Angular component SCSS 1:1.
+   ══════════════════════════════════════════════════════════════ */
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { font-family: 'Inter', sans-serif; background: #f5f9fc; overflow: hidden; }
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal; font-style: normal;
+  display: inline-block; line-height: 1; text-transform: none;
+  letter-spacing: normal; word-wrap: normal; white-space: nowrap; direction: ltr;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale; font-feature-settings: 'liga';
+  vertical-align: middle; user-select: none;
+}
+/* If the icon webfont cannot load, hide the ligature text rather than
+   rendering raw words like "receipt_long" across the page. */
+html.no-icon-font .material-icons { visibility: hidden; }
+
+/* ── Shell ───────────────────────────────────────────────── */
+.portal-shell { display: flex; height: 100%; overflow: hidden; background: #f5f9fc; }
+.portal-main  { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+.portal-content { flex: 1; overflow: hidden; display: flex; flex-direction: column; min-height: 0; }
+.screen { flex: 1; overflow: hidden; min-height: 0; display: none; }
+.screen.is-active { display: block; }
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+.sidebar {
+  width: 240px; background: #fff; border-right: 1px solid #e8e8e8;
+  display: flex; flex-direction: column; height: 100%; flex-shrink: 0;
+}
+.brand { padding: 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f0f0f0; }
+.logo-box {
+  width: 32px; height: 32px; background: #004d4d; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.logo-letter { color: #00ff9d; font-weight: 800; font-size: 14px; font-family: 'Montserrat', sans-serif; }
+.brand-name { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9rem; color: #004d4d; line-height: 1.1; }
+.brand-sub { font-size: 10px; color: #aaa; margin-top: 1px; }
+.nav-area { flex: 1; overflow-y: auto; padding: 8px 0; }
+.nav-section-label {
+  padding: 16px 8px 4px 16px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #bdbdbd;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 6px;
+  margin: 1px 8px; cursor: pointer; transition: all 0.15s ease; background: transparent;
+  color: #666; font-weight: 400; font-size: 13px; text-decoration: none;
+  border-left: 3px solid transparent; font-family: 'Inter', sans-serif;
+}
+.nav-item .nav-icon { font-size: 18px; color: #9e9e9e; flex-shrink: 0; transition: color 0.15s; }
+.nav-item:hover:not(.active) { background: rgba(0,0,0,0.03); color: #333; }
+.nav-item.active {
+  background: rgba(0,255,157,0.10); color: #004d4d; font-weight: 600; border-left-color: #00ff9d;
+}
+.nav-item.active .nav-icon { color: #004d4d; }
+.user-footer { padding: 12px 16px; border-top: 1px solid #f0f0f0; display: flex; align-items: center; gap: 8px; }
+.user-avatar {
+  width: 30px; height: 30px; border-radius: 50%; background: #004d4d;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  color: #00ff9d; font-weight: 700; font-size: 11px;
+}
+.user-info { flex: 1; min-width: 0; }
+.user-name { font-size: 12px; font-weight: 600; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-role { font-size: 10px; color: #999; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.settings-btn {
+  width: 28px; height: 28px; border: none; background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; border-radius: 4px;
+  transition: background 0.15s; color: #bdbdbd;
+}
+.settings-btn .material-icons { font-size: 16px; color: #bdbdbd; }
+.settings-btn:hover { background: rgba(0,0,0,0.06); }
+
+/* ── Topbar ──────────────────────────────────────────────── */
+.topbar {
+  height: 56px; background: #fff; border-bottom: 1px solid #e8e8e8;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.topbar-title { font-size: 16px; font-weight: 600; color: #1a1a1a; line-height: 1.2; }
+.topbar-subtitle { font-size: 11px; color: #999; margin-top: 1px; }
+
+/* ── Badges ──────────────────────────────────────────────── */
+.portal-badge {
+  display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px;
+  font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap;
+}
+.portal-badge.type-badge { text-transform: none; }
+
+/* ── Shared table ────────────────────────────────────────── */
+.table-card {
+  background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  overflow: hidden; display: flex; flex-direction: column;
+}
+.table-scroll { overflow-x: auto; overflow-y: auto; flex: 1; }
+.portal-table { width: 100%; border-collapse: collapse; }
+.portal-table thead tr { border-bottom: 1px solid #f5f5f5; background: #fafafa; }
+.portal-table th {
+  padding: 10px 16px; text-align: left; font-size: 10px; font-weight: 700; color: #aaa;
+  text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+}
+.portal-table th.text-right { text-align: right; }
+.table-row { border-bottom: 1px solid #f5f5f5; cursor: pointer; transition: background 0.12s; }
+.table-row:hover { background: rgba(0,255,157,0.03); }
+.table-row td { padding: 12px 16px; vertical-align: middle; }
+.table-row td.text-right { text-align: right; }
+.group-row.row-selected { background: rgba(0,77,77,0.05); }
+.group-row.row-selected .order-id-cell { color: #004d4d; }
+.group-row.row-selected .row-chevron { color: #00cc7a; transform: rotate(90deg); }
+.chevron-cell { width: 28px; text-align: center; }
+.row-chevron { font-size: 16px; color: #ccc; transition: transform 0.2s, color 0.2s; vertical-align: middle; }
+.order-id-cell { font-family: 'Consolas', monospace; font-size: 12px; font-weight: 600; color: #004d4d; white-space: nowrap; }
+.desc-cell {
+  font-size: 13px; color: #333; font-weight: 500; display: block;
+  max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.qty-cell { font-size: 13px; color: #555; }
+.muted-cell { font-size: 13px; color: #555; }
+.date-cell { font-size: 12px; color: #888; white-space: nowrap; }
+.date-cell.bold { font-weight: 500; color: #555; }
+.delivery-date-cell { white-space: normal; }
+.delivery-date-initial, .delivery-date-current { display: block; line-height: 1.3; }
+.delivery-date-initial { font-size: 11px; color: #8a8a8a; font-weight: 500; }
+.delivery-date-current { font-size: 12px; color: #555; font-weight: 600; }
+.empty-row { padding: 40px; text-align: center; color: #ccc; font-size: 13px; }
+
+/* ── Filters ─────────────────────────────────────────────── */
+.filters-row { display: flex; gap: 10px; margin-bottom: 18px; align-items: center; flex-wrap: wrap; }
+.search-wrap { position: relative; flex: 1 1 200px; }
+.search-icon {
+  position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
+  font-size: 16px; color: #bbb; pointer-events: none;
+}
+.search-input {
+  width: 100%; padding: 8px 10px 8px 30px; border: 1px solid #e0e0e0; border-radius: 6px;
+  font-size: 12px; font-family: 'Inter', sans-serif; outline: none; background: #fff;
+}
+.search-input:focus { border-color: #004d4d; }
+.select-filter {
+  padding: 7px 10px; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 12px;
+  font-family: 'Inter', sans-serif; background: #fff; color: #333; outline: none; cursor: pointer;
+}
+.result-count { font-size: 12px; color: #aaa; white-space: nowrap; }
+/* Date-range control — stands in for the Angular Material range picker */
+.date-range-field {
+  display: inline-flex; align-items: center; gap: 6px; position: relative;
+  border: 1px solid #e0e0e0; border-radius: 6px; background: #fff; padding: 4px 10px; height: 36px;
+}
+.date-range-field:hover { border-color: #bbb; }
+.date-range-field:focus-within { border-color: #004d4d; }
+.date-range-label {
+  position: absolute; top: -7px; left: 8px; background: #f5f9fc; padding: 0 4px;
+  font-size: 10px; color: #888;
+}
+.date-range-field input[type="date"] {
+  border: none; outline: none; font-size: 12px; font-family: 'Inter', sans-serif;
+  color: #333; background: transparent; width: 108px;
+}
+.date-range-sep { color: #ccc; font-size: 12px; }
+.clear-range-btn, .btn-filter-ghost {
+  height: 32px; padding: 0 12px; border: 1px solid #cdd8d8; border-radius: 6px;
+  background: #fff; color: #004d4d; font-size: 12px; font-family: 'Inter', sans-serif; cursor: pointer;
+  transition: all 0.15s;
+}
+.clear-range-btn:hover, .btn-filter-ghost:hover { background: #f7fbfb; border-color: #b8cdcd; }
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 5px; padding: 7px 14px;
+  background: #00ff9d; color: #004d4d; border: none; border-radius: 4px;
+  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s; text-decoration: none;
+}
+.btn-primary .material-icons { font-size: 14px; }
+.btn-primary:disabled { opacity: 0.65; cursor: not-allowed; }
+
+/* ══ DASHBOARD ═══════════════════════════════════════════ */
+#screen-dashboard { overflow-y: auto; }
+.dashboard { padding: 24px; display: flex; flex-direction: column; }
+.dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-shrink: 0; gap: 20px; }
+.welcome-title { font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 2px; }
+.welcome-sub { font-size: 12px; color: #999; }
+.orders-kpi-card {
+  background: #fff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  padding: 14px 20px; flex-shrink: 0; display: flex; align-items: center; gap: 20px;
+}
+.orders-kpi-left { display: flex; align-items: center; gap: 14px; }
+.orders-icon-box {
+  width: 40px; height: 40px; border-radius: 8px; background: rgba(0,77,77,0.1);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.orders-icon-box .material-icons { font-size: 22px; }
+.orders-kpi-info { display: flex; flex-direction: column; gap: 2px; }
+.orders-kpi-value { font-size: 28px; font-weight: 700; color: #1a1a1a; line-height: 1; }
+.orders-kpi-label { font-size: 12px; color: #888; font-weight: 500; }
+.orders-kpi-right { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.ring-chart { flex-shrink: 0; display: block; }
+.ring-legend { display: flex; flex-direction: column; gap: 5px; }
+.ring-legend-item { display: flex; align-items: center; gap: 6px; }
+.ring-legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.ring-legend-label { font-size: 11px; color: #555; white-space: nowrap; }
+.dash-body { display: grid; grid-template-columns: 1fr 300px; gap: 18px; align-items: start; }
+.dash-main { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.dash-sidebar { display: flex; flex-direction: column; gap: 14px; }
+#screen-dashboard .table-card { max-height: calc(100vh - 318px); }
+#screen-dashboard .table-card-header {
+  padding: 14px 16px; border-bottom: 1px solid #f5f5f5;
+  display: flex; justify-content: space-between; align-items: center; gap: 10px;
+}
+#screen-dashboard .table-card-title { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+#screen-dashboard .search-wrap { flex: 1 1 160px; max-width: 260px; }
+#screen-dashboard .search-input { padding: 6px 10px 6px 28px; font-size: 12px; }
+#screen-dashboard .search-icon { font-size: 15px; left: 8px; }
+#screen-dashboard .portal-table th { padding: 9px 16px; }
+.view-all-link { font-size: 11px; color: #2196f3; cursor: pointer; font-weight: 500; text-decoration: none; }
+.view-all-link:hover { text-decoration: underline; }
+.widget-card { background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); overflow: hidden; }
+.widget-header { padding: 12px 16px; border-bottom: 1px solid #f5f5f5; display: flex; align-items: center; gap: 8px; }
+.widget-icon { font-size: 16px; color: #004d4d; }
+.widget-title { font-size: 13px; font-weight: 600; color: #1a1a1a; }
+.delivery-item {
+  padding: 10px 16px; border-bottom: 1px solid #f9f9f9; display: flex;
+  justify-content: space-between; align-items: center; cursor: pointer; transition: background 0.12s;
+}
+.delivery-item:hover { background: rgba(0,255,157,0.03); }
+.delivery-id { font-size: 11px; font-family: 'Consolas', monospace; font-weight: 600; color: #004d4d; }
+.delivery-right { text-align: right; }
+.delivery-date { font-size: 11px; font-weight: 600; color: #333; }
+.activity-item { padding: 9px 16px; border-bottom: 1px solid #f9f9f9; display: flex; gap: 10px; align-items: flex-start; }
+.activity-check-icon {
+  width: 18px; height: 18px; border-radius: 50%; background: #2e7d32; color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; line-height: 1; flex-shrink: 0; margin-top: 1px;
+}
+.activity-body { flex: 1; min-width: 0; }
+.activity-text { font-size: 11px; color: #444; line-height: 1.4; }
+.activity-time { font-size: 10px; color: #bbb; margin-top: 1px; }
+
+/* ══ ACTIVE ORDERS / HISTORY ══════════════════════════════ */
+#screen-orders, #screen-history { overflow-y: auto; }
+.screen-pad { padding: 24px; }
+
+/* ══ SUPPORT ══════════════════════════════════════════════ */
+#screen-support { overflow-y: auto; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.contact-card {
+  background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start;
+}
+.contact-icon {
+  width: 44px; height: 44px; border-radius: 10px; display: flex;
+  align-items: center; justify-content: center; flex-shrink: 0;
+}
+.contact-icon .material-icons { font-size: 22px; }
+.contact-title { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 2px; }
+.contact-sub { font-size: 12px; color: #888; margin-bottom: 4px; }
+.contact-detail { font-size: 11px; color: #555; }
+.form-card { background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); padding: 20px 24px; }
+.form-title { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.form-field { display: flex; flex-direction: column; }
+.form-label {
+  font-size: 11px; font-weight: 600; color: #666; display: block;
+  margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em;
+}
+.form-input, .form-select, .form-textarea {
+  padding: 9px 12px; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 12px;
+  font-family: 'Inter', sans-serif; outline: none; background: #fff; width: 100%;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: #004d4d; }
+.form-textarea { resize: vertical; }
+.form-status { font-size: 12px; margin-bottom: 10px; padding: 8px 10px; border-radius: 6px; }
+.form-status.error { color: #8a1f1f; background: #fdeaea; border: 1px solid #f5c5c5; }
+.form-status.success { color: #0f5c32; background: #e9f8ef; border: 1px solid #bfe9cf; }
+.form-footer { display: flex; justify-content: flex-end; }
+#screen-support .btn-primary { padding: 9px 18px; font-size: 13px; }
+#screen-support .btn-primary .material-icons { font-size: 16px; }
+.order-combobox { position: relative; }
+.order-dropdown {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: #fff;
+  border: 1px solid #e0e0e0; border-radius: 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  z-index: 1000; max-height: 300px; overflow-y: auto;
+}
+.order-group:not(:last-child) { border-bottom: 1px solid #f0f0f0; }
+.order-group-header {
+  display: flex; align-items: center; gap: 7px; padding: 8px 12px;
+  cursor: pointer; background: #f6fafa; transition: background 0.12s;
+}
+.order-group-header:hover { background: #e6f4f4; }
+.order-group-header:hover .order-group-action { opacity: 1; }
+.order-group-icon { font-size: 15px; color: #004d4d; flex-shrink: 0; }
+.order-group-label { font-size: 12px; font-weight: 600; color: #004d4d; flex: 1; }
+.order-group-action {
+  display: flex; align-items: center; gap: 3px; font-size: 10px; color: #00aa77;
+  font-weight: 500; opacity: 0; transition: opacity 0.12s; white-space: nowrap;
+}
+.order-pcp-item { display: flex; align-items: center; gap: 6px; padding: 6px 12px; cursor: pointer; transition: background 0.12s; }
+.order-pcp-item:hover { background: #f0faf5; }
+.order-pcp-indent { width: 22px; flex-shrink: 0; border-left: 2px solid #e0eeee; height: 16px; margin-left: 6px; }
+.order-pcp-icon { font-size: 13px; color: #aaa; flex-shrink: 0; }
+.order-pcp-label { font-size: 12px; color: #333; }
+
+/* ══ ORDER DETAIL SLIDE-OVER ══════════════════════════════ */
+.panel-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 1500; }
+.panel {
+  position: fixed; right: 0; top: 0; bottom: 0; width: min(980px, 95vw); background: #fff;
+  z-index: 1501; display: flex; flex-direction: column;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.15); animation: slideIn 0.25s ease;
+}
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+.group-header {
+  display: flex; align-items: center; justify-content: space-between; padding: 14px 20px;
+  border-bottom: 1px solid #f0f0f0; flex-shrink: 0; background: #fafafa;
+}
+.group-header-left { display: flex; align-items: baseline; gap: 10px; }
+.group-order-id { font-family: 'Consolas', monospace; font-size: 17px; font-weight: 700; color: #004d4d; }
+.group-batch-count { font-size: 11px; color: #999; }
+.close-btn {
+  width: 28px; height: 28px; border: none; background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; border-radius: 4px;
+  transition: background 0.15s; flex-shrink: 0;
+}
+.close-btn .material-icons { font-size: 17px; color: #9e9e9e; }
+.close-btn:hover { background: rgba(0,0,0,0.06); }
+.panel-body { display: flex; flex: 1; min-height: 0; }
+.batch-rail {
+  width: 220px; flex-shrink: 0; border-right: 1px solid #f0f0f0;
+  display: flex; flex-direction: column; overflow-y: auto; background: #fafafa;
+}
+.batch-rail::-webkit-scrollbar { width: 4px; }
+.batch-rail::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+.rail-label {
+  display: flex; align-items: center; gap: 6px; padding: 10px 14px 8px; font-size: 10px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #b0bec5;
+  border-bottom: 1px solid #f0f0f0; flex-shrink: 0;
+}
+.rail-label-icon { font-size: 14px; color: #b0bec5; }
+.batch-rail-item { padding: 10px 12px; cursor: pointer; border-bottom: 1px solid #f0f0f0; transition: background 0.12s; }
+.batch-rail-item:hover { background: #f0f8f6; }
+.batch-rail-item.rail-item-active { background: #fff; border-left: 3px solid #00cc7a; padding-left: 9px; }
+.bri-header { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+.bri-index {
+  display: flex; align-items: center; justify-content: center; width: 18px; height: 18px;
+  border-radius: 50%; background: #e8edf2; font-size: 9px; font-weight: 700; color: #888; flex-shrink: 0;
+}
+.rail-item-active .bri-index { background: #004d4d; color: #00ff9d; }
+.bri-code {
+  font-size: 11px; font-weight: 700; color: #1a1a1a; font-family: 'Consolas', monospace;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0;
+}
+.bri-status-row { margin-bottom: 5px; }
+.bri-progress { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+.bri-bar { flex: 1; height: 4px; background: #e8ecf0; border-radius: 4px; overflow: hidden; }
+.bri-fill { height: 100%; border-radius: 4px; transition: width 0.3s ease; }
+.bri-pct { font-size: 9px; color: #aaa; font-weight: 600; white-space: nowrap; min-width: 26px; text-align: right; }
+.bri-step-count { font-size: 9px; color: #b0bec5; margin-bottom: 4px; }
+.bri-process { display: flex; align-items: flex-start; gap: 4px; }
+.bri-process-icon { font-size: 10px; color: #00cc7a; flex-shrink: 0; margin-top: 1px; }
+.bri-process-name { font-size: 10px; color: #888; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.3; }
+.detail-pane { flex: 1; display: flex; flex-direction: column; min-width: 0; overflow-y: auto; }
+.detail-pane::-webkit-scrollbar { width: 5px; }
+.detail-pane::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+.panel-header { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; flex-shrink: 0; }
+.panel-id-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.order-id { font-family: 'Consolas', monospace; font-size: 13px; font-weight: 700; color: #004d4d; }
+.panel-description { font-size: 13px; font-weight: 500; color: #555; }
+.date-strip {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 12px;
+  padding: 10px 12px; background: rgba(0,77,77,0.03);
+  border: 1px solid rgba(0,77,77,0.08); border-radius: 8px;
+}
+.date-pill { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 170px; }
+.date-pill-delivery .date-pill-val { color: #004d4d; font-weight: 700; }
+.date-pill-icon { font-size: 18px; color: #b0bec5; flex-shrink: 0; }
+.date-pill-delivery .date-pill-icon { color: #00897b; }
+.date-pill-label { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+.date-pill-val { font-size: 13px; font-weight: 600; color: #333; }
+.date-strip-arrow { display: flex; align-items: center; gap: 6px; color: #ccc; flex-shrink: 0; }
+.date-strip-arrow .material-icons { font-size: 16px; }
+.date-strip-line { width: 24px; height: 1px; background: #ddd; }
+.spec-section { margin-top: 12px; }
+.spec-section-title {
+  font-size: 10px; font-weight: 700; color: #b0bec5; text-transform: uppercase;
+  letter-spacing: 0.07em; margin-bottom: 7px;
+}
+.qty-grid { display: flex; align-items: stretch; background: #fff; border: 1px solid #f0f0f0; border-radius: 8px; overflow: hidden; }
+.qty-cell { flex: 1; padding: 10px 12px; text-align: center; }
+.qty-val { font-size: 18px; font-weight: 700; color: #1a1a1a; line-height: 1; margin-bottom: 4px; }
+.qty-label { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em; }
+.qty-divider { width: 1px; background: #f0f0f0; flex-shrink: 0; margin: 10px 0; }
+.dim-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.dim-card { background: #fff; border: 1px solid #f0f0f0; border-radius: 8px; padding: 10px; }
+.dim-card-head { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.dim-icon { font-size: 14px; color: #b0bec5; }
+.dim-card-title { font-size: 11px; font-weight: 700; color: #555; text-transform: uppercase; letter-spacing: 0.05em; }
+.dim-wh { font-size: 13px; font-weight: 700; color: #1a1a1a; font-family: 'Consolas', monospace; letter-spacing: -0.02em; }
+.dim-wh-label { font-size: 10px; color: #bbb; margin-top: 2px; margin-bottom: 6px; }
+.dim-area { display: flex; align-items: baseline; gap: 3px; padding-top: 6px; border-top: 1px solid #f5f5f5; }
+.dim-area-val { font-size: 12px; font-weight: 600; color: #004d4d; font-family: 'Consolas', monospace; }
+.dim-area-unit { font-size: 10px; color: #aaa; }
+.stage-section { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; flex-shrink: 0; }
+.section-label {
+  font-size: 11px; font-weight: 700; color: #444; text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 4px;
+}
+.current-stage-card { border-radius: 8px; padding: 12px 14px; border: 1px solid; display: flex; align-items: flex-start; gap: 10px; }
+.stage-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
+.current-stage-meta { display: flex; flex-direction: column; gap: 2px; }
+.current-stage-name { font-size: 14px; font-weight: 700; color: #1a1a1a; }
+.current-stage-time { font-size: 11px; color: #888; }
+.panel-tabs { border-bottom: 1px solid #f0f0f0; display: flex; flex-shrink: 0; }
+.tab-btn {
+  padding: 11px 20px; border: none; background: transparent; font-family: 'Inter', sans-serif;
+  font-size: 12px; font-weight: 400; color: #888; cursor: pointer;
+  border-bottom: 2px solid transparent; transition: all 0.15s;
+}
+.tab-btn.active { font-weight: 600; color: #004d4d; border-bottom-color: #00ff9d; }
+.tab-content { flex: 1; padding: 18px 20px; overflow-y: auto; }
+.tab-content::-webkit-scrollbar { width: 4px; }
+.tab-content::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+.timeline-section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+.section-label-sm { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.06em; }
+.timeline-step-count { font-size: 10px; color: #b0bec5; font-weight: 600; }
+.history-item { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+.history-node-col { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.history-dot { width: 20px; height: 20px; border-radius: 50%; background: #00cc7a; display: flex; align-items: center; justify-content: center; }
+.history-dot.current { background: #00ff9d; }
+.history-dot.step-in-progress { background: #f59f00; }
+.history-dot.step-not-started { background: #cfd8dc; }
+.check-sm { font-size: 12px; color: #fff; }
+.history-line { width: 1px; height: 20px; background: #e0e0e0; margin-top: 2px; }
+.history-info { flex: 1; padding-bottom: 4px; }
+.history-name { font-size: 13px; font-weight: 500; color: #333; }
+.history-name.bold { font-weight: 700; }
+.history-name.step-in-progress { color: #9a6700; }
+.history-name.step-not-started { color: #90a4ae; }
+.history-time { font-size: 11px; color: #aaa; margin-top: 1px; }
+.history-time.in-progress { color: #00897b; font-weight: 600; }
+.history-time.not-started { color: #90a4ae; }
+.empty-msg { color: #bbb; font-size: 13px; text-align: center; padding: 30px 0; }
+
+@media (max-width: 700px) {
+  .panel { width: 100vw; }
+  .panel-body { flex-direction: column; }
+  .batch-rail {
+    width: 100%; max-height: 180px; overflow-x: auto; overflow-y: hidden;
+    flex-direction: row; border-right: none; border-bottom: 1px solid #f0f0f0;
+  }
+  .batch-rail-item { min-width: 140px; border-bottom: none; border-right: 1px solid #f0f0f0; }
+  .batch-rail-item.rail-item-active { border-left: none; border-top: 3px solid #00cc7a; }
+  .rail-label, .date-strip-arrow { display: none; }
+  .date-pill { flex: 1 1 100%; min-width: 0; }
+  .dash-body { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="portal-shell">
+
+  <!-- ── Sidebar ─────────────────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo-box"><span class="logo-letter">Z</span></div>
+      <div>
+        <div class="brand-name">Vortex</div>
+        <div class="brand-sub">Customer Portal</div>
+      </div>
+    </div>
+    <nav class="nav-area">
+      <div class="nav-section-label">Navigation</div>
+      <a class="nav-item active" data-screen="dashboard"><span class="material-icons nav-icon">dashboard</span><span class="nav-label">Dashboard</span></a>
+      <a class="nav-item" data-screen="orders"><span class="material-icons nav-icon">receipt_long</span><span class="nav-label">Active Orders</span></a>
+      <a class="nav-item" data-screen="history"><span class="material-icons nav-icon">history</span><span class="nav-label">Order History</span></a>
+      <a class="nav-item" data-screen="support"><span class="material-icons nav-icon">headset_mic</span><span class="nav-label">Support</span></a>
+    </nav>
+    <div class="user-footer">
+      <div class="user-avatar" id="userInitials">RO</div>
+      <div class="user-info">
+        <div class="user-name" id="userName">John Doe</div>
+        <div class="user-role" id="userRole">ZOT Instruments Ltd</div>
+      </div>
+      <button class="settings-btn" title="Sign out"><span class="material-icons">logout</span></button>
+    </div>
+  </aside>
+
+  <!-- ── Main ────────────────────────────────────────────── -->
+  <div class="portal-main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title" id="topbarTitle">Dashboard</div>
+        <div class="topbar-subtitle" id="topbarSubtitle" style="display:none"></div>
+      </div>
+    </header>
+
+    <div class="portal-content">
+
+      <!-- ══ Dashboard ══ -->
+      <section class="screen is-active" id="screen-dashboard">
+        <div class="dashboard">
+          <div class="dash-header">
+            <div>
+              <div class="welcome-title" id="dashCompany"></div>
+              <div class="welcome-sub" id="dashPhone"></div>
+            </div>
+            <div class="orders-kpi-card">
+              <div class="orders-kpi-left">
+                <div class="orders-icon-box"><span class="material-icons" style="color:#004d4d">receipt_long</span></div>
+                <div class="orders-kpi-info">
+                  <div class="orders-kpi-value" id="kpiActiveCount">0</div>
+                  <div class="orders-kpi-label">Active Orders</div>
+                </div>
+              </div>
+              <div class="orders-kpi-right">
+                <svg class="ring-chart" viewBox="0 0 72 72" width="64" height="64" id="ringChart"></svg>
+                <div class="ring-legend" id="ringLegend"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-body">
+            <div class="dash-main">
+              <div class="table-card">
+                <div class="table-card-header">
+                  <span class="table-card-title">Active Orders</span>
+                  <div class="search-wrap">
+                    <span class="material-icons search-icon">search</span>
+                    <input class="search-input" id="dashSearch" placeholder="Search orders..."/>
+                  </div>
+                  <a class="view-all-link" data-screen="orders">View all orders</a>
+                </div>
+                <div class="table-scroll">
+                  <table class="portal-table">
+                    <thead>
+                      <tr>
+                        <th>Order ID</th><th>Batches</th><th class="text-right">Qty</th>
+                        <th>Order Date</th><th>Est. Delivery</th><th>Status</th><th>Type</th><th></th>
+                      </tr>
+                    </thead>
+                    <tbody id="dashTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-sidebar">
+              <div class="widget-card">
+                <div class="widget-header">
+                  <span class="material-icons widget-icon">local_shipping</span>
+                  <span class="widget-title">Upcoming Deliveries</span>
+                </div>
+                <div id="upcomingDeliveries"></div>
+              </div>
+              <div class="widget-card">
+                <div class="widget-header">
+                  <span class="material-icons widget-icon">timeline</span>
+                  <span class="widget-title">Recent Activity</span>
+                </div>
+                <div id="recentActivity"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ Active Orders ══ -->
+      <section class="screen" id="screen-orders">
+        <div class="screen-pad">
+          <div class="filters-row">
+            <div class="search-wrap">
+              <span class="material-icons search-icon">search</span>
+              <input class="search-input" id="ordSearch" placeholder="Search by order ID, ZOT code, or description..."/>
+            </div>
+            <select class="select-filter" id="ordType">
+              <option>All</option><option>PCB</option><option>PCBA</option><option>Sheet Metal</option>
+            </select>
+            <select class="select-filter" id="ordStatus">
+              <option value="All">All Statuses</option>
+              <option value="on-track">On Track</option>
+              <option value="action-required">Action Required</option>
+              <option value="delayed">Delayed</option>
+            </select>
+            <div class="date-range-field">
+              <span class="date-range-label">Active due date range</span>
+              <input type="date" id="ordFrom"/>
+              <span class="date-range-sep">–</span>
+              <input type="date" id="ordTo"/>
+            </div>
+            <button class="clear-range-btn" id="ordClear" style="display:none">Clear</button>
+            <span class="result-count" id="ordCount"></span>
+          </div>
+          <div class="table-card">
+            <div class="table-scroll">
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th><th>Batches</th><th class="text-right">Qty</th>
+                    <th>Order Date</th><th>Est. Delivery</th><th>Status</th><th>Type</th><th></th>
+                  </tr>
+                </thead>
+                <tbody id="ordTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ Order History ══ -->
+      <section class="screen" id="screen-history">
+        <div class="screen-pad">
+          <div class="filters-row">
+            <div class="search-wrap">
+              <span class="material-icons search-icon">search</span>
+              <input class="search-input" id="hisSearch" placeholder="Search by order ID, ZOT code, or description..."/>
+            </div>
+            <div class="date-range-field">
+              <span class="date-range-label">Date range</span>
+              <input type="date" id="hisFrom"/>
+              <span class="date-range-sep">–</span>
+              <input type="date" id="hisTo"/>
+            </div>
+            <button class="btn-filter-ghost" id="hisReset">Reset</button>
+            <select class="select-filter" id="hisType">
+              <option>All</option><option>PCB</option><option>PCBA</option><option>Sheet Metal</option>
+            </select>
+            <span class="result-count" id="hisCount"></span>
+          </div>
+          <div class="table-card">
+            <div class="table-scroll">
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th><th>Batches</th><th>Qty</th>
+                    <th>Order Date</th><th>Completed Date</th><th>Type</th><th></th>
+                  </tr>
+                </thead>
+                <tbody id="hisTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ Support ══ -->
+      <section class="screen" id="screen-support">
+        <div class="screen-pad">
+          <div class="contact-grid" id="contactGrid"></div>
+          <div class="form-card">
+            <div class="form-title">Submit a Support Request</div>
+            <div class="form-row">
+              <div class="form-field">
+                <label class="form-label">Subject</label>
+                <input class="form-input" id="supSubject" placeholder="e.g. Production query for PO-88214"/>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Related Order</label>
+                <div class="order-combobox">
+                  <input class="form-input" id="supOrder" autocomplete="off" placeholder="Search by order ID or ZOT code..."/>
+                  <div class="order-dropdown" id="supDropdown" style="display:none"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-field" style="margin-bottom:14px">
+              <label class="form-label">Category</label>
+              <select class="form-select" id="supCategory">
+                <option>Production Query</option><option>Quality / Inspection</option>
+                <option>Shipping / Delivery</option><option>Invoice / Payment</option>
+                <option>Technical / DFM</option><option>Other</option>
+              </select>
+            </div>
+            <div class="form-field" style="margin-bottom:18px">
+              <label class="form-label">Message</label>
+              <textarea class="form-textarea" id="supMessage" rows="4" placeholder="Describe your query in detail..."></textarea>
+            </div>
+            <div class="form-status error" id="supError" style="display:none"></div>
+            <div class="form-status success" id="supSuccess" style="display:none"></div>
+            <div class="form-footer">
+              <button class="btn-primary" id="supSubmit"><span class="material-icons">send</span> Submit Request</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <div id="panelRoot"></div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   Vortex Customer Portal — presentation build
+   All data below is fictional and generated for demonstration.
+   ════════════════════════════════════════════════════════════ */
+
+/* ═════ DEMO DATA START ═════ */
+const DEMO = {
+  pageTitle: 'Vortex Customer Portal — Sheet Metal Demo',
+  customer: {
+    company: 'ZOT Instruments Ltd',
+    phone: '01234 567890',
+    userName: 'John Doe',
+    initials: 'JD',
+    customerNo: 'ZOT01'
+  },
+  contacts: [
+    { icon: 'person', color: '#004d4d', bg: 'rgba(0,77,77,0.1)',
+      title: 'Jane Doe', sub: 'Your Account Manager',
+      detail: '01234 567891 | 07700 123456 | jane.doe@example.com' },
+    { icon: 'local_shipping', color: '#2e7d32', bg: 'rgba(46,125,50,0.1)',
+      title: 'Logistics', sub: 'Shipping and delivery queries',
+      detail: 'logistics@example.com | 01234 567892' }
+  ],
+  // Sheet metal fabrication route
+  processes: [
+    'Material Issue & Nest', 'Laser Profiling', 'CNC Punch', 'Deburr & Linish',
+    'Press Brake Forming', 'Hardware Insertion', 'Welding', 'Weld Dress',
+    'Pre-treatment', 'Powder Coat', 'Cure Oven', 'Silk Screen & Legend',
+    'Sub-assembly', 'Final Inspection', 'Pack & Despatch'
+  ],
+  defaultType: 'Sheet Metal',
+  // Panel / array / circuit-per-panel are PCB panelisation concepts and carry
+  // no meaning for a fabricated sheet metal part, so this division shows a
+  // single part count and hides the Board Specifications block entirely
+  // rather than rendering columns that would always be empty.
+  qtyFields: [{ key: 'circuits', label: 'Parts' }],
+  showBoardSpecs: false,
+  active: [
+    { order: 'PO-33712', orderDate: '21 May 2026', batches: [
+      { prodNo: 415220, part: 'ZI4410-SM', batch: 'B2', qty: 240, due: '04 Sep 2026', done: 8, wip: true,
+        q: { circuits: 240 }, d: {} },
+      { prodNo: 415221, part: 'ZI4410-SM', batch: 'B3', qty: 240, due: '18 Sep 2026', done: 3, wip: true,
+        q: { circuits: 240 }, d: {} }
+    ]},
+    { order: 'PO-33658', orderDate: '30 Apr 2026', batches: [
+      { prodNo: 415104, part: 'ZI3980-SM', batch: 'B5', qty: 60, due: '20 Aug 2026', initialDue: '28 Jul 2026', done: 12, wip: true,
+        q: { circuits: 60 }, d: {} },
+      { prodNo: 415105, part: 'ZI3980-SM', batch: 'B6', qty: 60, due: '20 Aug 2026', initialDue: '28 Jul 2026', done: 10, wip: true,
+        q: { circuits: 60 }, d: {} }
+    ]},
+    { order: 'PO-33790', orderDate: '06 Jul 2026', batches: [
+      { prodNo: 415388, part: 'ZI5122-SM', batch: 'B1', qty: 500, due: '16 Oct 2026', done: 2, wip: true,
+        q: { circuits: 500 }, d: {} }
+    ]},
+    { order: 'PO-33744', orderDate: '15 Jun 2026', batches: [
+      { prodNo: 415301, part: 'ZI4655-SM', batch: 'B3', qty: 120, due: '09 Sep 2026', done: 6, wip: true,
+        q: { circuits: 120 }, d: {} },
+      { prodNo: 415302, part: 'ZI4655-SM', batch: 'B4', qty: 120, due: '23 Sep 2026', done: 4, wip: true,
+        q: { circuits: 120 }, d: {} }
+    ]},
+    { order: 'PO-33601', orderDate: '06 Apr 2026', batches: [
+      { prodNo: 414988, part: 'ZI3517-SM', batch: 'B8', qty: 36, due: '11 Aug 2026', initialDue: '15 Jul 2026', done: 13, wip: true,
+        q: { circuits: 36 }, d: {} }
+    ]}
+  ],
+  completed: [
+    { order: 'PO-33540', orderDate: '18 Mar 2026', completed: '03 Aug 2026', batches: [
+      { prodNo: 414801, part: 'ZI4410-SM', batch: 'B1', qty: 180, due: '03 Aug 2026', q: { circuits: 180 }, d: {} }
+    ]},
+    { order: 'PO-33488', orderDate: '04 Mar 2026', completed: '20 Jul 2026', batches: [
+      { prodNo: 414722, part: 'ZI4655-SM', batch: 'B1', qty: 96, due: '20 Jul 2026', q: { circuits: 96 }, d: {} },
+      { prodNo: 414723, part: 'ZI4655-SM', batch: 'B2', qty: 96, due: '20 Jul 2026', q: { circuits: 96 }, d: {} }
+    ]},
+    { order: 'PO-33415', orderDate: '12 Feb 2026', completed: '30 Jun 2026', batches: [
+      { prodNo: 414610, part: 'ZI3980-SM', batch: 'B3', qty: 48, due: '30 Jun 2026', q: { circuits: 48 }, d: {} },
+      { prodNo: 414611, part: 'ZI3980-SM', batch: 'B4', qty: 48, due: '30 Jun 2026', q: { circuits: 48 }, d: {} },
+      { prodNo: 414612, part: 'ZI3980-SM', batch: 'B5', qty: 24, due: '30 Jun 2026', q: { circuits: 24 }, d: {} }
+    ]},
+    { order: 'PO-33362', orderDate: '26 Jan 2026', completed: '10 Jun 2026', batches: [
+      { prodNo: 414503, part: 'ZI3517-SM', batch: 'B6', qty: 72, due: '10 Jun 2026', q: { circuits: 72 }, d: {} }
+    ]},
+    { order: 'PO-33290', orderDate: '15 Dec 2025', completed: '18 May 2026', batches: [
+      { prodNo: 414388, part: 'ZI5122-SM', batch: 'A4', qty: 300, due: '18 May 2026', q: { circuits: 300 }, d: {} },
+      { prodNo: 414389, part: 'ZI5122-SM', batch: 'A5', qty: 300, due: '18 May 2026', q: { circuits: 300 }, d: {} }
+    ]},
+    { order: 'PO-33204', orderDate: '19 Nov 2025', completed: '25 Feb 2026', batches: [
+      { prodNo: 414221, part: 'ZI4410-SM', batch: 'A7', qty: 150, due: '25 Feb 2026', q: { circuits: 150 }, d: {} }
+    ]}
+  ]
+};
+/* ═════ DEMO DATA END ═════ */
+
+
+/* ──────────────────────────────────────────────────────────
+   Formatting helpers — mirror PortalDataService / the panel
+   ────────────────────────────────────────────────────────── */
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function parseUkDate(text) {
+  if (!text) return null;
+  const m = String(text).match(/^(\d{1,2})\s([A-Za-z]{3})\s(\d{4})$/);
+  if (!m) return null;
+  const idx = MONTHS.indexOf(m[2]);
+  if (idx < 0) return null;
+  return new Date(Number(m[3]), idx, Number(m[1]));
+}
+// formatDate: en-GB { day:'numeric', month:'short', year:'numeric' }
+function fmtDate(d) { return d ? `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}` : ''; }
+// formatDateTime: en-GB 2-digit day/hour/minute, short month, 24h
+function fmtDateTime(d) {
+  if (!d) return '';
+  const p = (n) => String(n).padStart(2, '0');
+  return `${p(d.getDate())} ${MONTHS[d.getMonth()]} ${d.getFullYear()}, ${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+// formatMetricValue: Intl en-GB, no grouping, up to 10 dp; null/undefined -> '-'
+function fmtMetric(v) {
+  if (v === null || v === undefined || v === '') return '-';
+  const n = Number(v);
+  if (!Number.isFinite(n)) return String(v);
+  return new Intl.NumberFormat('en-GB', { useGrouping: false, maximumFractionDigits: 10 }).format(n);
+}
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+const STATUS_MAP = {
+  'on-track':        { bg: 'rgba(76,175,80,0.1)',  color: '#388e3c', label: 'On Track' },
+  'action-required': { bg: 'rgba(255,152,0,0.12)', color: '#e65100', label: 'Action Required' },
+  'delayed':         { bg: 'rgba(244,67,54,0.1)',  color: '#c62828', label: 'Delayed' },
+  'completed':       { bg: 'rgba(33,150,243,0.1)', color: '#1565c0', label: 'Completed' },
+  'dispatched':      { bg: 'rgba(0,77,77,0.1)',    color: '#004d4d', label: 'Dispatched' },
+  'in-qc':           { bg: 'rgba(103,58,183,0.1)', color: '#4527a0', label: 'In QC' }
+};
+const TYPE_MAP = {
+  'PCB':         { bg: '#004d4d', color: '#fff', label: 'PCB' },
+  'PCBA':        { bg: '#00695c', color: '#fff', label: 'PCBA' },
+  'Sheet Metal': { bg: '#01579b', color: '#fff', label: 'Sheet Metal' }
+};
+function badge(variant, value) {
+  const map = variant === 'type' ? TYPE_MAP : STATUS_MAP;
+  const s = map[value] || { bg: 'rgba(117,117,117,0.1)', color: '#616161', label: value };
+  const cls = variant === 'type' ? 'portal-badge type-badge' : 'portal-badge';
+  return `<span class="${cls}" style="background:${s.bg};color:${s.color}">${esc(s.label)}</span>`;
+}
+
+/* ──────────────────────────────────────────────────────────
+   Build the order model the way PortalDataService does
+   ────────────────────────────────────────────────────────── */
+const TODAY = new Date();
+
+function buildTimeline(processes, doneCount, inProgress, anchorEnd) {
+  // Walk backwards from the anchor so completed steps carry descending timestamps.
+  const steps = [];
+  const anchor = anchorEnd ? new Date(anchorEnd) : new Date();
+  for (let i = 0; i < processes.length; i++) {
+    const name = processes[i];
+    if (i < doneCount) {
+      const offsetSteps = doneCount - 1 - i;
+      const end = new Date(anchor);
+      end.setDate(end.getDate() - offsetSteps * 2);
+      end.setHours(8 + ((i * 5) % 9), (i * 17) % 60, 0, 0);
+      steps.push({ name, statusCode: 4, status: 'completed', endDateTime: fmtDateTime(end) });
+    } else if (i === doneCount && inProgress) {
+      const start = new Date(anchor);
+      start.setDate(start.getDate() + 1);
+      start.setHours(7 + ((i * 3) % 10), (i * 23) % 60, 0, 0);
+      steps.push({ name, statusCode: 3, status: 'in-progress', startDateTime: fmtDateTime(start) });
+    } else {
+      steps.push({ name, statusCode: 0, status: 'not-started' });
+    }
+  }
+  return steps;
+}
+
+function makeBatch(groupRef, orderDate, b, forceCompleted) {
+  const dueDate = parseUkDate(b.initialDue || b.due);
+  const displayDue = b.due;
+  const status = forceCompleted
+    ? 'completed'
+    : (dueDate && dueDate < new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate()) ? 'delayed' : 'on-track');
+
+  const total = DEMO.processes.length;
+  const done = forceCompleted ? total : (b.done || 0);
+  const wip = forceCompleted ? false : (b.wip !== false);
+  const anchor = parseUkDate(forceCompleted ? b.due : (b.lastUpdate || fmtDate(addDays(TODAY, -2))));
+  const timeline = buildTimeline(DEMO.processes, done, wip, anchor);
+
+  const latest = timeline.slice().reverse().find((s) => s.statusCode === 4);
+  const running = timeline.find((s) => s.statusCode === 3);
+  const lastStep = running || latest || null;
+
+  const zotCode = [DEMO.customer.customerNo, b.part, b.batch].filter(Boolean).join('-');
+  return {
+    id: `${groupRef}-PN-${b.prodNo}`,
+    orderRef: groupRef,
+    zotCode,
+    description: `Part ${b.part} - Batch ${b.batch}`,
+    type: b.type || DEMO.defaultType,
+    qty: b.qty,
+    orderDate,
+    estDelivery: displayDue,
+    initialEstDelivery: b.initialDue || displayDue,
+    status,
+    deliveredDate: forceCompleted ? b.completedOn || null : null,
+    q: b.q || {},
+    d: b.d || {},
+    timeline,
+    completedSteps: done,
+    totalSteps: total,
+    lastProcessName: lastStep ? lastStep.name : '',
+    lastProcessEndDateTime: lastStep ? (lastStep.endDateTime || lastStep.startDateTime || '') : '',
+    lastProcessInProgress: !!running
+  };
+}
+function addDays(d, n) { const x = new Date(d); x.setDate(x.getDate() + n); return x; }
+
+function buildGroups(source, forceCompleted) {
+  return source.map((g) => {
+    const batches = g.batches.map((b) =>
+      makeBatch(g.order, g.orderDate, Object.assign({ completedOn: g.completed }, b), forceCompleted));
+    const totalQty = batches.reduce((s, b) => s + (b.qty || 0), 0);
+    let overall = 'on-track';
+    if (batches.some((b) => b.status === 'action-required')) overall = 'action-required';
+    else if (batches.some((b) => b.status === 'delayed')) overall = 'delayed';
+    else if (batches.every((b) => b.status === 'completed')) overall = 'completed';
+    return { orderId: g.order, summary: batches[0], batches, totalQty, overallStatus: overall,
+             completedDate: g.completed || null };
+  });
+}
+
+const ACTIVE_GROUPS = buildGroups(DEMO.active, false);
+const HISTORY_GROUPS = buildGroups(DEMO.completed, true);
+
+/* ──────────────────────────────────────────────────────────
+   Screens
+   ────────────────────────────────────────────────────────── */
+const SCREEN_META = {
+  dashboard: { title: 'Dashboard', subtitle: '' },
+  orders:    { title: 'Active Orders', subtitle: 'All orders currently in production' },
+  history:   { title: 'Order History', subtitle: 'Completed and archived orders' },
+  support:   { title: 'Support', subtitle: 'Contact your account manager or submit a request' }
+};
+
+function showScreen(key) {
+  document.querySelectorAll('.screen').forEach((s) => s.classList.toggle('is-active', s.id === 'screen-' + key));
+  document.querySelectorAll('.nav-item').forEach((n) => n.classList.toggle('active', n.dataset.screen === key));
+  const meta = SCREEN_META[key];
+  document.getElementById('topbarTitle').textContent = meta.title;
+  const sub = document.getElementById('topbarSubtitle');
+  sub.textContent = meta.subtitle;
+  sub.style.display = meta.subtitle ? '' : 'none';
+}
+document.querySelectorAll('[data-screen]').forEach((el) => {
+  el.addEventListener('click', () => showScreen(el.dataset.screen));
+});
+
+/* ── Row renderers ───────────────────────────────────────── */
+function deliveryCell(order) {
+  const revised = order.initialEstDelivery && order.initialEstDelivery !== order.estDelivery;
+  if (revised) {
+    return `<span class="delivery-date-initial">Initial: ${esc(order.initialEstDelivery)}</span>
+            <span class="delivery-date-current">Current: ${esc(order.estDelivery)}</span>`;
+  }
+  return `<span class="delivery-date-current">${esc(order.estDelivery || '-')}</span>`;
+}
+
+function orderRowHtml(g) {
+  const plural = g.batches.length === 1 ? '' : 'es';
+  return `<tr class="table-row group-row" data-group="${esc(g.orderId)}">
+    <td><span class="order-id-cell">${esc(g.orderId)}</span></td>
+    <td><span class="desc-cell">${g.batches.length} batch${plural}</span></td>
+    <td class="text-right qty-cell">${g.totalQty.toLocaleString()}</td>
+    <td class="date-cell">${esc(g.summary.orderDate)}</td>
+    <td class="date-cell bold delivery-date-cell">${deliveryCell(g.summary)}</td>
+    <td>${badge('status', g.overallStatus)}</td>
+    <td>${badge('type', g.summary.type)}</td>
+    <td class="chevron-cell"><span class="material-icons row-chevron">chevron_right</span></td>
+  </tr>`;
+}
+
+function historyRowHtml(g) {
+  const plural = g.batches.length === 1 ? '' : 'es';
+  return `<tr class="table-row group-row" data-group="${esc(g.orderId)}" data-src="history">
+    <td><span class="order-id-cell">${esc(g.orderId)}</span></td>
+    <td><span class="desc-cell">${g.batches.length} batch${plural}</span></td>
+    <td class="muted-cell">${g.totalQty.toLocaleString()}</td>
+    <td class="date-cell">${esc(g.summary.orderDate)}</td>
+    <td class="date-cell">${esc(g.completedDate || g.summary.estDelivery)}</td>
+    <td>${badge('type', g.summary.type)}</td>
+    <td class="chevron-cell"><span class="material-icons row-chevron">chevron_right</span></td>
+  </tr>`;
+}
+
+function bindRows(tbody, groups) {
+  tbody.querySelectorAll('.group-row').forEach((row) => {
+    row.addEventListener('click', () => {
+      const g = groups.find((x) => x.orderId === row.dataset.group);
+      if (g) openPanel(g);
+    });
+  });
+}
+
+/* ── Dashboard ───────────────────────────────────────────── */
+function matchesQuery(g, q) {
+  if (!q) return true;
+  q = q.toLowerCase();
+  return g.orderId.toLowerCase().includes(q)
+    || g.summary.description.toLowerCase().includes(q)
+    || g.batches.some((b) => b.id.toLowerCase().includes(q)
+      || (b.zotCode || '').toLowerCase().includes(q)
+      || b.description.toLowerCase().includes(q));
+}
+
+function renderDashboard() {
+  document.getElementById('dashCompany').textContent = DEMO.customer.company;
+  document.getElementById('dashPhone').textContent =
+    `Phone: ${DEMO.customer.phone} - Here is your production overview`;
+  document.getElementById('kpiActiveCount').textContent = ACTIVE_GROUPS.length;
+
+  // Ring chart — orange (action-required) cannot occur, so only green/red appear.
+  const C = 2 * Math.PI * 28;
+  const total = ACTIVE_GROUPS.length;
+  const items = [
+    { color: '#4caf50', label: 'On Track',        count: ACTIVE_GROUPS.filter((g) => g.overallStatus === 'on-track').length },
+    { color: '#ff9800', label: 'Needs Attention', count: ACTIVE_GROUPS.filter((g) => g.overallStatus === 'action-required').length },
+    { color: '#f44336', label: 'Delayed',         count: ACTIVE_GROUPS.filter((g) => g.overallStatus === 'delayed').length }
+  ].filter((s) => s.count > 0);
+
+  let cumulative = 0;
+  const segs = items.map((it) => {
+    const dash = (it.count / total) * C;
+    const seg = { ...it, dash, gap: C - dash, offset: C - cumulative };
+    cumulative += dash;
+    return seg;
+  });
+  document.getElementById('ringChart').innerHTML = segs.map((s) =>
+    `<circle cx="36" cy="36" r="28" fill="none" stroke="${s.color}" stroke-width="8"
+       stroke-dasharray="${s.dash} ${s.gap}" stroke-dashoffset="${s.offset}" stroke-linecap="butt"
+       style="transform-box:fill-box;transform-origin:center;transform:rotate(-90deg)"></circle>`).join('');
+  document.getElementById('ringLegend').innerHTML = segs.map((s) =>
+    `<div class="ring-legend-item">
+       <span class="ring-legend-dot" style="background:${s.color}"></span>
+       <span class="ring-legend-label">${s.count} ${s.label}</span>
+     </div>`).join('');
+
+  // Upcoming deliveries — nearest three group summaries by est. delivery
+  const upcoming = ACTIVE_GROUPS.slice()
+    .sort((a, b) => (parseUkDate(a.summary.estDelivery) || 0) - (parseUkDate(b.summary.estDelivery) || 0))
+    .slice(0, 3);
+  document.getElementById('upcomingDeliveries').innerHTML = upcoming.map((g) =>
+    `<div class="delivery-item" data-group="${esc(g.orderId)}">
+       <div><div class="delivery-id">${esc(g.summary.id)}</div></div>
+       <div class="delivery-right"><div class="delivery-date">${esc(g.summary.estDelivery)}</div></div>
+     </div>`).join('');
+  document.querySelectorAll('#upcomingDeliveries .delivery-item').forEach((el) => {
+    el.addEventListener('click', () => {
+      const g = ACTIVE_GROUPS.find((x) => x.orderId === el.dataset.group);
+      if (g) openPanel(g);
+    });
+  });
+
+  // Recent activity — five most recent stage completions across all batches
+  const acts = [];
+  ACTIVE_GROUPS.forEach((g) => g.batches.forEach((b) => {
+    if (b.lastProcessName && b.lastProcessEndDateTime) {
+      acts.push({ orderId: g.orderId, stage: b.lastProcessName, time: b.lastProcessEndDateTime });
+    }
+  }));
+  acts.sort((a, b) => parseStamp(b.time) - parseStamp(a.time));
+  document.getElementById('recentActivity').innerHTML = acts.slice(0, 5).map((a) =>
+    `<div class="activity-item">
+       <span class="material-icons activity-check-icon">check</span>
+       <div class="activity-body">
+         <div class="activity-text">${esc(a.orderId)} - ${esc(a.stage)}</div>
+         <div class="activity-time">${esc(a.time)}</div>
+       </div>
+     </div>`).join('');
+
+  renderDashTable();
+}
+function parseStamp(s) {
+  const m = String(s).match(/^(\d{2})\s([A-Za-z]{3})\s(\d{4}),\s(\d{2}):(\d{2})$/);
+  if (!m) return 0;
+  return new Date(+m[3], MONTHS.indexOf(m[2]), +m[1], +m[4], +m[5]).getTime();
+}
+
+function renderDashTable() {
+  const q = document.getElementById('dashSearch').value.trim();
+  const rows = ACTIVE_GROUPS.filter((g) => matchesQuery(g, q));
+  const tbody = document.getElementById('dashTableBody');
+  tbody.innerHTML = rows.length
+    ? rows.map(orderRowHtml).join('')
+    : `<tr><td colspan="8" class="empty-row">No active orders found.</td></tr>`;
+  bindRows(tbody, ACTIVE_GROUPS);
+  markSelected();
+}
+document.getElementById('dashSearch').addEventListener('input', renderDashTable);
+
+/* ── Active Orders ───────────────────────────────────────── */
+function renderOrders() {
+  const q = document.getElementById('ordSearch').value.trim();
+  const type = document.getElementById('ordType').value;
+  const status = document.getElementById('ordStatus').value;
+  const from = document.getElementById('ordFrom').value;
+  const to = document.getElementById('ordTo').value;
+  document.getElementById('ordClear').style.display = (from || to) ? '' : 'none';
+
+  const rows = ACTIVE_GROUPS.filter((g) => {
+    if (type !== 'All' && !g.batches.some((b) => b.type === type)) return false;
+    if (status !== 'All' && !g.batches.some((b) => b.status === status)) return false;
+    if (from && to) {
+      const s = new Date(from + 'T00:00:00').getTime();
+      const e = new Date(to + 'T23:59:59').getTime();
+      const inRange = g.batches.some((b) => {
+        const d = parseUkDate(b.initialEstDelivery || b.estDelivery);
+        return d && d.getTime() >= s && d.getTime() <= e;
+      });
+      if (!inRange) return false;
+    }
+    return matchesQuery(g, q);
+  });
+
+  document.getElementById('ordCount').textContent =
+    `${rows.length} order${rows.length !== 1 ? 's' : ''}`;
+  const tbody = document.getElementById('ordTableBody');
+  tbody.innerHTML = rows.length
+    ? rows.map(orderRowHtml).join('')
+    : `<tr><td colspan="8" class="empty-row">No orders match your filters.</td></tr>`;
+  bindRows(tbody, ACTIVE_GROUPS);
+  markSelected();
+}
+['ordSearch','ordType','ordStatus','ordFrom','ordTo'].forEach((id) =>
+  document.getElementById(id).addEventListener('input', renderOrders));
+document.getElementById('ordClear').addEventListener('click', () => {
+  document.getElementById('ordFrom').value = '';
+  document.getElementById('ordTo').value = '';
+  renderOrders();
+});
+
+/* ── Order History ───────────────────────────────────────── */
+function isoDaysAgo(n) {
+  const d = addDays(TODAY, -n);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+function resetHistoryRange() {
+  document.getElementById('hisFrom').value = isoDaysAgo(90);
+  document.getElementById('hisTo').value = isoDaysAgo(0);
+  renderHistory();
+}
+function renderHistory() {
+  const q = document.getElementById('hisSearch').value.trim();
+  const type = document.getElementById('hisType').value;
+  const from = document.getElementById('hisFrom').value;
+  const to = document.getElementById('hisTo').value;
+
+  const rows = HISTORY_GROUPS.filter((g) => {
+    if (type !== 'All' && !g.batches.some((b) => b.type === type)) return false;
+    if (from && to) {
+      const s = new Date(from + 'T00:00:00').getTime();
+      const e = new Date(to + 'T23:59:59').getTime();
+      const d = parseUkDate(g.completedDate || g.summary.estDelivery);
+      if (!d || d.getTime() < s || d.getTime() > e) return false;
+    }
+    return matchesQuery(g, q);
+  });
+
+  document.getElementById('hisCount').textContent =
+    `${rows.length} order${rows.length !== 1 ? 's' : ''}`;
+  const tbody = document.getElementById('hisTableBody');
+  tbody.innerHTML = rows.length
+    ? rows.map(historyRowHtml).join('')
+    : `<tr><td colspan="7" class="empty-row">No orders match your filters.</td></tr>`;
+  bindRows(tbody, HISTORY_GROUPS);
+  markSelected();
+}
+['hisSearch','hisType','hisFrom','hisTo'].forEach((id) =>
+  document.getElementById(id).addEventListener('input', renderHistory));
+document.getElementById('hisReset').addEventListener('click', resetHistoryRange);
+
+/* ── Order detail slide-over ─────────────────────────────── */
+let selected = null;   // { group, batch }
+
+function markSelected() {
+  document.querySelectorAll('.group-row').forEach((r) =>
+    r.classList.toggle('row-selected', !!selected && r.dataset.group === selected.group.orderId));
+}
+
+function progressPercent(b) {
+  if (b.status === 'completed' || b.status === 'dispatched') return 100;
+  const t = b.totalSteps || 0;
+  if (!t) return 10;
+  const inProg = b.lastProcessInProgress ? 0.5 : 0;
+  return Math.max(10, Math.min(100, Math.round(((b.completedSteps + inProg) / t) * 100)));
+}
+// Default (PCB / PCBA) quantity breakdown. Overridden per division via DEMO.qtyFields.
+const QTY_FIELDS_DEFAULT = [
+  { key: 'circuits', label: 'Circuits' },
+  { key: 'arrays',   label: 'Arrays' },
+  { key: 'panels',   label: 'Panels' },
+  { key: 'cpp',      label: 'Circuits / Panel' }
+];
+
+function progressBarColor(status) {
+  if (status === 'action-required') return '#ff9800';
+  if (status === 'in-qc') return '#673ab7';
+  return '#00cc7a';
+}
+
+function openPanel(group, batch) {
+  selected = { group, batch: batch || group.batches[0] };
+  renderPanel();
+  markSelected();
+}
+function closePanel() {
+  selected = null;
+  document.getElementById('panelRoot').innerHTML = '';
+  markSelected();
+}
+
+function renderPanel() {
+  if (!selected) return;
+  const { group } = selected;
+  const o = selected.batch;
+  const plural = group.batches.length === 1 ? '' : 'es';
+
+  const rail = group.batches.map((b, i) => `
+    <div class="batch-rail-item ${b.id === o.id ? 'rail-item-active' : ''}" data-batch="${esc(b.id)}">
+      <div class="bri-header">
+        <span class="bri-index">${i + 1}</span>
+        <span class="bri-code">${esc(b.zotCode || b.id)}</span>
+      </div>
+      <div class="bri-status-row">${badge('status', b.status)}</div>
+      <div class="bri-progress">
+        <div class="bri-bar"><div class="bri-fill" style="width:${progressPercent(b)}%;background:${progressBarColor(b.status)}"></div></div>
+        <span class="bri-pct">${progressPercent(b)}%</span>
+      </div>
+      <div class="bri-step-count">${b.completedSteps} / ${b.totalSteps} steps</div>
+      ${b.lastProcessName ? `<div class="bri-process">
+        <span class="material-icons bri-process-icon">radio_button_checked</span>
+        <span class="bri-process-name">${esc(b.lastProcessName)}</span>
+      </div>` : ''}
+    </div>`).join('');
+
+  const revised = o.initialEstDelivery && o.initialEstDelivery !== o.estDelivery;
+  const dateStrip = `
+    <div class="date-strip">
+      <div class="date-pill">
+        <span class="material-icons date-pill-icon">calendar_today</span>
+        <div><div class="date-pill-label">Order Date</div><div class="date-pill-val">${esc(o.orderDate || '-')}</div></div>
+      </div>
+      <div class="date-strip-arrow"><div class="date-strip-line"></div><span class="material-icons">arrow_forward</span></div>
+      ${revised ? `
+      <div class="date-pill date-pill-delivery">
+        <span class="material-icons date-pill-icon">event_repeat</span>
+        <div><div class="date-pill-label">Initial Est. Delivery</div><div class="date-pill-val">${esc(o.initialEstDelivery)}</div></div>
+      </div>
+      <div class="date-strip-arrow"><div class="date-strip-line"></div><span class="material-icons">arrow_forward</span></div>` : ''}
+      <div class="date-pill date-pill-delivery">
+        <span class="material-icons date-pill-icon">local_shipping</span>
+        <div>
+          <div class="date-pill-label">${revised ? 'Current Est. Delivery' : 'Est. Delivery'}</div>
+          <div class="date-pill-val">${esc(o.estDelivery || '-')}</div>
+        </div>
+      </div>
+    </div>`;
+
+  // Quantity columns are division-specific. Panel/array/circuit are PCB
+  // panelisation concepts, so a division that has no such breakdown declares
+  // its own `qtyFields` and switches `showBoardSpecs` off rather than
+  // rendering columns that mean nothing for that product.
+  const q = o.q || {};
+  const qtyFields = DEMO.qtyFields || QTY_FIELDS_DEFAULT;
+  const qtyGrid = `
+    <div class="spec-section">
+      <div class="spec-section-title">Quantities</div>
+      <div class="qty-grid">
+        ${qtyFields.map((f, i) => `
+          ${i ? '<div class="qty-divider"></div>' : ''}
+          <div class="qty-cell">
+            <div class="qty-val">${fmtMetric(q[f.key])}</div>
+            <div class="qty-label">${esc(f.label)}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+
+  const d = o.d || {};
+  const dims = [
+    { label: 'Panel',   icon: 'crop_square', w: d.pw, h: d.ph, area: d.pa },
+    { label: 'Array',   icon: 'grid_view',   w: d.aw, h: d.ah, area: d.aa },
+    { label: 'Circuit', icon: 'memory',      w: d.cw, h: d.ch, area: d.ca }
+  ];
+  const dimCards = DEMO.showBoardSpecs === false ? '' : `
+    <div class="spec-section">
+      <div class="spec-section-title">Board Specifications</div>
+      <div class="dim-cards">
+        ${dims.map((x) => `
+        <div class="dim-card">
+          <div class="dim-card-head">
+            <span class="material-icons dim-icon">${x.icon}</span>
+            <span class="dim-card-title">${x.label}</span>
+          </div>
+          <div class="dim-wh">${fmtMetric(x.w)} × ${fmtMetric(x.h)}</div>
+          <div class="dim-wh-label">W × H (m)</div>
+          <div class="dim-area"><span class="dim-area-val">${fmtMetric(x.area)}</span><span class="dim-area-unit">m²</span></div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+
+  const running = o.timeline.find((s) => s.statusCode === 3);
+  const latestDone = o.timeline.slice().reverse().find((s) => s.statusCode === 4);
+  const latest = running || latestDone;
+  const stageCard = `
+    <div class="stage-section">
+      <div class="section-label">Last Updated Stage</div>
+      <div class="current-stage-card" style="background:rgba(0,255,157,0.07);border-color:rgba(0,255,157,0.2)">
+        <div class="stage-dot" style="background:#00cc7a"></div>
+        <div class="current-stage-meta">
+          <span class="current-stage-name">${esc(latest ? latest.name : 'No process update')}</span>
+          ${latest ? `<span class="current-stage-time">${running ? 'Started' : 'Ended'} ${esc(running ? latest.startDateTime : latest.endDateTime)}</span>` : ''}
+        </div>
+      </div>
+    </div>`;
+
+  const latestDoneIdx = (() => {
+    for (let i = o.timeline.length - 1; i >= 0; i--) if (o.timeline[i].statusCode === 4) return i;
+    return -1;
+  })();
+  const hasRunning = !!running;
+
+  const timelineHtml = o.timeline.map((step, i) => {
+    const done = step.statusCode === 4;
+    const prog = step.statusCode === 3;
+    const cls = done ? 'step-completed' : prog ? 'step-in-progress' : 'step-not-started';
+    const isCurrent = prog || (!hasRunning && (latestDoneIdx >= 0 ? i === latestDoneIdx : i === 0));
+    const icon = done ? 'check' : prog ? 'play_arrow' : 'radio_button_unchecked';
+    const time = done ? step.endDateTime : prog ? step.startDateTime : '';
+    const timeLabel = done ? 'Ended' : prog ? 'Started' : '';
+    return `<div class="history-item">
+      <div class="history-node-col">
+        <div class="history-dot ${cls} ${isCurrent ? 'current' : ''}"><span class="material-icons check-sm">${icon}</span></div>
+        ${i < o.timeline.length - 1 ? '<div class="history-line"></div>' : ''}
+      </div>
+      <div class="history-info">
+        <div class="history-name ${cls} ${isCurrent ? 'bold' : ''}">${esc(step.name)}</div>
+        ${time
+          ? `<div class="history-time ${prog ? 'in-progress' : ''}">${timeLabel} ${esc(time)}</div>`
+          : `<div class="history-time not-started">Not Started</div>`}
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('panelRoot').innerHTML = `
+    <div class="panel-backdrop" id="panelBackdrop"></div>
+    <div class="panel">
+      <div class="group-header">
+        <div class="group-header-left">
+          <span class="group-order-id">${esc(group.orderId)}</span>
+          <span class="group-batch-count">${group.batches.length} batch${plural}</span>
+        </div>
+        <button class="close-btn" id="panelClose"><span class="material-icons">close</span></button>
+      </div>
+      <div class="panel-body">
+        <div class="batch-rail">
+          <div class="rail-label"><span class="material-icons rail-label-icon">inventory_2</span>Batches</div>
+          ${rail}
+        </div>
+        <div class="detail-pane">
+          <div class="panel-header">
+            <div class="panel-id-row">
+              <span class="order-id">${esc(o.id)}</span>
+              ${badge('type', o.type)}
+              ${badge('status', o.status)}
+            </div>
+            ${o.zotCode ? `<div class="panel-description">ZOT Code: ${esc(o.zotCode)}</div>` : ''}
+            ${dateStrip}
+            ${qtyGrid}
+            ${dimCards}
+          </div>
+          ${stageCard}
+          <div class="panel-tabs"><button class="tab-btn active">Overview</button></div>
+          <div class="tab-content">
+            <div class="timeline-section-head">
+              <span class="section-label-sm">Process Timeline</span>
+              <span class="timeline-step-count">${o.timeline.length} processes</span>
+            </div>
+            ${timelineHtml}
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById('panelClose').addEventListener('click', closePanel);
+  document.getElementById('panelBackdrop').addEventListener('click', closePanel);
+  document.querySelectorAll('.batch-rail-item').forEach((el) => {
+    el.addEventListener('click', () => {
+      const b = selected.group.batches.find((x) => x.id === el.dataset.batch);
+      if (b) { selected.batch = b; renderPanel(); }
+    });
+  });
+}
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePanel(); });
+
+/* ── Support ─────────────────────────────────────────────── */
+function renderSupport() {
+  document.getElementById('contactGrid').innerHTML = DEMO.contacts.map((c) => `
+    <div class="contact-card">
+      <div class="contact-icon" style="background:${c.bg}">
+        <span class="material-icons" style="color:${c.color}">${c.icon}</span>
+      </div>
+      <div class="contact-info">
+        <div class="contact-title">${esc(c.title)}</div>
+        <div class="contact-sub">${esc(c.sub)}</div>
+        <div class="contact-detail">${esc(c.detail)}</div>
+      </div>
+    </div>`).join('');
+}
+
+const SUGGESTIONS = (() => {
+  const map = new Map();
+  [...ACTIVE_GROUPS, ...HISTORY_GROUPS].forEach((g) => {
+    if (!map.has(g.orderId)) map.set(g.orderId, new Set());
+    g.batches.forEach((b) => { if (b.zotCode) map.get(g.orderId).add(b.zotCode); });
+  });
+  return Array.from(map.entries()).map(([orderId, codes]) => ({ orderId, zotCodes: Array.from(codes) }));
+})();
+
+const supOrder = document.getElementById('supOrder');
+const supDropdown = document.getElementById('supDropdown');
+
+function renderDropdown(groups) {
+  if (!groups.length) { supDropdown.style.display = 'none'; return; }
+  supDropdown.innerHTML = groups.map((g) => `
+    <div class="order-group">
+      <div class="order-group-header" data-order="${esc(g.orderId)}">
+        <span class="material-icons order-group-icon">receipt_long</span>
+        <span class="order-group-label">${esc(g.orderId)}</span>
+        <span class="order-group-action"><span class="material-icons" style="font-size:13px">done_all</span> All batches</span>
+      </div>
+      ${g.zotCodes.map((z) => `
+        <div class="order-pcp-item" data-order="${esc(g.orderId)}" data-code="${esc(z)}">
+          <span class="order-pcp-indent"></span>
+          <span class="material-icons order-pcp-icon">tag</span>
+          <span class="order-pcp-label">${esc(z)}</span>
+        </div>`).join('')}
+    </div>`).join('');
+  supDropdown.style.display = '';
+
+  supDropdown.querySelectorAll('.order-group-header').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const g = SUGGESTIONS.find((x) => x.orderId === el.dataset.order);
+      supOrder.value = buildOrderValue(g.orderId, g.zotCodes);
+      supDropdown.style.display = 'none';
+    });
+  });
+  supDropdown.querySelectorAll('.order-pcp-item').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      supOrder.value = buildOrderValue(el.dataset.order, [el.dataset.code]);
+      supDropdown.style.display = 'none';
+    });
+  });
+}
+function buildOrderValue(orderId, codes) {
+  if (!codes.length) return orderId.slice(0, 80);
+  let value = orderId;
+  for (const c of codes) {
+    const candidate = value + ' - ' + c;
+    if (candidate.length > 80) break;
+    value = candidate;
+  }
+  return value;
+}
+supOrder.addEventListener('input', () => {
+  const q = supOrder.value.trim().toLowerCase();
+  const results = [];
+  for (const g of SUGGESTIONS) {
+    if (g.orderId.toLowerCase().includes(q)) results.push(g);
+    else {
+      const codes = g.zotCodes.filter((z) => z.toLowerCase().includes(q));
+      if (codes.length) results.push({ orderId: g.orderId, zotCodes: codes });
+    }
+    if (results.length >= 20) break;
+  }
+  renderDropdown(results);
+});
+supOrder.addEventListener('focus', () => {
+  if (!supOrder.value.trim()) renderDropdown(SUGGESTIONS.slice(0, 20));
+});
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.order-combobox')) supDropdown.style.display = 'none';
+});
+
+document.getElementById('supSubmit').addEventListener('click', () => {
+  const err = document.getElementById('supError');
+  const ok = document.getElementById('supSuccess');
+  err.style.display = 'none'; ok.style.display = 'none';
+
+  const subject = document.getElementById('supSubject').value.trim();
+  const message = document.getElementById('supMessage').value.trim();
+
+  if (!subject) { err.textContent = 'Subject is required.'; err.style.display = ''; return; }
+  if (message.length < 10) { err.textContent = 'Message must be at least 10 characters.'; err.style.display = ''; return; }
+
+  const id = 'SR-' + String(Math.floor(100000 + Math.random() * 899999));
+  ok.textContent = `Support request submitted successfully. Request ID: ${id}`;
+  ok.style.display = '';
+  document.getElementById('supSubject').value = '';
+  supOrder.value = '';
+  document.getElementById('supCategory').value = 'Production Query';
+  document.getElementById('supMessage').value = '';
+});
+
+/* ── Boot ────────────────────────────────────────────────── */
+document.title = DEMO.pageTitle;
+document.getElementById('userName').textContent = DEMO.customer.userName;
+document.getElementById('userRole').textContent = DEMO.customer.company;
+document.getElementById('userInitials').textContent = DEMO.customer.initials;
+document.getElementById('supSubject').placeholder =
+  'e.g. Production query for ' + (DEMO.active[0] ? DEMO.active[0].order : 'your order');
+
+renderDashboard();
+renderOrders();
+resetHistoryRange();
+renderSupport();
+
+// Degrade gracefully if the Material Icons webfont is unavailable offline.
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => {
+    if (!document.fonts.check('24px "Material Icons"')) {
+      document.documentElement.classList.add('no-icon-font');
+    }
+  });
+}
+</script>
+</body>
+</html>
