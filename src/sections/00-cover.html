@@ -10,63 +10,243 @@
         <div style="font-family:'Poppins',sans-serif; font-size:0.98rem; color:#757575; margin-top:5px;">Software Application Engineer, ZOT Engineering Ltd</div>
       </div>
     </div>
-    <div data-reveal data-delay="300" style="opacity:1; width:100%; max-width:960px; margin:0 auto 6px;">
-      <svg viewBox="0 0 1000 280" role="img" aria-label="Three divisions, PCB, assembly and sheet metal, flowing into one connected ZOT platform and out to live insight for teams and customers" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:block; width:100%; height:auto; overflow:visible;">
-        <defs>
-          <filter id="fbShadow" x="-30%" y="-40%" width="160%" height="200%">
-            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#004d4d" flood-opacity="0.12"/>
-          </filter>
-          <filter id="fbGlow" x="-80%" y="-80%" width="260%" height="260%">
-            <feGaussianBlur stdDeviation="2.6" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <path id="fpTop" d="M186,70 C300,70 300,140 402,140" fill="none"/>
-          <path id="fpMid" d="M186,140 L402,140" fill="none"/>
-          <path id="fpBot" d="M186,210 C300,210 300,140 402,140" fill="none"/>
-          <path id="fpOut" d="M598,140 L790,140" fill="none"/>
-        </defs>
 
-        <g fill="none" stroke="#c2e8d6" stroke-width="2.4" stroke-linecap="round">
-          <use xlink:href="#fpTop"/>
-          <use xlink:href="#fpMid"/>
-          <use xlink:href="#fpBot"/>
-          <use xlink:href="#fpOut"/>
-        </g>
+    <div id="ztsWrap" data-reveal data-delay="300" style="opacity:1; position:relative; width:100%; max-width:1000px; margin:0 auto 6px;">
+      <div class="zts-diagram" id="ztsDiagram">
+        <svg class="zts-conn" id="ztsConn" preserveAspectRatio="none" aria-hidden="true"></svg>
 
-        <g class="flow-dots" fill="#00e08a" filter="url(#fbGlow)">
-          <circle r="4.6"><animateMotion dur="2.8s" begin="0s"    repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpTop"/></animateMotion></circle>
-          <circle r="4.6"><animateMotion dur="2.8s" begin="1.4s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpTop"/></animateMotion></circle>
-          <circle r="4.6"><animateMotion dur="2.6s" begin="0.5s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpMid"/></animateMotion></circle>
-          <circle r="4.6"><animateMotion dur="2.6s" begin="1.9s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpMid"/></animateMotion></circle>
-          <circle r="4.6"><animateMotion dur="2.8s" begin="0.9s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpBot"/></animateMotion></circle>
-          <circle r="4.6"><animateMotion dur="2.8s" begin="2.3s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpBot"/></animateMotion></circle>
-          <circle r="5"><animateMotion dur="2.2s" begin="0.3s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpOut"/></animateMotion></circle>
-          <circle r="5"><animateMotion dur="2.2s" begin="1.3s"  repeatCount="indefinite" calcMode="linear"><mpath xlink:href="#fpOut"/></animateMotion></circle>
-        </g>
+        <div class="zts-inputs">
+          <div class="zts-io">PCB</div>
+          <div class="zts-io">PCB Assembly</div>
+          <div class="zts-io">Sheet-metal</div>
+        </div>
 
-        <g font-family="'Montserrat','Poppins',sans-serif">
-          <g filter="url(#fbShadow)">
-            <rect x="14"  y="42"  width="172" height="56" rx="12" fill="#ffffff" stroke="#e6ecec" stroke-width="1.5"/>
-            <rect x="14"  y="112" width="172" height="56" rx="12" fill="#ffffff" stroke="#e6ecec" stroke-width="1.5"/>
-            <rect x="14"  y="182" width="172" height="56" rx="12" fill="#ffffff" stroke="#e6ecec" stroke-width="1.5"/>
-            <rect x="402" y="92"  width="196" height="96" rx="14" fill="#ffffff" stroke="#05b981" stroke-width="2.4"/>
-            <rect x="790" y="103" width="196" height="74" rx="12" fill="#ffffff" stroke="#e6ecec" stroke-width="1.5"/>
-          </g>
+        <div class="zts-center">
+          <div class="zts-platform" id="ztsHit" role="button" tabindex="0" aria-expanded="false" aria-label="Show the technology the ZOT platform is built on">
+            <div class="zts-plat-collapsed">
+              <span class="zts-plat-title">ZOT Platform</span>
+              <span class="zts-plat-sub">one connected system</span>
+              <span class="zts-plat-cue" id="ztsToggleLabel">VIEW THE STACK &#9662;</span>
+            </div>
+            <div class="zts-plat-expanded">
+              <div class="zts-box-head">
+                <span class="zts-box-title"><span class="zts-dot"></span>ZOT Platform</span>
+                <span class="zts-box-sub">one connected system, built and run on</span>
+              </div>
+              <div class="zts-arch" id="ztsArch"></div>
+            </div>
+          </div>
+        </div>
 
-          <text x="100" y="75"  text-anchor="middle" font-size="19" font-weight="700" fill="#004d4d">PCB</text>
-          <text x="100" y="145" text-anchor="middle" font-size="19" font-weight="700" fill="#004d4d">PCB Assembly</text>
-          <text x="100" y="215" text-anchor="middle" font-size="19" font-weight="700" fill="#004d4d">Sheet-metal</text>
+        <div class="zts-output">
+          <div class="zts-io zts-io-out">Live insight<small>for teams &amp; customers</small></div>
+        </div>
+      </div>
 
-          <text x="500" y="134" text-anchor="middle" font-size="21" font-weight="700" fill="#004d4d">ZOT Platform</text>
-          <text x="500" y="158" text-anchor="middle" font-size="13" font-weight="500" fill="#6b7c7c" font-family="'Poppins',sans-serif">one connected system</text>
-
-          <text x="888" y="134" text-anchor="middle" font-size="18" font-weight="700" fill="#004d4d">Live insight</text>
-          <text x="888" y="153" text-anchor="middle" font-size="12" font-weight="500" fill="#6b7c7c" font-family="'Poppins',sans-serif">for teams &amp; customers</text>
-        </g>
-      </svg>
+      <p id="ztsHint" style="text-align:center; font-family:'Poppins',sans-serif; font-size:0.82rem; color:#9e9e9e; margin:16px 0 0;">Select the <span style="color:#04936a; font-weight:600;">ZOT Platform</span> to see the technology it runs on</p>
     </div>
+
     <div data-reveal data-delay="360" style="opacity:1; width:100%; max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; gap:10px 32px; justify-content:space-between; align-items:center; padding-top:22px; border-top:1px solid #e0e0e0; font-family:'Poppins',sans-serif; font-size:0.85rem; color:#9e9e9e;">
       <span>Five minutes on me, fifteen on the work, then questions</span>
       <span>Scroll, or use the arrow keys</span>
     </div>
+
+    <style>
+      #ztsWrap { transition:max-width 0.55s cubic-bezier(0.22,1,0.36,1); }
+      .zts-diagram { position:relative; display:flex; align-items:center; gap:clamp(10px,2.2vw,28px); }
+      .zts-conn { position:absolute; inset:0; width:100%; height:100%; z-index:0; overflow:visible; pointer-events:none; }
+      .zts-conn path { fill:none; stroke:#cfe9dc; stroke-width:2.2; stroke-linecap:round; }
+      .zts-conn circle { fill:#00e08a; }
+
+      .zts-inputs { flex:0 0 clamp(116px,15%,150px); display:flex; flex-direction:column; gap:16px; position:relative; z-index:1; }
+      .zts-output { flex:0 0 clamp(128px,17%,168px); position:relative; z-index:1; }
+      .zts-center { flex:1 1 auto; min-width:0; display:flex; justify-content:center; position:relative; z-index:1; }
+
+      .zts-io { background:#ffffff; border:1.6px solid #e6ecec; border-radius:12px; padding:14px 12px; text-align:center; box-shadow:0 6px 16px rgba(0,77,77,0.06); font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.96rem; color:#004d4d; }
+      .zts-io-out { display:flex; flex-direction:column; gap:3px; }
+      .zts-io-out small { font-family:'Poppins',sans-serif; font-weight:500; font-size:0.72rem; color:#6b7c7c; }
+
+      .zts-platform {
+        cursor:pointer; text-align:center; width:232px; max-width:100%; box-sizing:border-box;
+        background:#ffffff; border:2.4px solid #05b981; border-radius:16px; box-shadow:0 8px 22px rgba(0,77,77,0.10);
+        padding:18px 20px; transition:width 0.55s cubic-bezier(0.22,1,0.36,1), padding 0.5s ease, box-shadow 0.3s ease;
+      }
+      .zts-diagram:not(.open) .zts-platform { animation:ztsGlow 2.6s ease-in-out infinite; }
+      @keyframes ztsGlow { 0%,100% { box-shadow:0 8px 22px rgba(0,77,77,0.10), 0 0 0 0 rgba(0,255,157,0); } 50% { box-shadow:0 8px 22px rgba(0,77,77,0.10), 0 0 0 7px rgba(0,255,157,0.13); } }
+      .zts-diagram.open .zts-platform { width:100%; padding:22px clamp(14px,2.4vw,24px) 24px; box-shadow:0 24px 56px rgba(0,77,77,0.15); animation:none; }
+
+      .zts-plat-collapsed { display:flex; flex-direction:column; gap:5px; }
+      .zts-plat-title { font-family:'Montserrat',sans-serif; font-weight:700; font-size:1.2rem; color:#004d4d; }
+      .zts-plat-sub { font-family:'Poppins',sans-serif; font-size:0.82rem; color:#6b7c7c; }
+      .zts-plat-cue { font-family:'Poppins',sans-serif; font-size:0.66rem; font-weight:700; letter-spacing:0.08em; color:#05b981; margin-top:2px; }
+      .zts-plat-expanded { display:none; }
+      .zts-diagram.open .zts-plat-collapsed { display:none; }
+      .zts-diagram.open .zts-plat-expanded { display:block; }
+
+      .zts-box-head { text-align:center; margin-bottom:18px; }
+      .zts-box-title { display:inline-flex; align-items:center; gap:9px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:1.12rem; color:#004d4d; }
+      .zts-dot { width:9px; height:9px; border-radius:50%; background:#00ff9d; box-shadow:0 0 0 4px rgba(0,255,157,0.16); }
+      .zts-box-sub { display:block; font-family:'Poppins',sans-serif; font-size:0.82rem; color:#8a9997; margin-top:4px; }
+
+      .zts-arch { display:grid; grid-template-columns:1fr 1fr; align-items:stretch; gap:0 54px; position:relative; }
+      .zts-region { min-width:0; background:#eef5f6; border:1px solid #dbe7e9; border-radius:14px; padding:16px 16px 18px; }
+      .zts-region-title { text-align:center; font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.88rem; color:#004d4d; margin-bottom:13px; }
+      .zts-region-title span { display:block; font-family:'Poppins',sans-serif; font-weight:500; font-size:0.67rem; color:#9bacaa; letter-spacing:0.03em; margin-top:2px; }
+      .zts-cards { display:flex; flex-direction:column; gap:9px; }
+      .zts-card { background:#ffffff; border:1px solid #e6eef0; border-radius:10px; padding:10px 12px 11px; }
+      .zts-card-label { font-family:'Inter',system-ui,sans-serif; font-size:0.62rem; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; color:#04936a; margin-bottom:8px; }
+      .zts-card-icons { display:flex; flex-wrap:wrap; gap:8px 12px; }
+
+      .zts-item { display:flex; flex-direction:column; align-items:center; gap:6px; width:62px; opacity:0; }
+      .zts-item img { height:30px; width:auto; max-width:36px; display:block; }
+      .zts-item span { font-family:'Poppins',sans-serif; font-size:0.62rem; font-weight:600; color:#0c473f; text-align:center; line-height:1.1; }
+      .zts-diagram.open .zts-item { animation:ztsPop 0.45s cubic-bezier(0.34,1.35,0.64,1) both; animation-delay:var(--d,0ms); }
+      @keyframes ztsPop { from { opacity:0; transform:translateY(10px) scale(0.9); } to { opacity:1; transform:none; } }
+
+      .zts-flow { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; gap:9px; }
+      .zts-flow svg { width:36px; height:11px; overflow:visible; }
+      .zts-flow line { stroke:#9fc7bb; stroke-width:1.6; stroke-dasharray:2 3; }
+      .zts-diagram.open .zts-flow line { animation:ztsDash 1.3s linear infinite; }
+      .zts-flow polyline { fill:none; stroke:#9fcfc0; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+      @keyframes ztsDash { to { stroke-dashoffset:-10; } }
+
+      @media (max-width:900px) {
+        .zts-diagram.open { flex-direction:column; align-items:stretch; }
+        .zts-diagram.open .zts-inputs { flex-direction:row; }
+        .zts-diagram.open .zts-conn { display:none; }
+        .zts-arch { grid-template-columns:1fr; gap:20px 0; }
+        .zts-flow { position:static; transform:rotate(90deg); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .zts-diagram:not(.open) .zts-platform, .zts-diagram.open .zts-item, .zts-diagram.open .zts-flow line { animation:none; }
+        .zts-diagram.open .zts-item { opacity:1; }
+      }
+    </style>
+
+    <script>
+    (function () {
+      var REGIONS = [
+        { title: 'Application & engineering', meta: 'What we build and ship', cards: [
+          { label: 'Frontend & backend', items: [['Angular', 'angular.svg'], ['.NET', 'dotnet.svg'], ['Python', 'python.svg']] },
+          { label: 'Delivery', items: [['Static Web Apps', 'azure-static-web-apps.svg'], ['Function Apps', 'azure-functions.svg']] },
+          { label: 'DevOps', items: [['GitHub', 'github.svg'], ['Docker', 'docker.svg']] },
+          { label: 'Engineering', items: [['Siemens', 'siemens.svg']] }
+        ]},
+        { title: 'Cloud & AI', meta: 'Microsoft Azure', cards: [
+          { label: 'Cloud & data', items: [['Azure', 'azure.svg'], ['Storage', 'azure-storage.svg'], ['Virtual Network', 'azure-vnet.svg'], ['External ID (CIAM)', 'azure-ciam.svg']] },
+          { label: 'Document AI', items: [['Document Intelligence', 'azure-document-intelligence.svg'], ['AI Foundry', 'azure-ai-foundry.svg']] },
+          { label: 'AI assistants', items: [['ChatGPT', 'chatgpt.svg'], ['Claude', 'claude.svg'], ['Ollama', 'ollama.svg']] }
+        ]}
+      ];
+
+      var FLOW = '<div class="zts-flow" aria-hidden="true">' +
+        '<svg viewBox="0 0 36 11"><line x1="2" y1="5.5" x2="30" y2="5.5"/><polyline points="26,2 32,5.5 26,9"/></svg>' +
+        '<svg viewBox="0 0 36 11"><line x1="6" y1="5.5" x2="34" y2="5.5"/><polyline points="10,2 4,5.5 10,9"/></svg>' +
+        '</div>';
+
+      var wrap = document.getElementById('ztsWrap');
+      var diagram = document.getElementById('ztsDiagram');
+      var hit = document.getElementById('ztsHit');
+      var arch = document.getElementById('ztsArch');
+      var conn = document.getElementById('ztsConn');
+      var label = document.getElementById('ztsToggleLabel');
+      var hint = document.getElementById('ztsHint');
+      if (!diagram || !hit || !arch || !conn) return;
+
+      var inputs = Array.prototype.slice.call(diagram.querySelectorAll('.zts-inputs .zts-io'));
+      var output = diagram.querySelector('.zts-output .zts-io');
+      var built = false, open = false, connBuilt = false;
+
+      function buildArch() {
+        if (built) return;
+        var d = 0, html = '';
+        REGIONS.forEach(function (region, ri) {
+          html += '<div class="zts-region"><div class="zts-region-title">' + region.title +
+            '<span>' + region.meta + '</span></div><div class="zts-cards">';
+          region.cards.forEach(function (card) {
+            html += '<div class="zts-card"><div class="zts-card-label">' + card.label + '</div><div class="zts-card-icons">';
+            card.items.forEach(function (it) {
+              html += '<span class="zts-item" style="--d:' + d + 'ms">' +
+                '<img src="assets/tech/' + it[1] + '" alt="' + it[0] + '" loading="lazy" width="32" height="26">' +
+                '<span>' + it[0] + '</span></span>';
+              d += 32;
+            });
+            html += '</div></div>';
+          });
+          html += '</div></div>';
+        });
+        html += FLOW;
+        arch.innerHTML = html;
+        built = true;
+      }
+
+      function buildConn() {
+        if (connBuilt) return;
+        var paths = '', dots = '';
+        for (var i = 0; i < inputs.length; i++) {
+          paths += '<path id="ztsp' + i + '"></path>';
+          dots += '<circle r="4.4"><animateMotion dur="2.7s" begin="' + (i * 0.5) + 's" repeatCount="indefinite" calcMode="linear"><mpath href="#ztsp' + i + '"/></animateMotion></circle>';
+        }
+        paths += '<path id="ztspOut"></path>';
+        dots += '<circle r="4.8"><animateMotion dur="2.3s" begin="0.4s" repeatCount="indefinite" calcMode="linear"><mpath href="#ztspOut"/></animateMotion></circle>';
+        conn.innerHTML = paths + dots;
+        connBuilt = true;
+      }
+
+      function draw() {
+        buildConn();
+        var dr = diagram.getBoundingClientRect();
+        var W = dr.width, H = dr.height;
+        conn.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+        conn.setAttribute('width', W); conn.setAttribute('height', H);
+        var pr = hit.getBoundingClientRect();
+        var leftX = pr.left - dr.left, rightX = pr.right - dr.left, midY = pr.top - dr.top + pr.height / 2;
+        inputs.forEach(function (chip, i) {
+          var r = chip.getBoundingClientRect();
+          var sx = r.right - dr.left, sy = r.top - dr.top + r.height / 2;
+          var d = 'M' + sx + ',' + sy + ' C' + (sx + 46) + ',' + sy + ' ' + (leftX - 60) + ',' + midY + ' ' + leftX + ',' + midY;
+          var p = document.getElementById('ztsp' + i); if (p) p.setAttribute('d', d);
+        });
+        if (output) {
+          var ro = output.getBoundingClientRect();
+          var ex = ro.left - dr.left, ey = ro.top - dr.top + ro.height / 2;
+          var d = 'M' + rightX + ',' + midY + ' C' + (rightX + 50) + ',' + midY + ' ' + (ex - 50) + ',' + ey + ' ' + ex + ',' + ey;
+          var po = document.getElementById('ztspOut'); if (po) po.setAttribute('d', d);
+        }
+      }
+
+      // Keep the connectors glued to the platform while it grows/shrinks.
+      function animateDraw(ms) {
+        var t0 = performance.now();
+        (function step(now) {
+          draw();
+          if (now - t0 < ms) requestAnimationFrame(step);
+        })(t0);
+      }
+
+      function setOpen(next) {
+        open = next;
+        if (open) buildArch();
+        diagram.classList.toggle('open', open);
+        if (wrap) wrap.style.maxWidth = open ? 'min(1360px, 94vw)' : '1000px';
+        hit.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (label) label.textContent = open ? 'CLOSE' : 'VIEW THE STACK ▾';
+        if (hint) hint.style.opacity = open ? '0' : '1';
+        animateDraw(650);
+        if (open) setTimeout(function () { diagram.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 280);
+      }
+
+      function toggle() { setOpen(!open); }
+
+      hit.addEventListener('click', function (e) { e.stopPropagation(); toggle(); });
+      hit.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); toggle(); }
+      });
+      document.addEventListener('click', function () { if (open) setOpen(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) setOpen(false); });
+      window.addEventListener('resize', draw);
+      window.addEventListener('load', draw);
+      draw();
+    })();
+    </script>
   </section>
