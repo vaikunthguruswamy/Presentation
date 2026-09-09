@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Vortex Cluster — Analytics Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Vortex Cluster — presentation build
+   Analytics dashboard for a multi-branch customer group.
+   Layout mirrors the production Angular cluster component.
+   ══════════════════════════════════════════════════════════════ */
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { font-family: 'Inter', sans-serif; background: #f4f7fa; overflow: hidden; }
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal; font-style: normal;
+  display: inline-block; line-height: 1; text-transform: none;
+  letter-spacing: normal; word-wrap: normal; white-space: nowrap; direction: ltr;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale; font-feature-settings: 'liga';
+  vertical-align: middle; user-select: none;
+}
+html.no-icon-font .material-icons { visibility: hidden; }
+
+/* ── Shell ───────────────────────────────────────────────── */
+.portal-shell { display: flex; height: 100%; overflow: hidden; }
+.portal-main  { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+.portal-content { flex: 1; overflow: hidden; display: flex; flex-direction: column; min-height: 0; }
+.screen { flex: 1; overflow-y: auto; min-height: 0; display: none; }
+.screen.is-active { display: block; }
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+.sidebar {
+  width: 240px; background: #fff; border-right: 1px solid #e8e8e8;
+  display: flex; flex-direction: column; height: 100%; flex-shrink: 0;
+}
+.brand { padding: 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f0f0f0; }
+.logo-box {
+  width: 32px; height: 32px; background: #004d4d; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.logo-letter { color: #00ff9d; font-weight: 800; font-size: 14px; font-family: 'Montserrat', sans-serif; }
+.brand-name { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9rem; color: #004d4d; line-height: 1.1; }
+.brand-sub { font-size: 10px; color: #aaa; margin-top: 2px; }
+.nav-area { flex: 1; overflow-y: auto; padding: 8px 0; }
+.nav-section-label {
+  padding: 16px 8px 4px 16px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #bdbdbd;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 6px;
+  margin: 1px 8px; cursor: pointer; transition: all 0.15s ease; background: transparent;
+  color: #666; font-weight: 400; font-size: 13px; text-decoration: none;
+  border-left: 3px solid transparent; font-family: 'Inter', sans-serif;
+}
+.nav-item .nav-icon { font-size: 18px; color: #9e9e9e; flex-shrink: 0; transition: color 0.15s; }
+.nav-item:hover:not(.active) { background: rgba(0,0,0,0.03); color: #333; }
+.nav-item.active {
+  background: rgba(0,255,157,0.10); color: #004d4d; font-weight: 600; border-left-color: #00ff9d;
+}
+.nav-item.active .nav-icon { color: #004d4d; }
+.user-footer { padding: 12px 16px; border-top: 1px solid #f0f0f0; display: flex; align-items: center; gap: 8px; }
+.user-avatar {
+  width: 30px; height: 30px; border-radius: 50%; background: #004d4d;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  color: #00ff9d; font-weight: 700; font-size: 11px;
+}
+.user-info { flex: 1; min-width: 0; }
+.user-name { font-size: 12px; font-weight: 600; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-role { font-size: 10px; color: #999; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.settings-btn {
+  width: 28px; height: 28px; border: none; background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; border-radius: 4px;
+  transition: background 0.15s; color: #bdbdbd;
+}
+.settings-btn .material-icons { font-size: 16px; color: #bdbdbd; }
+.settings-btn:hover { background: rgba(0,0,0,0.06); }
+
+/* ── Page header (window + controls) ─────────────────────── */
+.page { padding: 22px 26px; }
+.page-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 18px;
+}
+.page-h1 { font-size: 21px; font-weight: 700; color: #1a1a1a; line-height: 1.15; }
+.page-sub { font-size: 12px; color: #9aa0a6; margin-top: 3px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.branch-chip {
+  display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px;
+  background: rgba(0,77,77,0.08); color: #004d4d; font-size: 11px; font-weight: 600;
+}
+.branch-chip .material-icons { font-size: 14px; }
+.head-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.seg-toggle { display: inline-flex; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; background: #fff; }
+.seg-btn {
+  border: none; background: #fff; padding: 8px 15px; font-family: 'Inter', sans-serif;
+  font-size: 12px; font-weight: 600; color: #888; cursor: pointer; transition: all 0.15s;
+  border-right: 1px solid #eee;
+}
+.seg-btn:last-child { border-right: none; }
+.seg-btn:hover:not(.active) { background: #f7fbfb; }
+.seg-btn.active { background: #004d4d; color: #00ff9d; }
+.date-range-field {
+  display: inline-flex; align-items: center; gap: 6px; position: relative;
+  border: 1px solid #e0e0e0; border-radius: 8px; background: #fff; padding: 4px 12px; height: 38px;
+}
+.date-range-field:hover { border-color: #bbb; }
+.date-range-field:focus-within { border-color: #004d4d; }
+.date-range-field .material-icons { font-size: 16px; color: #b0b0b0; }
+.date-range-field input[type="date"] {
+  border: none; outline: none; font-size: 12px; font-family: 'Inter', sans-serif;
+  color: #333; background: transparent; width: 104px;
+}
+.date-range-sep { color: #ccc; font-size: 12px; }
+.select-filter {
+  padding: 8px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 12px;
+  font-family: 'Inter', sans-serif; background: #fff; color: #333; outline: none; cursor: pointer;
+  height: 38px;
+}
+.select-filter:focus { border-color: #004d4d; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 5px; padding: 0 15px; height: 38px;
+  background: #00ff9d; color: #004d4d; border: none; border-radius: 8px;
+  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s; text-decoration: none;
+}
+.btn-primary:hover { background: #00e88f; }
+.btn-primary .material-icons { font-size: 15px; }
+
+/* ── KPI cards ───────────────────────────────────────────── */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 16px; }
+.kpi-card {
+  background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  padding: 15px 18px 0; display: flex; flex-direction: column; overflow: hidden;
+  border-top: 3px solid var(--accent, #004d4d);
+}
+.kpi-label { font-size: 10px; font-weight: 700; color: #9aa0a6; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+.kpi-value { font-size: 30px; font-weight: 700; color: #1a1a1a; line-height: 1; margin-bottom: 6px; }
+.kpi-sub { font-size: 11px; color: #9a9a9a; line-height: 1.3; min-height: 28px; }
+.kpi-deltas { display: flex; gap: 8px; margin: 6px 0 4px; }
+.delta-chip { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 600; }
+.delta-up   { background: rgba(46,125,50,0.10); color: #2e7d32; }
+.delta-down { background: rgba(198,40,40,0.09); color: #c62828; }
+.delta-flat { background: rgba(120,120,120,0.10); color: #757575; }
+.delta-tag { font-size: 9px; opacity: 0.7; font-weight: 700; letter-spacing: 0.03em; margin-left: 3px; }
+.kpi-spark { width: calc(100% + 36px); margin: 6px -18px 0; height: 42px; display: block; }
+
+/* ── Chart cards ─────────────────────────────────────────── */
+.ov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.chart-card {
+  background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  padding: 16px 18px; display: flex; flex-direction: column; min-width: 0;
+}
+.chart-card.span-2 { grid-column: 1 / -1; }
+.chart-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.chart-title { font-size: 14px; font-weight: 700; color: #1a1a1a; }
+.chart-sub { font-size: 11px; color: #a4abb2; margin-top: 2px; }
+.chart-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 12px; white-space: nowrap;
+}
+.badge-completed { background: rgba(0,168,122,0.12); color: #00996f; }
+.badge-orders    { background: rgba(251,140,0,0.13); color: #e07b00; }
+.chart-body { position: relative; }
+.chart-legend-float {
+  position: absolute; top: 2px; right: 4px; display: flex; gap: 14px; z-index: 2;
+  background: rgba(255,255,255,0.85); padding: 2px 4px; border-radius: 6px;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #666; }
+.legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.chart-svg { width: 100%; height: auto; display: block; overflow: visible; }
+
+/* Top-customers horizontal bars */
+.hbar-list { display: flex; flex-direction: column; gap: 11px; margin-top: 4px; }
+.hbar-row { display: grid; grid-template-columns: 150px 1fr auto; align-items: center; gap: 10px; }
+.hbar-name { font-size: 12px; color: #444; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: right; }
+.hbar-track { height: 15px; background: #eef1f4; border-radius: 4px; overflow: hidden; }
+.hbar-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+.hbar-val { font-size: 12px; font-weight: 700; color: #1a1a1a; white-space: nowrap; min-width: 44px; text-align: right; }
+.hbar-delta { font-size: 10px; font-weight: 700; white-space: nowrap; margin-left: 2px; }
+.hbar-delta.up { color: #2e7d32; }
+.hbar-delta.down { color: #c62828; }
+
+/* Heatmap */
+.heatmap-scroll { overflow-x: auto; }
+.heatmap { border-collapse: separate; border-spacing: 3px; width: 100%; table-layout: fixed; }
+.heatmap col.hm-branch-col { width: 190px; }
+.heatmap th {
+  font-size: 10px; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 0.03em;
+  padding: 2px 4px; text-align: center; white-space: nowrap;
+}
+.heatmap th.hm-branch-th { text-align: right; padding-right: 8px; }
+.heatmap td.hm-branch { font-size: 12px; color: #444; white-space: nowrap; padding-right: 8px; text-align: right;
+  overflow: hidden; text-overflow: ellipsis; }
+.hm-cell {
+  height: 30px; border-radius: 4px; text-align: center; vertical-align: middle;
+  font-size: 11px; font-weight: 700; cursor: default; transition: transform 0.1s;
+}
+.hm-cell:hover { transform: scale(1.06); }
+.hm-scale { display: flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 10px; color: #999; }
+.hm-swatch { width: 20px; height: 12px; border-radius: 3px; }
+
+/* Tooltip */
+.chart-tooltip {
+  position: fixed; z-index: 3000; pointer-events: none; background: #1a2b2b; color: #fff;
+  border-radius: 6px; padding: 7px 10px; font-size: 11px; line-height: 1.45; box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  opacity: 0; transition: opacity 0.12s; max-width: 240px;
+}
+.chart-tooltip strong { color: #00ff9d; }
+
+/* Tables */
+.table-card {
+  background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow: hidden; display: flex; flex-direction: column; margin-top: 16px;
+}
+.table-card .chart-head { padding: 16px 18px 6px; margin: 0; }
+.table-scroll { overflow-x: auto; overflow-y: auto; }
+.portal-table { width: 100%; border-collapse: collapse; }
+.portal-table thead tr { border-bottom: 1px solid #f0f0f0; }
+.portal-table th {
+  padding: 12px 18px; text-align: left; font-size: 10px; font-weight: 700; color: #9aa0a6;
+  text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+}
+.portal-table th.text-right { text-align: right; }
+.portal-table th.sortable { cursor: pointer; user-select: none; }
+.portal-table th.sortable:hover { color: #004d4d; }
+.portal-table th .sort-ico { font-size: 14px; vertical-align: middle; color: #cfcfcf; margin-left: 3px; }
+.portal-table th.sorted .sort-ico { color: #004d4d; }
+.table-row { border-bottom: 1px solid #f5f5f5; transition: background 0.12s; }
+.table-row:hover { background: rgba(0,255,157,0.04); }
+.table-row td { padding: 13px 18px; vertical-align: middle; font-size: 13px; color: #444; }
+.table-row td.text-right { text-align: right; }
+.branch-cell { font-weight: 600; color: #004d4d; white-space: nowrap; }
+.order-id-cell { font-family: 'Consolas', monospace; font-size: 12px; font-weight: 600; color: #004d4d; white-space: nowrap; }
+.mono { font-family: 'Consolas', monospace; font-size: 12px; }
+.date-cell { font-size: 12px; color: #888; white-space: nowrap; }
+.empty-row { padding: 40px; text-align: center; color: #ccc; font-size: 13px; }
+.result-count { font-size: 12px; color: #aaa; white-space: nowrap; }
+.portal-badge {
+  display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px;
+  font-weight: 600; letter-spacing: 0.03em; white-space: nowrap;
+}
+
+/* Screen headers / filters */
+.screen-title { font-size: 21px; font-weight: 700; color: #1a1a1a; }
+.screen-subtitle { font-size: 12px; color: #9aa0a6; margin: 3px 0 16px; }
+.filters-row { display: flex; gap: 10px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+.search-wrap { position: relative; flex: 1 1 220px; max-width: 340px; }
+.search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 16px; color: #bbb; pointer-events: none; }
+.search-input {
+  width: 100%; padding: 9px 10px 9px 32px; border: 1px solid #e0e0e0; border-radius: 8px;
+  font-size: 12px; font-family: 'Inter', sans-serif; outline: none; background: #fff; height: 38px;
+}
+.search-input:focus { border-color: #004d4d; }
+
+@media (max-width: 980px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .ov-grid { grid-template-columns: 1fr; }
+  .chart-card.span-2 { grid-column: auto; }
+}
+@media (max-width: 560px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="portal-shell">
+
+  <!-- ── Sidebar ─────────────────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo-box"><span class="logo-letter">Z</span></div>
+      <div>
+        <div class="brand-name">Vortex Cluster</div>
+        <div class="brand-sub" id="brandBranches">— branches tracked</div>
+      </div>
+    </div>
+    <nav class="nav-area">
+      <div class="nav-section-label">Navigation</div>
+      <a class="nav-item active" data-screen="overview"><span class="material-icons nav-icon">dashboard</span><span class="nav-label">Overview</span></a>
+      <a class="nav-item" data-screen="active"><span class="material-icons nav-icon">receipt_long</span><span class="nav-label">Active Orders</span></a>
+      <a class="nav-item" data-screen="history"><span class="material-icons nav-icon">history</span><span class="nav-label">Order History</span></a>
+    </nav>
+    <div class="user-footer">
+      <div class="user-avatar" id="userInitials">SR</div>
+      <div class="user-info">
+        <div class="user-name" id="userName">Sam Rivera</div>
+        <div class="user-role" id="userRole">Customer Account</div>
+      </div>
+      <button class="settings-btn" title="Sign out"><span class="material-icons">logout</span></button>
+    </div>
+  </aside>
+
+  <!-- ── Main ────────────────────────────────────────────── -->
+  <div class="portal-main">
+    <div class="portal-content">
+
+      <!-- ══ Overview ══ -->
+      <section class="screen is-active" id="screen-overview">
+        <div class="page">
+
+          <!-- Header: window + controls -->
+          <div class="page-head">
+            <div>
+              <div class="page-h1" id="winLabel">Year To Date</div>
+              <div class="page-sub">
+                <span id="winRange">—</span>
+                <span class="branch-chip"><span class="material-icons">corporate_fare</span><span id="branchChip">— branches</span></span>
+              </div>
+            </div>
+            <div class="head-controls">
+              <div class="seg-toggle" id="winToggle">
+                <button class="seg-btn" data-win="90d">90D</button>
+                <button class="seg-btn" data-win="1yr">1YR</button>
+                <button class="seg-btn active" data-win="ytd">YTD</button>
+              </div>
+              <div class="date-range-field">
+                <span class="material-icons">calendar_today</span>
+                <input type="date" id="ovFrom"/>
+                <span class="date-range-sep">–</span>
+                <input type="date" id="ovTo"/>
+              </div>
+              <select class="select-filter" id="ovBranch"><option value="__all">All branches</option></select>
+              <button class="btn-primary" id="ovExport"><span class="material-icons">download</span> Export</button>
+            </div>
+          </div>
+
+          <!-- KPI cards -->
+          <div class="kpi-grid" id="kpiGrid"></div>
+
+          <!-- Charts -->
+          <div class="ov-grid">
+
+            <div class="chart-card">
+              <div class="chart-head">
+                <div>
+                  <div class="chart-title">On-Time Delivery Trend</div>
+                  <div class="chart-sub">OTD % over time — dashed line = 95% target</div>
+                </div>
+                <span class="chart-badge badge-completed">COMPLETED</span>
+              </div>
+              <div class="chart-body">
+                <div class="chart-legend-float">
+                  <span class="legend-item"><span class="legend-dot" style="background:#00897b"></span>OTD %</span>
+                  <span class="legend-item"><span class="legend-dot" style="background:#b0bec5"></span>Previous OTD %</span>
+                </div>
+                <div id="trendChart"></div>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-head">
+                <div>
+                  <div class="chart-title">On-Time Delivery by Branch</div>
+                  <div class="chart-sub">Completed OTD % based on known completed orders</div>
+                </div>
+                <span class="chart-badge badge-completed">COMPLETED</span>
+              </div>
+              <div class="chart-body"><div id="branchOtdChart"></div></div>
+            </div>
+
+            <div class="chart-card span-2">
+              <div class="chart-head">
+                <div>
+                  <div class="chart-title">OTD Heatmap — Branch × Period</div>
+                  <div class="chart-sub">Raw OTD % per branch-period cell; hover for sample size (n) and confidence</div>
+                </div>
+                <span class="chart-badge badge-completed">COMPLETED</span>
+              </div>
+              <div class="heatmap-scroll" id="heatmap"></div>
+              <div class="hm-scale">
+                <span>Worse</span>
+                <span class="hm-swatch" style="background:#c62828"></span>
+                <span class="hm-swatch" style="background:#f9a825"></span>
+                <span class="hm-swatch" style="background:#2e7d32"></span>
+                <span>Better</span>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-head">
+                <div>
+                  <div class="chart-title">Order Intake Trend</div>
+                  <div class="chart-sub">monthly selected window vs previous monthly window</div>
+                </div>
+                <span class="chart-badge badge-orders">ALL ORDERS</span>
+              </div>
+              <div class="chart-body">
+                <div class="chart-legend-float">
+                  <span class="legend-item"><span class="legend-dot" style="background:#004d4d"></span>Selected window</span>
+                  <span class="legend-item"><span class="legend-dot" style="background:#b0bec5"></span>Previous window</span>
+                </div>
+                <div id="intakeChart"></div>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-head">
+                <div>
+                  <div class="chart-title">Top Customers by Circuits</div>
+                  <div class="chart-sub" id="topCustSub">Total circuits this window vs prior window</div>
+                </div>
+                <span class="chart-badge badge-orders">TOTAL CIRCUITS</span>
+              </div>
+              <div class="hbar-list" id="topBranchesList"></div>
+            </div>
+
+          </div>
+
+          <!-- Summary table -->
+          <div class="table-card">
+            <div class="chart-head">
+              <div class="chart-title">Branch Batch &amp; Circuit Summary</div>
+              <span class="result-count" id="sumCount"></span>
+            </div>
+            <div class="table-scroll">
+              <table class="portal-table" id="summaryTable">
+                <thead>
+                  <tr>
+                    <th class="sortable sorted" data-key="name">Branch Name <span class="material-icons sort-ico">arrow_upward</span></th>
+                    <th class="sortable text-right" data-key="batches">Total PCP Batches <span class="material-icons sort-ico">sort</span></th>
+                    <th class="sortable text-right" data-key="circuits">Total Circuits <span class="material-icons sort-ico">sort</span></th>
+                    <th class="sortable text-right" data-key="otd">OTD <span class="material-icons sort-ico">sort</span></th>
+                    <th class="sortable text-right" data-key="avgDelay">Average Delay Duration <span class="material-icons sort-ico">sort</span></th>
+                  </tr>
+                </thead>
+                <tbody id="summaryBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══ Active Orders ══ -->
+      <section class="screen" id="screen-active">
+        <div class="page">
+          <div class="screen-title">Active Orders</div>
+          <div class="screen-subtitle">Orders currently in production across all branches</div>
+          <div class="filters-row">
+            <div class="search-wrap">
+              <span class="material-icons search-icon">search</span>
+              <input class="search-input" id="actSearch" placeholder="Search by order ID or branch..."/>
+            </div>
+            <select class="select-filter" id="actBranch"><option value="__all">All branches</option></select>
+            <select class="select-filter" id="actStatus">
+              <option value="__all">All statuses</option>
+              <option value="on-track">On Track</option>
+              <option value="delayed">Delayed</option>
+            </select>
+            <span class="result-count" id="actCount"></span>
+          </div>
+          <div class="table-card" style="margin-top:0">
+            <div class="table-scroll">
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Branch</th><th>Order ID</th><th class="text-right">Batches</th>
+                    <th class="text-right">Circuits</th><th>Order Date</th><th>Est. Delivery</th><th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="actBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ Order History ══ -->
+      <section class="screen" id="screen-history">
+        <div class="page">
+          <div class="screen-title">Order History</div>
+          <div class="screen-subtitle">Completed orders across the group</div>
+          <div class="filters-row">
+            <div class="search-wrap">
+              <span class="material-icons search-icon">search</span>
+              <input class="search-input" id="hisSearch" placeholder="Search by order ID or branch..."/>
+            </div>
+            <select class="select-filter" id="hisBranch"><option value="__all">All branches</option></select>
+            <select class="select-filter" id="hisOtd">
+              <option value="__all">All outcomes</option>
+              <option value="on">On time</option>
+              <option value="late">Late</option>
+            </select>
+            <span class="result-count" id="hisCount"></span>
+          </div>
+          <div class="table-card" style="margin-top:0">
+            <div class="table-scroll">
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Branch</th><th>Order ID</th><th class="text-right">Batches</th>
+                    <th class="text-right">Circuits</th><th>Order Date</th><th>Completed</th><th>Outcome</th>
+                  </tr>
+                </thead>
+                <tbody id="hisBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<div class="chart-tooltip" id="tooltip"></div>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   Vortex Cluster — presentation build
+   All data below is fictional and generated for demonstration.
+   No production or customer data is used.
+   ════════════════════════════════════════════════════════════ */
+
+/* ═════ DEMO DATA START ═════ */
+const DEMO = {
+  pageTitle: 'Vortex Cluster — Analytics Demo',
+  group: {
+    name: 'Meridian Components Group',
+    branchesTracked: 38,
+    user: { name: 'Sam Rivera', initials: 'SR', role: 'Customer Account' }
+  },
+  windows: {
+    '90d': { label: 'Last 90 Days',  range: '11 Jun 2026 – 09 Sep 2026', from: '2026-06-11', to: '2026-09-09' },
+    '1yr': { label: 'Last 12 Months', range: '10 Sep 2025 – 09 Sep 2026', from: '2025-09-10', to: '2026-09-09' },
+    'ytd': { label: 'Year To Date',  range: '01 Jan 2026 – 09 Sep 2026', from: '2026-01-01', to: '2026-09-09' }
+  },
+  months: ['Jan 26','Feb 26','Mar 26','Apr 26','May 26','Jun 26','Jul 26','Aug 26','Sep 26'],
+
+  branches: [
+    { name: 'Meridian Nordic AB',       batches: 172, circuits: 22140, panels: 1420, completed: 168, onTime: 119, avgDelay: 3, prevCircuits: 7900 },
+    { name: 'Meridian Iberia S.L.',     batches: 41,  circuits: 10880, panels: 690,  completed: 39,  onTime: 16,  avgDelay: 7, prevCircuits: 2165 },
+    { name: 'Meridian Flatridge Ltd',   batches: 33,  circuits: 7320,  panels: 512,  completed: 31,  onTime: 12,  avgDelay: 8, prevCircuits: 1030 },
+    { name: 'Meridian France SAS',      batches: 21,  circuits: 2010,  panels: 180,  completed: 20,  onTime: 9,   avgDelay: 4, prevCircuits: 2246 },
+    { name: 'Meridian UK',              batches: 47,  circuits: 1940,  panels: 205,  completed: 44,  onTime: 26,  avgDelay: 4, prevCircuits: 1984 },
+    { name: 'Meridian Polska Sp.',      batches: 15,  circuits: 1560,  panels: 132,  completed: 14,  onTime: 5,   avgDelay: 5, prevCircuits: 459 },
+    { name: 'Meridian Danmark',         batches: 26,  circuits: 1405,  panels: 150,  completed: 24,  onTime: 14,  avgDelay: 6, prevCircuits: 2100 },
+    { name: 'Meridian Suomi Oy',        batches: 19,  circuits: 910,   panels: 96,   completed: 18,  onTime: 11,  avgDelay: 2, prevCircuits: 1076 },
+    { name: 'Meridian Norge AS',        batches: 13,  circuits: 720,   panels: 74,   completed: 12,  onTime: 9,   avgDelay: 9, prevCircuits: 540 },
+    { name: 'Meridian Balkan DOO',      batches: 18,  circuits: 240,   panels: 40,   completed: 15,  onTime: 6,   avgDelay: 5, prevCircuits: 210 },
+    { name: 'Meridian Portugal Lda',    batches: 9,   circuits: 168,   panels: 22,   completed: 8,   onTime: 8,   avgDelay: 0, prevCircuits: 90 },
+    { name: 'Meridian Helvetia AG',     batches: 6,   circuits: 96,    panels: 18,   completed: 5,   onTime: 0,   avgDelay: 3, prevCircuits: 40 },
+    { name: 'Meridian Deutschland GmbH',batches: 8,   circuits: 312,   panels: 30,   completed: 7,   onTime: 0,   avgDelay: 7, prevCircuits: 120 },
+    { name: 'Meridian Italia SRL',      batches: 5,   circuits: 84,    panels: 12,   completed: 4,   onTime: 0,   avgDelay: 2, prevCircuits: 30 }
+  ],
+
+  otdTrend: [
+    { month: 'Jan 26', onTime: 18, completed: 34, prevOnTime: 12, prevCompleted: 30 },
+    { month: 'Feb 26', onTime: 22, completed: 38, prevOnTime: 15, prevCompleted: 33 },
+    { month: 'Mar 26', onTime: 30, completed: 48, prevOnTime: 20, prevCompleted: 40 },
+    { month: 'Apr 26', onTime: 26, completed: 44, prevOnTime: 18, prevCompleted: 38 },
+    { month: 'May 26', onTime: 31, completed: 52, prevOnTime: 22, prevCompleted: 45 },
+    { month: 'Jun 26', onTime: 28, completed: 49, prevOnTime: 20, prevCompleted: 42 },
+    { month: 'Jul 26', onTime: 33, completed: 56, prevOnTime: 24, prevCompleted: 48 },
+    { month: 'Aug 26', onTime: 38, completed: 64, prevOnTime: 27, prevCompleted: 52 },
+    { month: 'Sep 26', onTime: 9,  completed: 24, prevOnTime: 8,  prevCompleted: 20 }
+  ],
+
+  intake: [
+    { month: 'Jan 26', current: 38, previous: 30 },
+    { month: 'Feb 26', current: 42, previous: 54 },
+    { month: 'Mar 26', current: 55, previous: 41 },
+    { month: 'Apr 26', current: 47, previous: 39 },
+    { month: 'May 26', current: 58, previous: 33 },
+    { month: 'Jun 26', current: 51, previous: 40 },
+    { month: 'Jul 26', current: 60, previous: 52 },
+    { month: 'Aug 26', current: 66, previous: 50 },
+    { month: 'Sep 26', current: 16, previous: 44 }
+  ],
+
+  heatmap: {
+    'Meridian Nordic AB':        [72, 68, 75, 70, 78, 66, 74, 80, 60],
+    'Meridian Iberia S.L.':      [38, 45, 50, 42, 40, 44, 36, 48, 25],
+    'Meridian Flatridge Ltd':    [40, 35, 44, 38, 42, 30, 46, 39, 20],
+    'Meridian France SAS':       [50, 42, 48, 45, 40, 52, 44, 47, 33],
+    'Meridian UK':               [60, 58, 66, 55, 62, 57, 64, 59, 50],
+    'Meridian Polska Sp.':       [30, 38, 42, 33, 40, 28, 36, 44, null],
+    'Meridian Danmark':          [55, 60, 52, 58, 61, 54, 57, 62, 45],
+    'Meridian Suomi Oy':         [62, 58, 66, 60, 55, 64, 61, 59, 50],
+    'Meridian Norge AS':         [70, 75, 68, 72, 78, 66, 74, 80, null],
+    'Meridian Balkan DOO':       [40, 33, 45, 38, 42, 30, 44, null, null],
+    'Meridian Portugal Lda':     [100, 100, 100, 100, null, 100, 100, null, null],
+    'Meridian Helvetia AG':      [0, 25, 0, 33, 0, null, 0, null, null],
+    'Meridian Deutschland GmbH': [0, 12, 0, 25, 0, 33, 0, null, null],
+    'Meridian Italia SRL':       [0, 0, 33, 0, null, 0, null, null, null]
+  }
+};
+/* ═════ DEMO DATA END ═════ */
+
+
+/* ──────────────────────────────────────────────────────────
+   Helpers
+   ────────────────────────────────────────────────────────── */
+const $ = (id) => document.getElementById(id);
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function fmtInt(n) { return Number(n).toLocaleString('en-GB'); }
+function fmtK(n) { return n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : String(n); }
+function pct(on, total) { return total > 0 ? (on / total) * 100 : 0; }
+function fmtPct(v) { return v.toFixed(1).replace(/\.0$/, '') + '%'; }
+function truncate(s, n) { return s.length > n ? s.slice(0, n - 1) + '…' : s; }
+
+/* Colour ramp red -> amber -> green for OTD 0..100 */
+function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+function mix(c1, c2, t) { return `rgb(${lerp(c1[0],c2[0],t)},${lerp(c1[1],c2[1],t)},${lerp(c1[2],c2[2],t)})`; }
+const RED = [198,40,40], AMBER = [249,168,37], GREEN = [46,125,50];
+function otdColor(v) {
+  if (v == null) return '#eef1f4';
+  const t = Math.max(0, Math.min(100, v)) / 100;
+  return t < 0.5 ? mix(RED, AMBER, t / 0.5) : mix(AMBER, GREEN, (t - 0.5) / 0.5);
+}
+function cellTextColor(v) {
+  if (v == null) return '#c4ccd2';
+  return (v >= 35 && v <= 68) ? '#3a2c00' : '#fff';
+}
+
+/* Catmull-Rom -> cubic bezier smoothing */
+function smoothPath(pts) {
+  if (pts.length < 2) return pts.length ? `M ${pts[0][0]},${pts[0][1]}` : '';
+  let d = `M ${pts[0][0]},${pts[0][1]}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+    const c1x = p1[0] + (p2[0] - p0[0]) / 6, c1y = p1[1] + (p2[1] - p0[1]) / 6;
+    const c2x = p2[0] - (p3[0] - p1[0]) / 6, c2y = p2[1] - (p3[1] - p1[1]) / 6;
+    d += ` C ${c1x.toFixed(1)},${c1y.toFixed(1)} ${c2x.toFixed(1)},${c2y.toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
+  }
+  return d;
+}
+
+/* Tooltip */
+const tooltip = $('tooltip');
+function showTip(html, evt) { tooltip.innerHTML = html; tooltip.style.opacity = '1'; moveTip(evt); }
+function moveTip(evt) {
+  const pad = 14; let x = evt.clientX + pad, y = evt.clientY + pad;
+  const r = tooltip.getBoundingClientRect();
+  if (x + r.width > window.innerWidth) x = evt.clientX - r.width - pad;
+  if (y + r.height > window.innerHeight) y = evt.clientY - r.height - pad;
+  tooltip.style.left = x + 'px'; tooltip.style.top = y + 'px';
+}
+function hideTip() { tooltip.style.opacity = '0'; }
+
+function branchOtd(b) { return pct(b.onTime, b.completed); }
+
+/* ──────────────────────────────────────────────────────────
+   Sparkline (for KPI cards)
+   ────────────────────────────────────────────────────────── */
+function sparkline(data, color) {
+  const W = 220, H = 42, p = 5;
+  const min = Math.min(...data), max = Math.max(...data), rng = (max - min) || 1;
+  const pts = data.map((v, i) => [p + (i / (data.length - 1)) * (W - 2 * p), H - p - ((v - min) / rng) * (H - 2 * p)]);
+  const path = smoothPath(pts);
+  const area = `${path} L ${pts[pts.length - 1][0]},${H} L ${pts[0][0]},${H} Z`;
+  return `<svg class="kpi-spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
+    <path d="${area}" fill="${color}" opacity="0.10"/>
+    <path d="${path}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
+}
+
+/* ──────────────────────────────────────────────────────────
+   KPI cards
+   ────────────────────────────────────────────────────────── */
+function deltaChip(tag, value, lowerIsBetter) {
+  const flat = Math.abs(value) < 0.05;
+  const good = value >= 0 ? !lowerIsBetter : lowerIsBetter;
+  const cls = flat ? 'delta-flat' : (good ? 'delta-up' : 'delta-down');
+  const sign = value > 0 ? '+' : '';
+  return `<span class="delta-chip ${cls}">${sign}${value.toFixed(1)}%<span class="delta-tag">${tag}</span></span>`;
+}
+function renderKpis(branches) {
+  const batches   = branches.reduce((s, b) => s + b.batches, 0);
+  const circuits  = branches.reduce((s, b) => s + b.circuits, 0);
+  const panels    = branches.reduce((s, b) => s + b.panels, 0);
+  const completed = branches.reduce((s, b) => s + b.completed, 0);
+  const onTime    = branches.reduce((s, b) => s + b.onTime, 0);
+  const otd       = pct(onTime, completed);
+  const avgBatch  = batches ? Math.round(circuits / batches) : 0;
+  const avgDelay  = completed ? branches.reduce((s, b) => s + b.avgDelay * b.completed, 0) / completed : 0;
+  const uniqueOrders = Math.round(batches * 0.72);
+  const otdSpark = DEMO.otdTrend.map((d) => pct(d.onTime, d.completed));
+
+  const cards = [
+    { accent: '#2196f3', label: 'PCP Orders', value: fmtInt(batches),
+      sub: `${fmtInt(uniqueOrders)} unique group orders`,
+      deltas: [['PoP', 14.2, false], ['YoY', 19.5, false]],
+      spark: DEMO.intake.map((d) => d.current) },
+    { accent: '#00b894', label: 'Completed OTD', value: fmtPct(otd), valueColor: '#d64545',
+      sub: `${fmtInt(onTime)} on-time · ${fmtInt(completed)} total completed`,
+      deltas: [['PoP', -12.4, false], ['YoY', 15.3, false]],
+      spark: otdSpark },
+    { accent: '#8b5cf6', label: 'Production Quantity', value: fmtInt(circuits),
+      sub: `circuits · ${fmtInt(panels)} panels · ${avgBatch} avg/batch`,
+      deltas: [['PoP', 142.7, false], ['YoY', 166.0, false]],
+      spark: [20, 24, 30, 28, 36, 33, 40, 48, 52] },
+    { accent: '#fb8c00', label: 'Average Delay Duration', value: avgDelay.toFixed(1),
+      sub: 'average business days past due',
+      deltas: [['PoP', -9.8, true], ['YoY', 0.0, true]],
+      spark: [6.4, 6.0, 5.6, 5.3, 5.1, 4.9, 4.7, 4.5, 4.4] }
+  ];
+
+  $('kpiGrid').innerHTML = cards.map((c) => `
+    <div class="kpi-card" style="--accent:${c.accent}">
+      <div class="kpi-label">${esc(c.label)}</div>
+      <div class="kpi-value" ${c.valueColor ? `style="color:${c.valueColor}"` : ''}>${c.value}</div>
+      <div class="kpi-sub">${esc(c.sub)}</div>
+      <div class="kpi-deltas">${c.deltas.map((d) => deltaChip(d[0], d[1], d[2])).join('')}</div>
+      ${sparkline(c.spark, c.accent)}
+    </div>`).join('');
+}
+
+/* ──────────────────────────────────────────────────────────
+   OTD Trend — smooth line + area (SVG)
+   ────────────────────────────────────────────────────────── */
+function renderTrend() {
+  const data = DEMO.otdTrend;
+  const W = 620, H = 300, pad = { l: 46, r: 14, t: 16, b: 32 };
+  const iw = W - pad.l - pad.r, ih = H - pad.t - pad.b, n = data.length;
+  const x = (i) => pad.l + (n === 1 ? iw / 2 : (i / (n - 1)) * iw);
+  const y = (v) => pad.t + (1 - v / 100) * ih;
+  const cur  = data.map((d) => pct(d.onTime, d.completed));
+  const prev = data.map((d) => pct(d.prevOnTime, d.prevCompleted));
+
+  const grid = [0, 20, 40, 60, 80, 100].map((v) =>
+    `<line x1="${pad.l}" y1="${y(v)}" x2="${W - pad.r}" y2="${y(v)}" stroke="#eef1f4"/>
+     <text x="${pad.l - 8}" y="${y(v) + 3}" text-anchor="end" font-size="10" fill="#b5bcc4">${v}%</text>`).join('');
+  const target = `<line x1="${pad.l}" y1="${y(95)}" x2="${W - pad.r}" y2="${y(95)}" stroke="#e57373" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="${W - pad.r}" y="${y(95) - 4}" text-anchor="end" font-size="9" fill="#e57373">95%</text>`;
+  const xlabels = data.map((d, i) =>
+    `<text x="${x(i)}" y="${H - 10}" text-anchor="middle" font-size="10" fill="#9aa3ab">${esc(d.month)}</text>`).join('');
+
+  const curPts = cur.map((v, i) => [x(i), y(v)]);
+  const prevPts = prev.map((v, i) => [x(i), y(v)]);
+  const curPath = smoothPath(curPts);
+  const areaPath = `${curPath} L ${curPts[curPts.length - 1][0]},${y(0)} L ${curPts[0][0]},${y(0)} Z`;
+
+  const curDots = cur.map((v, i) =>
+    `<circle class="trend-dot" data-i="${i}" cx="${x(i)}" cy="${y(v)}" r="4.5" fill="#00897b" stroke="#fff" stroke-width="2" style="cursor:pointer"/>`).join('');
+  const prevDots = prev.map((v, i) =>
+    `<circle cx="${x(i)}" cy="${y(v)}" r="3" fill="#fff" stroke="#b0bec5" stroke-width="1.5"/>`).join('');
+
+  $('trendChart').innerHTML = `
+    <svg class="chart-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="OTD trend">
+      <text x="14" y="${H / 2}" transform="rotate(-90 14 ${H / 2})" text-anchor="middle" font-size="10" fill="#b5bcc4">OTD %</text>
+      ${grid}${target}
+      <path d="${areaPath}" fill="#00897b" opacity="0.08"/>
+      <path d="${smoothPath(prevPts)}" fill="none" stroke="#b0bec5" stroke-width="2.5" stroke-dasharray="6 5" stroke-linecap="round"/>
+      <path d="${curPath}" fill="none" stroke="#00897b" stroke-width="2.75" stroke-linecap="round"/>
+      ${prevDots}${curDots}${xlabels}
+    </svg>`;
+
+  $('trendChart').querySelectorAll('.trend-dot').forEach((dot) => {
+    const d = data[+dot.dataset.i];
+    dot.addEventListener('mousemove', (e) => showTip(
+      `<strong>${esc(d.month)}</strong><br>OTD: ${fmtPct(pct(d.onTime, d.completed))} (${d.onTime}/${d.completed})<br>`
+      + `Prev: ${fmtPct(pct(d.prevOnTime, d.prevCompleted))} (${d.prevOnTime}/${d.prevCompleted})`, e));
+    dot.addEventListener('mouseleave', hideTip);
+  });
+}
+
+/* ──────────────────────────────────────────────────────────
+   OTD by Branch — horizontal bar chart with axis (SVG)
+   ────────────────────────────────────────────────────────── */
+function renderBranchOtd(branches) {
+  const rows = branches.filter((b) => b.completed > 0)
+    .map((b) => ({ name: b.name, v: branchOtd(b), on: b.onTime, tot: b.completed }))
+    .sort((a, b) => b.v - a.v);
+  const W = 620, labelW = 150, rowH = 26, padT = 6, padB = 26;
+  const H = padT + rows.length * rowH + padB;
+  const plotL = labelW, plotR = W - 44;
+  const x = (v) => plotL + (v / 100) * (plotR - plotL);
+
+  const grid = [0, 20, 40, 60, 80, 100].map((t) =>
+    `<line x1="${x(t)}" y1="${padT}" x2="${x(t)}" y2="${H - padB}" stroke="#eef1f4"/>
+     <text x="${x(t)}" y="${H - 10}" text-anchor="middle" font-size="10" fill="#9aa3ab">${t}%</text>`).join('');
+
+  const bars = rows.map((r, i) => {
+    const cy = padT + i * rowH + rowH / 2;
+    return `<g class="bo-row" data-i="${i}" style="cursor:default">
+      <text x="${plotL - 8}" y="${cy + 4}" text-anchor="end" font-size="11" fill="#555">${esc(truncate(r.name, 18))}</text>
+      <rect x="${plotL}" y="${cy - 7}" width="${x(r.v) - plotL}" height="14" rx="3" fill="${otdColor(r.v)}"/>
+      <text x="${x(r.v) + 6}" y="${cy + 4}" font-size="11" font-weight="600" fill="#555">${fmtPct(r.v)}</text>
+    </g>`;
+  }).join('');
+
+  $('branchOtdChart').innerHTML = `
+    <svg class="chart-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="OTD by branch">${grid}${bars}</svg>`;
+
+  $('branchOtdChart').querySelectorAll('.bo-row').forEach((g) => {
+    const r = rows[+g.dataset.i];
+    g.addEventListener('mousemove', (e) => showTip(`<strong>${esc(r.name)}</strong><br>OTD: ${fmtPct(r.v)}<br>${r.on}/${r.tot} on time`, e));
+    g.addEventListener('mouseleave', hideTip);
+  });
+}
+
+/* ──────────────────────────────────────────────────────────
+   Order Intake — smooth line chart (SVG)
+   ────────────────────────────────────────────────────────── */
+function renderIntake() {
+  const data = DEMO.intake;
+  const W = 620, H = 280, pad = { l: 34, r: 14, t: 16, b: 30 };
+  const iw = W - pad.l - pad.r, ih = H - pad.t - pad.b, n = data.length;
+  const rawMax = Math.max(...data.flatMap((d) => [d.current, d.previous]));
+  const max = Math.ceil(rawMax / 10) * 10;
+  const x = (i) => pad.l + (i / (n - 1)) * iw;
+  const y = (v) => pad.t + (1 - v / max) * ih;
+
+  const ticks = []; for (let t = 0; t <= max; t += 10) ticks.push(t);
+  const grid = ticks.map((t) =>
+    `<line x1="${pad.l}" y1="${y(t)}" x2="${W - pad.r}" y2="${y(t)}" stroke="#eef1f4"/>
+     <text x="${pad.l - 6}" y="${y(t) + 3}" text-anchor="end" font-size="10" fill="#b5bcc4">${t}</text>`).join('');
+  const xlabels = data.map((d, i) =>
+    `<text x="${x(i)}" y="${H - 10}" text-anchor="middle" font-size="10" fill="#9aa3ab">${esc(d.month)}</text>`).join('');
+
+  const curPts = data.map((d, i) => [x(i), y(d.current)]);
+  const prevPts = data.map((d, i) => [x(i), y(d.previous)]);
+  const curDots = data.map((d, i) =>
+    `<circle class="intake-dot" data-i="${i}" cx="${x(i)}" cy="${y(d.current)}" r="4" fill="#004d4d" stroke="#fff" stroke-width="2" style="cursor:pointer"/>`).join('');
+
+  $('intakeChart').innerHTML = `
+    <svg class="chart-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Order intake">
+      ${grid}
+      <path d="${smoothPath(prevPts)}" fill="none" stroke="#b0bec5" stroke-width="2.5" stroke-dasharray="6 5" stroke-linecap="round"/>
+      <path d="${smoothPath(curPts)}" fill="none" stroke="#004d4d" stroke-width="2.75" stroke-linecap="round"/>
+      ${curDots}${xlabels}
+    </svg>`;
+
+  $('intakeChart').querySelectorAll('.intake-dot').forEach((dot) => {
+    const d = data[+dot.dataset.i];
+    dot.addEventListener('mousemove', (e) => showTip(
+      `<strong>${esc(d.month)}</strong><br>Selected: ${d.current} orders<br>Previous: ${d.previous} orders`, e));
+    dot.addEventListener('mouseleave', hideTip);
+  });
+}
+
+/* ──────────────────────────────────────────────────────────
+   OTD Heatmap
+   ────────────────────────────────────────────────────────── */
+function heatN(name, i) { let h = 0; const s = name + i; for (let k = 0; k < s.length; k++) h = (h * 31 + s.charCodeAt(k)) >>> 0; return 3 + (h % 12); }
+function renderHeatmap(branches) {
+  const names = branches.map((b) => b.name).filter((nm) => DEMO.heatmap[nm]);
+  const months = DEMO.months;
+  const head = `<tr><th class="hm-branch-th">Branch</th>${months.map((m) => `<th>${esc(m)}</th>`).join('')}</tr>`;
+  const body = names.map((nm) => {
+    const cells = DEMO.heatmap[nm].map((v, i) =>
+      `<td><div class="hm-cell" data-b="${esc(nm)}" data-i="${i}" data-v="${v == null ? '' : v}"
+         style="background:${otdColor(v)};color:${cellTextColor(v)}">${v == null ? '–' : Math.round(v)}</div></td>`).join('');
+    return `<tr><td class="hm-branch" title="${esc(nm)}">${esc(nm)}</td>${cells}</tr>`;
+  }).join('');
+  $('heatmap').innerHTML =
+    `<table class="heatmap"><colgroup><col class="hm-branch-col">${months.map(() => '<col>').join('')}</colgroup>`
+    + `<thead>${head}</thead><tbody>${body}</tbody></table>`;
+
+  $('heatmap').querySelectorAll('.hm-cell').forEach((cell) => {
+    const nm = cell.dataset.b, i = +cell.dataset.i, v = cell.dataset.v;
+    cell.addEventListener('mousemove', (e) => {
+      const n = heatN(nm, i), conf = n >= 10 ? 'high' : n >= 5 ? 'medium' : 'low';
+      showTip(v === ''
+        ? `<strong>${esc(nm)}</strong><br>${esc(DEMO.months[i])}<br>No completed orders`
+        : `<strong>${esc(nm)}</strong><br>${esc(DEMO.months[i])}<br>OTD: ${fmtPct(+v)}<br>n = ${n} (${conf} confidence)`, e);
+    });
+    cell.addEventListener('mouseleave', hideTip);
+  });
+}
+
+/* ──────────────────────────────────────────────────────────
+   Top Customers by Circuits
+   ────────────────────────────────────────────────────────── */
+function renderTopBranches(branches) {
+  const rows = branches.slice().sort((a, b) => b.circuits - a.circuits).slice(0, 8);
+  const max = Math.max(...rows.map((r) => r.circuits));
+  $('topBranchesList').innerHTML = rows.map((r) => {
+    const change = r.prevCircuits > 0 ? ((r.circuits - r.prevCircuits) / r.prevCircuits) * 100 : 100;
+    const up = change >= 0;
+    return `<div class="hbar-row">
+      <span class="hbar-name" title="${esc(r.name)}">${esc(r.name)}</span>
+      <div class="hbar-track"><div class="hbar-fill" style="width:${(r.circuits / max) * 100}%;background:#004d4d"></div></div>
+      <span class="hbar-val">${fmtK(r.circuits)}
+        <span class="hbar-delta ${up ? 'up' : 'down'}">${up ? '↑' : '↓'} ${Math.abs(change).toFixed(1)}%</span></span>
+    </div>`;
+  }).join('');
+}
+
+/* ──────────────────────────────────────────────────────────
+   Branch summary table (sortable)
+   ────────────────────────────────────────────────────────── */
+let sumSort = { key: 'name', dir: 1 };
+function otdPill(v) { return `<span style="color:${otdColor(v)};font-weight:700">${fmtPct(v)}</span>`; }
+function renderSummary(branches) {
+  const rows = branches.map((b) => ({ ...b, otd: branchOtd(b) }));
+  rows.sort((a, b) => {
+    const av = a[sumSort.key], bv = b[sumSort.key];
+    if (typeof av === 'string') return av.localeCompare(bv) * sumSort.dir;
+    return (av - bv) * sumSort.dir;
+  });
+  $('summaryBody').innerHTML = rows.map((r) => `
+    <tr class="table-row">
+      <td class="branch-cell">${esc(r.name)}</td>
+      <td class="text-right mono">${fmtInt(r.batches)}</td>
+      <td class="text-right mono">${fmtInt(r.circuits)}</td>
+      <td class="text-right">${otdPill(r.otd)}</td>
+      <td class="text-right mono">${r.avgDelay.toFixed(1)}d</td>
+    </tr>`).join('');
+  $('sumCount').textContent = `${rows.length} branch${rows.length !== 1 ? 'es' : ''}`;
+  document.querySelectorAll('#summaryTable th.sortable').forEach((th) => {
+    const active = th.dataset.key === sumSort.key;
+    th.classList.toggle('sorted', active);
+    th.querySelector('.sort-ico').textContent = active ? (sumSort.dir === 1 ? 'arrow_upward' : 'arrow_downward') : 'sort';
+  });
+}
+document.querySelectorAll('#summaryTable th.sortable').forEach((th) => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.key;
+    if (sumSort.key === key) sumSort.dir *= -1; else sumSort = { key, dir: key === 'name' ? 1 : -1 };
+    renderSummary(currentBranches());
+  });
+});
+
+/* ──────────────────────────────────────────────────────────
+   Overview orchestration + filters
+   ────────────────────────────────────────────────────────── */
+function currentBranches() {
+  const sel = $('ovBranch').value;
+  return sel === '__all' ? DEMO.branches : DEMO.branches.filter((b) => b.name === sel);
+}
+function renderOverview() {
+  const branches = currentBranches();
+  renderKpis(branches);
+  renderTrend();
+  renderBranchOtd(branches);
+  renderIntake();
+  renderHeatmap(branches);
+  renderTopBranches(branches);
+  renderSummary(branches);
+}
+$('ovBranch').addEventListener('change', renderOverview);
+
+$('winToggle').addEventListener('click', (e) => {
+  const btn = e.target.closest('.seg-btn');
+  if (!btn) return;
+  document.querySelectorAll('#winToggle .seg-btn').forEach((b) => b.classList.toggle('active', b === btn));
+  applyWindow(btn.dataset.win);
+});
+function applyWindow(key) {
+  const w = DEMO.windows[key];
+  $('winLabel').textContent = w.label;
+  $('winRange').textContent = w.range;
+  $('ovFrom').value = w.from;
+  $('ovTo').value = w.to;
+}
+
+$('ovExport').addEventListener('click', () => {
+  const branches = currentBranches();
+  const header = ['Branch', 'Total PCP Batches', 'Total Circuits', 'OTD %', 'Avg Delay (days)'];
+  const lines = [header.join(',')].concat(branches.map((b) =>
+    [`"${b.name}"`, b.batches, b.circuits, branchOtd(b).toFixed(1), b.avgDelay.toFixed(1)].join(',')));
+  const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'meridian-cluster-summary.csv';
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+});
+
+/* ──────────────────────────────────────────────────────────
+   Order tables (Active + History) — generated from branches
+   ────────────────────────────────────────────────────────── */
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function fmtDate(d) { return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`; }
+
+const ORDERS = (() => {
+  const rnd = mulberry32(20260909); let seq = 4200;
+  const active = [], history = [];
+  DEMO.branches.forEach((b) => {
+    for (let i = 0; i < 2 + Math.floor(rnd() * 4); i++) {
+      const orderDate = new Date(2026, Math.floor(rnd() * 6) + 2, 1 + Math.floor(rnd() * 27));
+      const est = new Date(orderDate); est.setDate(est.getDate() + 60 + Math.floor(rnd() * 40));
+      active.push({ branch: b.name, id: 'MC-' + (seq++), batches: 1 + Math.floor(rnd() * 4),
+        circuits: 60 + Math.floor(rnd() * 900), orderDate, est,
+        status: rnd() < (1 - branchOtd(b) / 100) * 0.8 ? 'delayed' : 'on-track' });
+    }
+    for (let i = 0; i < 2 + Math.floor(rnd() * 4); i++) {
+      const orderDate = new Date(2026, Math.floor(rnd() * 5), 1 + Math.floor(rnd() * 27));
+      const done = new Date(orderDate); done.setDate(done.getDate() + 55 + Math.floor(rnd() * 45));
+      history.push({ branch: b.name, id: 'MC-' + (seq++), batches: 1 + Math.floor(rnd() * 4),
+        circuits: 60 + Math.floor(rnd() * 900), orderDate, done, onTime: rnd() < branchOtd(b) / 100 });
+    }
+  });
+  return { active, history };
+})();
+
+const STATUS_MAP = {
+  'on-track': { bg: 'rgba(46,125,50,0.12)', color: '#2e7d32', label: 'On Track' },
+  'delayed':  { bg: 'rgba(198,40,40,0.10)', color: '#c62828', label: 'Delayed' }
+};
+function statusBadge(s) { const m = STATUS_MAP[s]; return `<span class="portal-badge" style="background:${m.bg};color:${m.color}">${m.label}</span>`; }
+function outcomeBadge(on) {
+  return on ? `<span class="portal-badge" style="background:rgba(46,125,50,0.12);color:#2e7d32">On time</span>`
+            : `<span class="portal-badge" style="background:rgba(230,81,0,0.12);color:#e65100">Late</span>`;
+}
+function renderActive() {
+  const q = $('actSearch').value.trim().toLowerCase(), br = $('actBranch').value, st = $('actStatus').value;
+  const rows = ORDERS.active.filter((o) =>
+    (br === '__all' || o.branch === br) && (st === '__all' || o.status === st) &&
+    (!q || o.id.toLowerCase().includes(q) || o.branch.toLowerCase().includes(q)));
+  $('actCount').textContent = `${rows.length} order${rows.length !== 1 ? 's' : ''}`;
+  $('actBody').innerHTML = rows.length ? rows.map((o) => `
+    <tr class="table-row">
+      <td class="branch-cell">${esc(o.branch)}</td>
+      <td><span class="order-id-cell">${esc(o.id)}</span></td>
+      <td class="text-right mono">${o.batches}</td>
+      <td class="text-right mono">${fmtInt(o.circuits)}</td>
+      <td class="date-cell">${fmtDate(o.orderDate)}</td>
+      <td class="date-cell">${fmtDate(o.est)}</td>
+      <td>${statusBadge(o.status)}</td>
+    </tr>`).join('') : `<tr><td colspan="7" class="empty-row">No orders match your filters.</td></tr>`;
+}
+function renderHistory() {
+  const q = $('hisSearch').value.trim().toLowerCase(), br = $('hisBranch').value, oc = $('hisOtd').value;
+  const rows = ORDERS.history.filter((o) =>
+    (br === '__all' || o.branch === br) && (oc === '__all' || (oc === 'on') === o.onTime) &&
+    (!q || o.id.toLowerCase().includes(q) || o.branch.toLowerCase().includes(q)));
+  $('hisCount').textContent = `${rows.length} order${rows.length !== 1 ? 's' : ''}`;
+  $('hisBody').innerHTML = rows.length ? rows.map((o) => `
+    <tr class="table-row">
+      <td class="branch-cell">${esc(o.branch)}</td>
+      <td><span class="order-id-cell">${esc(o.id)}</span></td>
+      <td class="text-right mono">${o.batches}</td>
+      <td class="text-right mono">${fmtInt(o.circuits)}</td>
+      <td class="date-cell">${fmtDate(o.orderDate)}</td>
+      <td class="date-cell">${fmtDate(o.done)}</td>
+      <td>${outcomeBadge(o.onTime)}</td>
+    </tr>`).join('') : `<tr><td colspan="7" class="empty-row">No orders match your filters.</td></tr>`;
+}
+['actSearch','actBranch','actStatus'].forEach((id) => $(id).addEventListener('input', renderActive));
+['hisSearch','hisBranch','hisOtd'].forEach((id) => $(id).addEventListener('input', renderHistory));
+
+/* ── Screen navigation ───────────────────────────────────── */
+function showScreen(key) {
+  document.querySelectorAll('.screen').forEach((s) => s.classList.toggle('is-active', s.id === 'screen-' + key));
+  document.querySelectorAll('.nav-item').forEach((n) => n.classList.toggle('active', n.dataset.screen === key));
+}
+document.querySelectorAll('[data-screen]').forEach((el) =>
+  el.addEventListener('click', () => showScreen(el.dataset.screen)));
+window.addEventListener('scroll', hideTip, true);
+
+/* ── Boot ────────────────────────────────────────────────── */
+function populateBranchSelects() {
+  const opts = DEMO.branches.map((b) => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join('');
+  ['ovBranch','actBranch','hisBranch'].forEach((id) => $(id).insertAdjacentHTML('beforeend', opts));
+}
+document.title = DEMO.pageTitle;
+$('brandBranches').textContent = `${DEMO.group.branchesTracked} branches tracked`;
+$('branchChip').textContent = `${DEMO.group.branchesTracked} branches`;
+$('userName').textContent = DEMO.group.user.name;
+$('userInitials').textContent = DEMO.group.user.initials;
+$('userRole').textContent = DEMO.group.user.role;
+
+populateBranchSelects();
+applyWindow('ytd');
+renderOverview();
+renderActive();
+renderHistory();
+
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => {
+    if (!document.fonts.check('24px "Material Icons"')) document.documentElement.classList.add('no-icon-font');
+  });
+}
+</script>
+</body>
+</html>

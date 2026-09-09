@@ -1,33 +1,65 @@
   <!-- 10 VORTEX -->
-  <section data-screen-label="10 Vortex" data-chapter="Vortex" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 60px; background:#f5f9fc;">
-    <div style="width:100%; max-width:1240px; margin:0 auto;">
-      <div style="display:grid; grid-template-columns:minmax(0,0.85fr) minmax(0,2fr); gap:44px; align-items:center;">
+  <section data-screen-label="10 Vortex" data-chapter="Vortex" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:110px 4% 60px; background:#f5f9fc;">
+    <div style="width:100%; max-width:1560px; margin:0 auto;">
+
+      <!-- intro -->
+      <div style="display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:48px; align-items:end; margin-bottom:32px;">
         <div>
           <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">10</div>
           <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.65rem,2.6vw,2.2rem); line-height:1.25; color:#333333; margin:0;">Vortex, the customer portal</h2>
-          <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 1.8rem;"></div>
-          <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.7; color:#333333; margin:0 0 1.1rem;">Our customers are other manufacturers placing bulk orders that split across batches, divisions and process stages. Keeping them informed used to mean somebody writing emails.</p>
-          <p data-reveal data-delay="160" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.7; color:#333333; margin:0 0 1.1rem;">Vortex gives them a secure login to their own live position: which stage each order is at, expected dates, whether it is on time, and their delivery performance over any period. For our larger accounts there is a cluster view covering every site they buy from.</p>
-          <p data-reveal data-delay="200" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.7; color:#555555; margin:0 0 1.6rem;">It is the piece I am least aware of a direct competitor offering at our scale, and the one customers react to most.</p>
-          <div data-reveal data-delay="240" style="opacity:1; display:flex; flex-wrap:wrap; gap:12px;">
-            <a href="demos/vortex-pcb.html" target="_blank" style="display:inline-block; padding:0.7rem 1.3rem; border-radius:4px; background:#00ff9d; color:#004d4d; font-family:'Poppins',sans-serif; font-size:0.9rem; font-weight:500; text-decoration:none;">Open PCB portal</a>
-            <a href="demos/vortex-pcba.html" target="_blank" style="display:inline-block; padding:0.7rem 1.3rem; border-radius:4px; background:#004d4d; color:#ffffff; font-family:'Poppins',sans-serif; font-size:0.9rem; font-weight:500; text-decoration:none;">Assembly</a>
-            <a href="demos/vortex-sheetmetal.html" target="_blank" style="display:inline-block; padding:0.7rem 1.3rem; border-radius:4px; background:#004d4d; color:#ffffff; font-family:'Poppins',sans-serif; font-size:0.9rem; font-weight:500; text-decoration:none;">Sheet metal</a>
-          </div>
+          <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 1.4rem;"></div>
+          <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.7; color:#333333; margin:0 0 0.9rem; max-width:640px;">Our customers are other manufacturers placing bulk orders that split across batches, divisions and process stages. The Vortex portal keeps them informed of their order status at every stage.</p>
+          <p data-reveal data-delay="160" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.7; color:#333333; margin:0; max-width:640px;">For our larger accounts there is a cluster view covering every site they buy from.</p>
         </div>
 
-        <figure data-reveal data-delay="200" style="opacity:1; margin:0;">
-          <div style="background:#ffffff; border-radius:8px; box-shadow:0 8px 25px rgba(0,0,0,0.15); overflow:hidden;">
-            <div style="display:flex; align-items:center; gap:7px; padding:9px 14px; background:#f5f5f5; border-bottom:1px solid #e0e0e0;">
-              <span style="width:9px; height:9px; border-radius:50%; background:#e0e0e0; display:block;"></span>
-              <span style="width:9px; height:9px; border-radius:50%; background:#e0e0e0; display:block;"></span>
-              <span style="width:9px; height:9px; border-radius:50%; background:#e0e0e0; display:block;"></span>
-              <span style="margin-left:12px; font-family:'Inter',system-ui,sans-serif; font-size:11px; color:#9e9e9e;">zot.co.uk/vortex</span>
-            </div>
-            <iframe src="demos/vortex-pcb.html" title="Vortex customer portal" loading="lazy" style="width:100%; height:min(58vh,560px); border:0; display:block; background:#f5f9fc;"></iframe>
+        <!-- demo switcher -->
+        <div data-reveal data-delay="200" data-vortex-switch style="opacity:1;">
+          <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:#9e9e9e; margin-bottom:0.7rem;">Explore the live demos</div>
+          <div style="display:flex; flex-wrap:wrap; gap:10px;">
+            <button type="button" data-vortex-btn data-src="demos/vortex-cluster-demo.html" data-url="zot.co.uk/vortex/cluster" data-active="true" style="cursor:pointer; padding:0.62rem 1.15rem; border-radius:4px; border:0; background:#00ff9d; color:#004d4d; font-family:'Poppins',sans-serif; font-size:0.88rem; font-weight:600; transition:background .18s,color .18s;">Cluster view</button>
+            <button type="button" data-vortex-btn data-src="demos/vortex-pcb.html" data-url="zot.co.uk/vortex" style="cursor:pointer; padding:0.62rem 1.15rem; border-radius:4px; border:0; background:#004d4d; color:#ffffff; font-family:'Poppins',sans-serif; font-size:0.88rem; font-weight:500; transition:background .18s,color .18s;">PCB portal</button>
+            <button type="button" data-vortex-btn data-src="demos/vortex-pcba.html" data-url="zot.co.uk/vortex" style="cursor:pointer; padding:0.62rem 1.15rem; border-radius:4px; border:0; background:#004d4d; color:#ffffff; font-family:'Poppins',sans-serif; font-size:0.88rem; font-weight:500; transition:background .18s,color .18s;">Assembly</button>
+            <button type="button" data-vortex-btn data-src="demos/vortex-sheetmetal.html" data-url="zot.co.uk/vortex" style="cursor:pointer; padding:0.62rem 1.15rem; border-radius:4px; border:0; background:#004d4d; color:#ffffff; font-family:'Poppins',sans-serif; font-size:0.88rem; font-weight:500; transition:background .18s,color .18s;">Sheet metal</button>
           </div>
-          <figcaption style="font-family:'Poppins',sans-serif; font-size:0.82rem; color:#757575; margin-top:10px;">Live demonstration build of the portal. Navigate it directly, or open it full screen using the buttons.</figcaption>
-        </figure>
+        </div>
       </div>
+
+      <!-- full-width browser mockup -->
+      <figure data-reveal data-delay="240" style="opacity:1; margin:0;">
+        <div style="background:#ffffff; border-radius:8px; box-shadow:0 12px 34px rgba(0,0,0,0.16); overflow:hidden;">
+          <div style="display:flex; align-items:center; gap:7px; padding:9px 14px; background:#f5f5f5; border-bottom:1px solid #e0e0e0;">
+            <span style="width:9px; height:9px; border-radius:50%; background:#e0e0e0; display:block;"></span>
+            <span style="width:9px; height:9px; border-radius:50%; background:#e0e0e0; display:block;"></span>
+            <span style="width:9px; height:9px; border-radius:50%; background:#e0e0e0; display:block;"></span>
+            <span data-vortex-url style="margin-left:12px; font-family:'Inter',system-ui,sans-serif; font-size:11px; color:#9e9e9e;">zot.co.uk/vortex/cluster</span>
+          </div>
+          <iframe data-vortex-frame src="demos/vortex-cluster-demo.html" title="Vortex customer portal" loading="lazy" style="width:100%; height:min(74vh,860px); border:0; display:block; background:#f5f9fc;"></iframe>
+        </div>
+        <figcaption style="font-family:'Poppins',sans-serif; font-size:0.82rem; color:#757575; margin-top:10px;">Live demonstration build of the portal. Use the buttons above to switch between the cluster analytics view and each division's portal.</figcaption>
+      </figure>
     </div>
+
+    <script>
+      (function () {
+        var root = document.currentScript.closest('section');
+        if (!root) return;
+        var frame = root.querySelector('[data-vortex-frame]');
+        var urlBar = root.querySelector('[data-vortex-url]');
+        var btns = root.querySelectorAll('[data-vortex-btn]');
+        btns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var src = btn.getAttribute('data-src');
+            if (frame.getAttribute('src') !== src) frame.setAttribute('src', src);
+            if (urlBar) urlBar.textContent = btn.getAttribute('data-url');
+            btns.forEach(function (b) {
+              var on = b === btn;
+              b.setAttribute('data-active', on ? 'true' : 'false');
+              b.style.background = on ? '#00ff9d' : '#004d4d';
+              b.style.color = on ? '#004d4d' : '#ffffff';
+              b.style.fontWeight = on ? '600' : '500';
+            });
+          });
+        });
+      })();
+    </script>
   </section>
