@@ -1305,6 +1305,13 @@
             <span style="width:9px; height:9px; border-radius:50%; background:#e0e0e0; display:block;"></span>
             <span style="width:9px; height:9px; border-radius:50%; background:#e0e0e0; display:block;"></span>
             <span data-vortex-url style="margin-left:12px; font-family:'Inter',system-ui,sans-serif; font-size:11px; color:#9e9e9e;">zot.co.uk/vortex/cluster</span>
+            <a data-vortex-open href="demos/vortex-cluster-demo.html" target="_blank" rel="noopener" title="Open in new tab" aria-label="Open in new tab" style="margin-left:auto; display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:4px; color:#9e9e9e; text-decoration:none; transition:background .18s,color .18s;" onmouseover="this.style.background='#e8e8e8';this.style.color='#004d4d';" onmouseout="this.style.background='transparent';this.style.color='#9e9e9e';">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
           </div>
           <iframe data-vortex-frame src="demos/vortex-cluster-demo.html" title="Vortex customer portal" loading="lazy" style="width:100%; height:min(74vh,860px); border:0; display:block; background:#f5f9fc;"></iframe>
         </div>
@@ -1318,12 +1325,14 @@
         if (!root) return;
         var frame = root.querySelector('[data-vortex-frame]');
         var urlBar = root.querySelector('[data-vortex-url]');
+        var openLink = root.querySelector('[data-vortex-open]');
         var btns = root.querySelectorAll('[data-vortex-btn]');
         btns.forEach(function (btn) {
           btn.addEventListener('click', function () {
             var src = btn.getAttribute('data-src');
             if (frame.getAttribute('src') !== src) frame.setAttribute('src', src);
             if (urlBar) urlBar.textContent = btn.getAttribute('data-url');
+            if (openLink) openLink.setAttribute('href', src);
             btns.forEach(function (b) {
               var on = b === btn;
               b.setAttribute('data-active', on ? 'true' : 'false');
@@ -1338,85 +1347,65 @@
   </section>
 
   <!-- 07 WIDER INFLUENCE -->
-  <section data-screen-label="07 Wider influence" data-chapter="Influence" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#ffffff;">
-    <div style="width:100%; max-width:1100px; margin:0 auto;">
-      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">07</div>
-      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">Wider influence</h2>
-      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2.2rem;"></div>
+  <section data-screen-label="07 Wider influence" data-chapter="Influence" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:100px 5% 60px; background:#ffffff;">
+    <div style="width:100%; max-width:1140px; margin:0 auto;">
+      <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.7rem;">07</div>
+      <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.2; color:#333333; margin:0;">Wider influence</h2>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:14px 0 1.8rem;"></div>
 
-      <div style="display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:52px; align-items:start;">
-        <div style="display:flex; flex-direction:column; gap:2.4rem;">
+      <div style="display:flex; flex-direction:column; gap:34px;">
 
-          <div data-reveal data-delay="210" style="opacity:1; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:start;">
-            <span style="grid-row:span 2; width:12px; height:12px; margin-top:8px; border-radius:50%; background:#00ff9d; box-shadow:0 0 0 6px rgba(0,255,157,0.14); flex:none;"></span>
-            <h3 style="font-family:'Poppins',sans-serif; font-weight:600; font-size:1.12rem; color:#1a1a1a; margin:0 0 0.5rem;">Hosting the next generation</h3>
-            <p style="grid-column:2; font-family:'Poppins',sans-serif; font-size:1.02rem; line-height:1.7; color:#4a4a4a; margin:0 0 0.7rem;">We regularly host students from the <a href="https://www.linkedin.com/feed/update/urn:li:activity:7434991150366822403/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">University of Edinburgh</a>, <a href="https://www.linkedin.com/feed/update/urn:li:activity:7394422034925105152/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">Edinburgh Napier</a> and <a href="https://www.linkedin.com/feed/update/urn:li:activity:7394422034925105152/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">Heriot-Watt</a> on the shop floor — walking them through our transition into Industry 4.0 with complete traceability from order to dispatch, and the opportunity a fresh graduate can find in manufacturing.</p>
+        <!-- ROW 1: two highlight points (left) + image (right) -->
+        <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,0.82fr); gap:44px; align-items:center;">
+          <div style="display:flex; flex-direction:column; gap:1.8rem;">
+
+            <div data-reveal data-delay="210" style="opacity:1; display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start;">
+              <span style="grid-row:span 2; width:12px; height:12px; margin-top:8px; border-radius:50%; background:#00ff9d; box-shadow:0 0 0 6px rgba(0,255,157,0.14); flex:none;"></span>
+              <h3 style="font-family:'Poppins',sans-serif; font-weight:600; font-size:1.1rem; color:#1a1a1a; margin:0 0 0.45rem;">Hosting the next generation</h3>
+              <p style="grid-column:2; font-family:'Poppins',sans-serif; font-size:0.98rem; line-height:1.65; color:#4a4a4a; margin:0;">We regularly host students from the <a href="https://www.linkedin.com/feed/update/urn:li:activity:7434991150366822403/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">University of Edinburgh</a>, <a href="https://www.linkedin.com/feed/update/urn:li:activity:7394422034925105152/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">Edinburgh Napier</a> and <a href="https://www.linkedin.com/feed/update/urn:li:activity:7394422034925105152/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">Heriot-Watt</a> on the shop floor, walking them through our transition into Industry 4.0 with complete traceability from order to dispatch, and the opportunity a fresh graduate can find in manufacturing.</p>
+            </div>
+
+            <div data-reveal data-delay="260" style="opacity:1; display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start;">
+              <span style="grid-row:span 2; width:12px; height:12px; margin-top:8px; border-radius:50%; background:#00ff9d; box-shadow:0 0 0 6px rgba(0,255,157,0.14); flex:none;"></span>
+              <h3 style="font-family:'Poppins',sans-serif; font-weight:600; font-size:1.1rem; color:#1a1a1a; margin:0 0 0.45rem;">Bringing AI into everyday work</h3>
+              <p style="grid-column:2; font-family:'Poppins',sans-serif; font-size:0.98rem; line-height:1.65; color:#4a4a4a; margin:0;">I lead a company-wide initiative to bring AI into day-to-day work, running sessions for managers, engineers, HR and the board that walk through what the tools can do and how to put AI agents to work effectively. The focus is practical and honest: using AI securely, protecting sensitive data, and knowing where it saves real time versus where human judgement stays in charge, so every function can adopt it with confidence.</p>
+            </div>
+
           </div>
 
-          <div data-reveal data-delay="260" style="opacity:1; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:start;">
-            <span style="grid-row:span 2; width:12px; height:12px; margin-top:8px; border-radius:50%; background:#00ff9d; box-shadow:0 0 0 6px rgba(0,255,157,0.14); flex:none;"></span>
-            <h3 style="font-family:'Poppins',sans-serif; font-weight:600; font-size:1.12rem; color:#1a1a1a; margin:0 0 0.5rem;">Published as a case study</h3>
-            <p style="grid-column:2; font-family:'Poppins',sans-serif; font-size:1.02rem; line-height:1.7; color:#4a4a4a; margin:0;">My placement was published by the <a href="https://www.melcc.org.uk/successful-internship-results-in-a-new-website-for-zot-engineering/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">Midlothian and East Lothian Chamber of Commerce</a> — now used to make the case for taking on technical interns in manufacturing.</p>
-          </div>
-
-          <div data-reveal data-delay="310" style="opacity:1; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:start;">
-            <span style="grid-row:span 2; width:12px; height:12px; margin-top:8px; border-radius:50%; background:#00ff9d; box-shadow:0 0 0 6px rgba(0,255,157,0.14); flex:none;"></span>
-            <h3 style="font-family:'Poppins',sans-serif; font-weight:600; font-size:1.12rem; color:#1a1a1a; margin:0 0 0.5rem;">Learning beyond the business</h3>
-            <p style="grid-column:2; font-family:'Poppins',sans-serif; font-size:1.02rem; line-height:1.7; color:#4a4a4a; margin:0;">ZOT encouraged me to attend research conferences and technical meetups, where I could learn directly from engineers with far more experience than me.</p>
-          </div>
-
-        </div>
-
-        <div data-reveal data-delay="300" style="opacity:1;">
-          <figure id="wi15-carousel" style="margin:0; position:relative;">
-            <div style="position:absolute; top:16px; left:16px; right:-16px; bottom:44px; background:#00ff9d; opacity:0.14; border-radius:16px; z-index:0;"></div>
-            <div style="position:relative; z-index:1; aspect-ratio:4/3; border-radius:16px; overflow:hidden; box-shadow:0 22px 50px -20px rgba(0,0,0,0.4); background:#f2f2f2;">
-              <img class="wi15-slide" src="assets/student-visit-talk.jpeg" alt="University students during a shop-floor talk at ZOT, with PCB assemblies on display" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:1; transition:opacity 0.9s ease;">
-              <img class="wi15-slide" src="assets/student-visit-group.jpeg" alt="Group photo of visiting university students with the ZOT Engineering team" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 0.9s ease;">
-              <div style="position:absolute; left:0; right:0; bottom:0; height:40%; background:linear-gradient(to top, rgba(0,0,0,0.42), rgba(0,0,0,0)); pointer-events:none;"></div>
-              <div style="position:absolute; left:18px; bottom:16px; z-index:2; display:flex; align-items:center; gap:10px; font-family:'Poppins',sans-serif;">
-                <span style="display:inline-block; width:24px; height:3px; background:#00ff9d; flex:none;"></span>
-                <span style="font-size:0.9rem; font-weight:500; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.4);">Student visits at ZOT Engineering</span>
-              </div>
-              <div style="position:absolute; right:16px; bottom:18px; z-index:2; display:flex; gap:8px;">
-                <button type="button" class="wi15-dot" aria-label="Show slide 1" aria-current="true" style="width:9px; height:9px; padding:0; border:none; border-radius:50%; background:#ffffff; opacity:1; cursor:pointer; transition:opacity 0.3s ease;"></button>
-                <button type="button" class="wi15-dot" aria-label="Show slide 2" aria-current="false" style="width:9px; height:9px; padding:0; border:none; border-radius:50%; background:#ffffff; opacity:0.4; cursor:pointer; transition:opacity 0.3s ease;"></button>
-              </div>
+          <figure data-reveal data-delay="300" style="opacity:1; margin:0;">
+            <div style="aspect-ratio:4/3; border-radius:14px; overflow:hidden; box-shadow:0 18px 40px -22px rgba(0,0,0,0.4); background:#f2f2f2;">
+              <img src="assets/student-visit-talk.jpeg" alt="University students during a shop-floor talk at ZOT, with PCB assemblies on display" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
             </div>
           </figure>
         </div>
+
+        <!-- ROW 2: image (left) + two supporting points (right) -->
+        <div style="display:grid; grid-template-columns:minmax(0,0.82fr) minmax(0,1fr); gap:44px; align-items:center;">
+          <figure data-reveal data-delay="340" style="opacity:1; margin:0;">
+            <div style="aspect-ratio:4/3; border-radius:14px; overflow:hidden; box-shadow:0 18px 40px -22px rgba(0,0,0,0.4); background:#f2f2f2;">
+              <img src="assets/student-visit-group.jpeg" alt="Group photo of visiting university students with the ZOT Engineering team" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
+            </div>
+          </figure>
+
+          <div style="display:flex; flex-direction:column; gap:1.8rem;">
+
+            <div data-reveal data-delay="380" style="opacity:1; display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start;">
+              <span style="grid-row:span 2; width:12px; height:12px; margin-top:8px; border-radius:50%; background:#00ff9d; box-shadow:0 0 0 6px rgba(0,255,157,0.14); flex:none;"></span>
+              <h3 style="font-family:'Poppins',sans-serif; font-weight:600; font-size:1.1rem; color:#1a1a1a; margin:0 0 0.45rem;">Published as a case study</h3>
+              <p style="grid-column:2; font-family:'Poppins',sans-serif; font-size:0.98rem; line-height:1.65; color:#4a4a4a; margin:0;">My placement was published by the <a href="https://www.melcc.org.uk/successful-internship-results-in-a-new-website-for-zot-engineering/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">Midlothian and East Lothian Chamber of Commerce</a>, now used to make the case for taking on technical interns in manufacturing.</p>
+            </div>
+
+            <div data-reveal data-delay="430" style="opacity:1; display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start;">
+              <span style="grid-row:span 2; width:12px; height:12px; margin-top:8px; border-radius:50%; background:#00ff9d; box-shadow:0 0 0 6px rgba(0,255,157,0.14); flex:none;"></span>
+              <h3 style="font-family:'Poppins',sans-serif; font-weight:600; font-size:1.1rem; color:#1a1a1a; margin:0 0 0.45rem;">Learning beyond the business</h3>
+              <p style="grid-column:2; font-family:'Poppins',sans-serif; font-size:0.98rem; line-height:1.65; color:#4a4a4a; margin:0;">ZOT encouraged me to attend research conferences and technical meetups, where I could learn directly from engineers with far more experience than me.</p>
+            </div>
+
+          </div>
+        </div>
+
       </div>
-
-      <script>
-        (function () {
-          var root = document.getElementById('wi15-carousel');
-          if (!root) return;
-          var slides = Array.prototype.slice.call(root.querySelectorAll('.wi15-slide'));
-          var dots = Array.prototype.slice.call(root.querySelectorAll('.wi15-dot'));
-          if (slides.length < 2) return;
-          var i = 0, timer = null;
-          var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-          function go(n) {
-            slides[i].style.opacity = '0';
-            dots[i].style.opacity = '0.4';
-            dots[i].setAttribute('aria-current', 'false');
-            i = (n + slides.length) % slides.length;
-            slides[i].style.opacity = '1';
-            dots[i].style.opacity = '1';
-            dots[i].setAttribute('aria-current', 'true');
-          }
-          function start() { if (!reduce) { stop(); timer = setInterval(function () { go(i + 1); }, 4500); } }
-          function stop() { if (timer) { clearInterval(timer); timer = null; } }
-
-          dots.forEach(function (d, idx) {
-            d.addEventListener('click', function () { stop(); go(idx); start(); });
-          });
-          root.addEventListener('mouseenter', stop);
-          root.addEventListener('mouseleave', start);
-          start();
-        })();
-      </script>
     </div>
   </section>
 

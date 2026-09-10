@@ -32,6 +32,13 @@
             <span style="width:9px; height:9px; border-radius:50%; background:#e0e0e0; display:block;"></span>
             <span style="width:9px; height:9px; border-radius:50%; background:#e0e0e0; display:block;"></span>
             <span data-vortex-url style="margin-left:12px; font-family:'Inter',system-ui,sans-serif; font-size:11px; color:#9e9e9e;">zot.co.uk/vortex/cluster</span>
+            <a data-vortex-open href="demos/vortex-cluster-demo.html" target="_blank" rel="noopener" title="Open in new tab" aria-label="Open in new tab" style="margin-left:auto; display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:4px; color:#9e9e9e; text-decoration:none; transition:background .18s,color .18s;" onmouseover="this.style.background='#e8e8e8';this.style.color='#004d4d';" onmouseout="this.style.background='transparent';this.style.color='#9e9e9e';">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
           </div>
           <iframe data-vortex-frame src="demos/vortex-cluster-demo.html" title="Vortex customer portal" loading="lazy" style="width:100%; height:min(74vh,860px); border:0; display:block; background:#f5f9fc;"></iframe>
         </div>
@@ -45,12 +52,14 @@
         if (!root) return;
         var frame = root.querySelector('[data-vortex-frame]');
         var urlBar = root.querySelector('[data-vortex-url]');
+        var openLink = root.querySelector('[data-vortex-open]');
         var btns = root.querySelectorAll('[data-vortex-btn]');
         btns.forEach(function (btn) {
           btn.addEventListener('click', function () {
             var src = btn.getAttribute('data-src');
             if (frame.getAttribute('src') !== src) frame.setAttribute('src', src);
             if (urlBar) urlBar.textContent = btn.getAttribute('data-url');
+            if (openLink) openLink.setAttribute('href', src);
             btns.forEach(function (b) {
               var on = b === btn;
               b.setAttribute('data-active', on ? 'true' : 'false');
