@@ -893,45 +893,189 @@
 
   <!-- 04 GOVERNANCE -->
   <section data-screen-label="04 Governance" data-chapter="Governance" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#f5f9fc;">
-    <div style="width:100%; max-width:1100px; margin:0 auto;">
+    <div style="width:100%; max-width:1240px; margin:0 auto;">
       <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">04</div>
       <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">Governance, security and spending discipline</h2>
-      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2.2rem;"></div>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 1.4rem;"></div>
 
-      <!-- <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:74ch; margin:0 0 2.4rem;">A single engineer with access to every production database is a risk to the business unless the controls around them are explicit. These are the arrangements we put in place, and they were agreed with the people accountable for each area rather than decided by me.</p> -->
+      <!-- <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.05rem; line-height:1.7; color:#555555; max-width:72ch; margin:0 0 1.6rem;">Every domain routes through one platform. Each control was agreed with the people accountable for that area, rather than decided in isolation &mdash; and built on a vetted, industry-standard stack.</p> -->
 
-      <div style="border:1px solid #e0e0e0;">
-        <div data-reveal data-delay="170" style="opacity:1; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.6fr) minmax(0,1fr); gap:0; background:#f5f9fc; border-bottom:1px solid #e0e0e0;">
-          <div style="padding:12px 20px; font-family:'Inter',system-ui,sans-serif; font-size:0.74rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#757575;">Area</div>
-          <div style="padding:12px 20px; font-family:'Inter',system-ui,sans-serif; font-size:0.74rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#757575;">Arrangement</div>
-          <div style="padding:12px 20px; font-family:'Inter',system-ui,sans-serif; font-size:0.74rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#757575;">Accountable with</div>
-        </div>
-        <div data-reveal data-delay="205" style="opacity:1; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.6fr) minmax(0,1fr); border-bottom:1px solid #e0e0e0;">
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Access control</div>
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.55; color:#555555;">Per-route read, write and admin permissions, configurable per person; single sign-on for staff and a separate external identity tier for customers. End to end RBAC.</div>
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.9rem; color:#757575;">Directors, department heads</div>
-        </div>
-        <div data-reveal data-delay="235" style="opacity:1; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.6fr) minmax(0,1fr); border-bottom:1px solid #e0e0e0;">
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Network and cloud</div>
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.55; color:#555555;">On-premise databases reached only through a private gateway with end-to-end encryption. With 7 layers of encryption.</div>
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.9rem; color:#757575;">Azure admin, cyber-security partner</div>
-        </div>
-        <div data-reveal data-delay="265" style="opacity:1; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.6fr) minmax(0,1fr); border-bottom:1px solid #e0e0e0;">
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Personal data</div>
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.55; color:#555555;">Names, addresses and contact details are stripped from CVs before any model sees them, so screening cannot act on identity. Consent, cookies and privacy handled with legal input.</div>
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.9rem; color:#757575;">HR, legal team</div>
-        </div>
-        <div data-reveal data-delay="295" style="opacity:1; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.6fr) minmax(0,1fr); border-bottom:1px solid #e0e0e0;">
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">Change control</div>
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.55; color:#555555;">Automated build, test and deployment on every change, with automated code review. Unit, end-to-end, accessibility and performance suites all run before release.</div>
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.9rem; color:#757575;">Owned by me, Azure Admin</div>
-        </div>
-        <div data-reveal data-delay="325" style="opacity:1; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.6fr) minmax(0,1fr);">
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; color:#004d4d;">GDPR</div>
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.95rem; line-height:1.55; color:#555555;">Strict compliance with GDPR and EU AI Act. Proper data handling and activity logging to ensure transparency and accountability.</div>
-          <div style="padding:16px 20px; font-family:'Poppins',sans-serif; font-size:0.9rem; color:#757575;">DPO and legal team</div>
-        </div>
-      </div>
+      <figure data-reveal data-delay="170" style="opacity:1; margin:0;">
+        <svg viewBox="0 0 1280 800" style="width:100%; height:auto; display:block;" role="img" aria-label="ZOT platform at the centre, with six governance domains branching out into cards: access control, network and cloud, personal data, change control, GDPR and the EU AI Act, and Cyber Essentials certification. Each card lists the technologies it is built on.">
+          <defs>
+            <marker id="govArr" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto"><path d="M1 1 L9 5.5 L1 10 Z" fill="#37605a"></path></marker>
+            <filter id="govHubShadow" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#004d4d" flood-opacity="0.16"></feDropShadow></filter>
+            <filter id="govCardShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#37605a" flood-opacity="0.10"></feDropShadow></filter>
+            <linearGradient id="govHubFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"></stop><stop offset="1" stop-color="#f3faf7"></stop></linearGradient>
+          </defs>
+
+          <!-- ===== CONNECTORS ===== -->
+          <g fill="none" stroke="#aebfb9" stroke-width="1.6">
+            <path d="M594,345 C 550,298 508,205 465,150" marker-end="url(#govArr)"></path>
+            <path d="M566,400 L 465,400" marker-end="url(#govArr)"></path>
+            <path d="M594,455 C 550,502 508,595 465,650" marker-end="url(#govArr)"></path>
+            <path d="M686,345 C 730,298 772,205 815,150" marker-end="url(#govArr)"></path>
+            <path d="M714,400 L 815,400" marker-end="url(#govArr)"></path>
+            <path d="M686,455 C 730,502 772,595 815,650" marker-end="url(#govArr)"></path>
+          </g>
+          <g fill="#c3d4ce">
+            <circle cx="460" cy="145" r="3.4"></circle>
+            <circle cx="460" cy="400" r="3.4"></circle>
+            <circle cx="460" cy="655" r="3.4"></circle>
+            <circle cx="820" cy="145" r="3.4"></circle>
+            <circle cx="820" cy="400" r="3.4"></circle>
+            <circle cx="820" cy="655" r="3.4"></circle>
+          </g>
+
+          <!-- ===== CENTRAL HUB ===== -->
+          <circle cx="640" cy="400" r="98" fill="none" stroke="#cfe0da" stroke-width="1" stroke-dasharray="2 6"></circle>
+          <circle cx="640" cy="400" r="74" fill="url(#govHubFill)" stroke="#0d5a52" stroke-width="2" filter="url(#govHubShadow)"></circle>
+          <circle cx="640" cy="400" r="64" fill="none" stroke="#e2f1eb" stroke-width="1"></circle>
+          <text x="640" y="396" text-anchor="middle" font-family="'Poppins',sans-serif" font-weight="800" font-size="33" letter-spacing="1.5" fill="#0aa06e">ZOT</text>
+          <text x="640" y="423" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-weight="600" font-size="10" letter-spacing="2.6" fill="#9aa7a3">PLATFORM</text>
+
+          <!-- ===== LEFT CARD 1 :: ACCESS CONTROL ===== -->
+          <g>
+            <rect x="104" y="40" width="356" height="210" rx="16" fill="#ffffff" stroke="#e6ebef" stroke-width="1" filter="url(#govCardShadow)"></rect>
+            <circle cx="132" cy="74" r="4.5" fill="#00c97b"></circle>
+            <text x="148" y="79" font-family="'Inter',system-ui,sans-serif" font-weight="700" font-size="15" letter-spacing="0.9" fill="#0d3b36">ACCESS CONTROL</text>
+            <rect x="148" y="90" width="26" height="2.5" rx="1.25" fill="#00e08f"></rect>
+            <g font-family="'Poppins',sans-serif" font-size="14" fill="#556066">
+              <text x="130" y="116">Per-route read, write and admin</text>
+              <text x="130" y="137">permissions per person, with SSO</text>
+              <text x="130" y="158">and end-to-end RBAC.</text>
+            </g>
+            <text x="130" y="182" font-family="'Inter',system-ui,sans-serif" font-size="12.5" fill="#8a9a95"><tspan font-weight="600" fill="#4f6b64">With: </tspan>Directors, department heads</text>
+            <line x1="158" y1="198" x2="434" y2="198" stroke="#eef2f0" stroke-width="1"></line>
+            <a href="https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-external-id" target="_blank" rel="noopener">
+              <rect x="130" y="208" width="32" height="32" rx="8" fill="#f5f9f7" stroke="#e3ece8"></rect>
+              <image href="assets/tech/azure-ciam.svg" x="136" y="214" width="20" height="20" preserveAspectRatio="xMidYMid meet"></image>
+            </a>
+            <a href="https://www.mongodb.com" target="_blank" rel="noopener">
+              <rect x="170" y="208" width="32" height="32" rx="8" fill="#f5f9f7" stroke="#e3ece8"></rect>
+              <image href="assets/tech/mongodb.svg" x="176" y="214" width="20" height="20" preserveAspectRatio="xMidYMid meet"></image>
+            </a>
+          </g>
+
+          <!-- ===== LEFT CARD 2 :: NETWORK & CLOUD ===== -->
+          <g>
+            <rect x="104" y="295" width="356" height="210" rx="16" fill="#ffffff" stroke="#e6ebef" stroke-width="1" filter="url(#govCardShadow)"></rect>
+            <circle cx="132" cy="329" r="4.5" fill="#00c97b"></circle>
+            <text x="148" y="334" font-family="'Inter',system-ui,sans-serif" font-weight="700" font-size="15" letter-spacing="0.9" fill="#0d3b36">NETWORK &amp; CLOUD</text>
+            <rect x="148" y="345" width="26" height="2.5" rx="1.25" fill="#00e08f"></rect>
+            <g font-family="'Poppins',sans-serif" font-size="14" fill="#556066">
+              <text x="130" y="371">On-premise databases reached</text>
+              <text x="130" y="392">only via a private gateway, behind</text>
+              <text x="130" y="413">7 layers of encryption.</text>
+            </g>
+            <text x="130" y="437" font-family="'Inter',system-ui,sans-serif" font-size="12.5" fill="#8a9a95"><tspan font-weight="600" fill="#4f6b64">With: </tspan>Azure admin, cyber-security partner</text>
+            <line x1="158" y1="453" x2="434" y2="453" stroke="#eef2f0" stroke-width="1"></line>
+            <a href="https://azure.microsoft.com/en-us/products/functions" target="_blank" rel="noopener">
+              <rect x="130" y="463" width="32" height="32" rx="8" fill="#f5f9f7" stroke="#e3ece8"></rect>
+              <image href="assets/tech/azure-functions.svg" x="136" y="469" width="20" height="20" preserveAspectRatio="xMidYMid meet"></image>
+            </a>
+            <a href="https://azure.microsoft.com/en-us/products/vpn-gateway" target="_blank" rel="noopener">
+              <rect x="170" y="463" width="32" height="32" rx="8" fill="#f5f9f7" stroke="#e3ece8"></rect>
+              <image href="assets/tech/azure-vpn-gateway.svg" x="176" y="469" width="20" height="20" preserveAspectRatio="xMidYMid meet"></image>
+            </a>
+          </g>
+
+          <!-- ===== LEFT CARD 3 :: PERSONAL DATA ===== -->
+          <g>
+            <rect x="104" y="550" width="356" height="210" rx="16" fill="#ffffff" stroke="#e6ebef" stroke-width="1" filter="url(#govCardShadow)"></rect>
+            <circle cx="132" cy="584" r="4.5" fill="#00c97b"></circle>
+            <text x="148" y="589" font-family="'Inter',system-ui,sans-serif" font-weight="700" font-size="15" letter-spacing="0.9" fill="#0d3b36">PERSONAL DATA</text>
+            <rect x="148" y="600" width="26" height="2.5" rx="1.25" fill="#00e08f"></rect>
+            <g font-family="'Poppins',sans-serif" font-size="14" fill="#556066">
+              <text x="130" y="626">Identifying details stripped from</text>
+              <text x="130" y="647">CVs before any model sees them;</text>
+              <text x="130" y="668">privacy handled with legal input.</text>
+            </g>
+            <text x="130" y="692" font-family="'Inter',system-ui,sans-serif" font-size="12.5" fill="#8a9a95"><tspan font-weight="600" fill="#4f6b64">With: </tspan>HR, legal team</text>
+            <line x1="158" y1="708" x2="434" y2="708" stroke="#eef2f0" stroke-width="1"></line>
+            <a href="https://azure.microsoft.com/en-us/products/ai-foundry" target="_blank" rel="noopener">
+              <rect x="130" y="718" width="32" height="32" rx="8" fill="#f5f9f7" stroke="#e3ece8"></rect>
+              <image href="assets/tech/azure-ai-foundry.svg" x="136" y="724" width="20" height="20" preserveAspectRatio="xMidYMid meet"></image>
+            </a>
+            <a href="https://openai.com/chatgpt" target="_blank" rel="noopener">
+              <rect x="170" y="718" width="32" height="32" rx="8" fill="#f5f9f7" stroke="#e3ece8"></rect>
+              <image href="assets/tech/chatgpt.svg" x="176" y="724" width="20" height="20" preserveAspectRatio="xMidYMid meet"></image>
+            </a>
+          </g>
+
+          <!-- ===== RIGHT CARD 1 :: CHANGE CONTROL ===== -->
+          <g>
+            <rect x="820" y="40" width="356" height="210" rx="16" fill="#ffffff" stroke="#e6ebef" stroke-width="1" filter="url(#govCardShadow)"></rect>
+            <circle cx="848" cy="74" r="4.5" fill="#00c97b"></circle>
+            <text x="864" y="79" font-family="'Inter',system-ui,sans-serif" font-weight="700" font-size="15" letter-spacing="0.9" fill="#0d3b36">CHANGE CONTROL</text>
+            <rect x="864" y="90" width="26" height="2.5" rx="1.25" fill="#00e08f"></rect>
+            <g font-family="'Poppins',sans-serif" font-size="14" fill="#556066">
+              <text x="846" y="116">Automated build, test and deploy</text>
+              <text x="846" y="137">on every change, with tests run</text>
+              <text x="846" y="158">before every release.</text>
+            </g>
+            <text x="846" y="182" font-family="'Inter',system-ui,sans-serif" font-size="12.5" fill="#8a9a95"><tspan font-weight="600" fill="#4f6b64">With: </tspan>Owned by me, Azure admin</text>
+            <line x1="846" y1="198" x2="1150" y2="198" stroke="#eef2f0" stroke-width="1"></line>
+            <a href="https://github.com" target="_blank" rel="noopener">
+              <rect x="846" y="208" width="32" height="32" rx="8" fill="#f5f9f7" stroke="#e3ece8"></rect>
+              <image href="assets/tech/github.svg" x="852" y="214" width="20" height="20" preserveAspectRatio="xMidYMid meet"></image>
+            </a>
+            <a href="https://azure.microsoft.com/en-us/products/devops" target="_blank" rel="noopener">
+              <rect x="886" y="208" width="32" height="32" rx="8" fill="#f5f9f7" stroke="#e3ece8"></rect>
+              <image href="assets/tech/azure-devops.svg" x="892" y="214" width="20" height="20" preserveAspectRatio="xMidYMid meet"></image>
+            </a>
+            <a href="https://www.docker.com" target="_blank" rel="noopener">
+              <rect x="926" y="208" width="32" height="32" rx="8" fill="#f5f9f7" stroke="#e3ece8"></rect>
+              <image href="assets/tech/docker.svg" x="932" y="214" width="20" height="20" preserveAspectRatio="xMidYMid meet"></image>
+            </a>
+          </g>
+
+          <!-- ===== RIGHT CARD 2 :: GDPR & EU AI ACT ===== -->
+          <g>
+            <rect x="820" y="295" width="356" height="210" rx="16" fill="#ffffff" stroke="#e6ebef" stroke-width="1" filter="url(#govCardShadow)"></rect>
+            <circle cx="848" cy="329" r="4.5" fill="#00c97b"></circle>
+            <text x="864" y="334" font-family="'Inter',system-ui,sans-serif" font-weight="700" font-size="15" letter-spacing="0.9" fill="#0d3b36">GDPR &amp; EU AI ACT</text>
+            <rect x="864" y="345" width="26" height="2.5" rx="1.25" fill="#00e08f"></rect>
+            <g font-family="'Poppins',sans-serif" font-size="14" fill="#556066">
+              <text x="846" y="371">Compliance with GDPR and the EU</text>
+              <text x="846" y="392">AI Act, with full activity logging</text>
+              <text x="846" y="413">for accountability.</text>
+            </g>
+            <text x="846" y="437" font-family="'Inter',system-ui,sans-serif" font-size="12.5" fill="#8a9a95"><tspan font-weight="600" fill="#4f6b64">With: </tspan>DPO and legal team</text>
+            <line x1="846" y1="453" x2="1150" y2="453" stroke="#eef2f0" stroke-width="1"></line>
+            <a href="https://gdpr.eu" target="_blank" rel="noopener">
+              <rect x="846" y="463" width="32" height="32" rx="8" fill="#f5f9f7" stroke="#e3ece8"></rect>
+              <image href="assets/tech/gdpr.svg" x="852" y="469" width="20" height="20" preserveAspectRatio="xMidYMid meet"></image>
+            </a>
+            <a href="https://artificialintelligenceact.eu" target="_blank" rel="noopener">
+              <rect x="886" y="463" width="32" height="32" rx="8" fill="#f5f9f7" stroke="#e3ece8"></rect>
+              <image href="assets/tech/eu-emblem.svg" x="892" y="469" width="20" height="20" preserveAspectRatio="xMidYMid meet"></image>
+            </a>
+          </g>
+
+          <!-- ===== RIGHT CARD 3 :: CYBER ESSENTIALS ===== -->
+          <g>
+            <rect x="820" y="550" width="356" height="210" rx="16" fill="#ffffff" stroke="#e6ebef" stroke-width="1" filter="url(#govCardShadow)"></rect>
+            <circle cx="848" cy="584" r="4.5" fill="#00c97b"></circle>
+            <text x="864" y="589" font-family="'Inter',system-ui,sans-serif" font-weight="700" font-size="15" letter-spacing="0.9" fill="#0d3b36">CYBER ESSENTIALS</text>
+            <!-- <rect x="1078" y="575" width="74" height="18" rx="9" fill="#e3f6ee" stroke="#b9e6d3"></rect> -->
+            <!-- <text x="1115" y="587" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-weight="700" font-size="9.5" letter-spacing="0.5" fill="#007a55">CERTIFIED</text> -->
+            <rect x="864" y="600" width="26" height="2.5" rx="1.25" fill="#00e08f"></rect>
+            <g font-family="'Poppins',sans-serif" font-size="14" fill="#556066">
+              <text x="846" y="626">Certified to the UK government-</text>
+              <text x="846" y="647">backed scheme, with core security</text>
+              <text x="846" y="668">controls independently assessed.</text>
+            </g>
+            <text x="846" y="692" font-family="'Inter',system-ui,sans-serif" font-size="12.5" fill="#8a9a95"><tspan font-weight="600" fill="#4f6b64">With: </tspan>IT lead, cyber-security partner</text>
+            <line x1="846" y1="708" x2="1150" y2="708" stroke="#eef2f0" stroke-width="1"></line>
+            <a href="https://www.ncsc.gov.uk/cyberessentials/overview" target="_blank" rel="noopener">
+              <rect x="846" y="718" width="32" height="32" rx="8" fill="#f5f9f7" stroke="#e3ece8"></rect>
+              <image href="assets/tech/cyber-essentials-plus.svg" x="852" y="724" width="20" height="20" preserveAspectRatio="xMidYMid meet"></image>
+            </a>
+          </g>
+        </svg>
+        <!-- <figcaption style="font-family:'Poppins',sans-serif; font-size:0.85rem; color:#757575; margin-top:12px; line-height:1.5;">Six governance domains, one platform. Each control names the people accountable for it and the industry-standard technology it is built on &mdash; select any logo to open its official page.</figcaption> -->
+      </figure>
     </div>
   </section>
 
@@ -1304,6 +1448,19 @@
     #dc17 .dc17-cite .name{font-family:'Poppins',sans-serif; font-weight:600; color:#004d4d;}
     #dc17 .dc17-cite .role{font-family:'Poppins',sans-serif; color:#9aa4ad;}
 
+    /* LinkedIn person link + avatar */
+    #dc17 .dc17-person{display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+      vertical-align:middle; border-radius:8px; outline:none;}
+    #dc17 .dc17-person .name{transition:color .18s ease;}
+    #dc17 .dc17-person:hover .name, #dc17 .dc17-person:focus-visible .name{color:#00a36c; text-decoration:underline;}
+    #dc17 .dc17-person:focus-visible{box-shadow:0 0 0 2px rgba(0,194,129,0.45);}
+    #dc17 .dc17-avatar{width:34px; height:34px; border-radius:50%; object-fit:cover; flex:none;
+      background:#eef1f3; box-shadow:0 0 0 1px rgba(0,77,77,0.10); transition:box-shadow .18s ease, transform .18s ease;}
+    #dc17 .dc17-person:hover .dc17-avatar, #dc17 .dc17-person:focus-visible .dc17-avatar{
+      box-shadow:0 0 0 2px rgba(0,194,129,0.55); transform:translateY(-1px);}
+    #dc17 .dc17-feature .dc17-avatar{width:42px; height:42px;}
+    #dc17 .dc17-feature .dc17-cite .role{margin-left:52px;}
+
     #dc17 .dc17-hint{display:inline-block; margin-top:12px; font-family:'Inter',system-ui,sans-serif;
       font-size:0.66rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#00a36c;
       opacity:0; transition:opacity .25s ease;}
@@ -1351,7 +1508,10 @@
             <p class="q-text">&ldquo;From day one he has demonstrated his eagerness to learn, strong problem solving skills, and ability to learn and adapt to new challenges. A fantastic &lsquo;can do&rsquo; attitude, working quickly and efficiently to solve problems and handle task given to him, showing creativity and initiative to find solutions.&rdquo;</p>
           </div></div>
           <div class="dc17-cite">
-            <span class="name">Gordon Falconer</span>
+            <a class="dc17-person" href="https://www.linkedin.com/in/gordon-falconer-037b3935/" target="_blank" rel="noopener noreferrer" aria-label="Gordon Falconer on LinkedIn (opens in a new tab)">
+              <img class="dc17-avatar" src="assets/people/gordon-falconer.jpg" alt="" width="42" height="42" loading="lazy">
+              <span class="name">Gordon Falconer</span>
+            </a>
             <span class="role">Former Managing Director, ZOT</span>
             <span class="dc17-hint" aria-hidden="true">Read full &rarr;</span>
           </div>
@@ -1369,7 +1529,7 @@
             <div class="q-full-w"><div class="q-full-i">
               <p class="q-text">&ldquo;His proactive, can-do attitude and skills allow me to come to him with any project and be sure that it will get done as soon as possible. His expertise saved us thousands of pounds on a CRM solution and the website we built together already generated business enquiries from almost 30 new customers.&rdquo;</p>
             </div></div>
-            <div class="dc17-cite"><span class="name">Antoni Masny</span><span class="role">Sales and Marketing Assistant, ZOT</span><span class="dc17-hint" aria-hidden="true">Read full &rarr;</span></div>
+            <div class="dc17-cite"><a class="dc17-person" href="https://www.linkedin.com/in/antoni-masny/" target="_blank" rel="noopener noreferrer" aria-label="Antoni Masny on LinkedIn (opens in a new tab)"><img class="dc17-avatar" src="assets/people/antoni-masny.png" alt="" width="34" height="34" loading="lazy"><span class="name">Antoni Masny</span></a><span class="role">Sales and Marketing Assistant, ZOT</span><span class="dc17-hint" aria-hidden="true">Read full &rarr;</span></div>
           </blockquote>
 
           <blockquote class="dc17-quote dc17-item" data-reveal data-delay="250" tabindex="0" role="button" aria-expanded="false" aria-label="Read full statement from Evan Polak" style="opacity:1; margin:0;">
@@ -1379,7 +1539,7 @@
             <div class="q-full-w"><div class="q-full-i">
               <p class="q-text">&ldquo;Vaikunth has been a crucial part of our PCB department for awhile now, he has helped us throughout with multiple different projects. I have come to Vaikunth many times within the past year for help tracking different process areas and working on brand new projects which he has always been happy to help with. A big part of this is a new job card, previously this project had been seen as not achievable, but with Vaikunths help we have been able to develop a software to almost completely transfer our job cards to digital. This has given us the ability to improve our processes and carbon footprint.&rdquo;</p>
             </div></div>
-            <div class="dc17-cite"><span class="name">Evan Polak</span><span class="role">Process Engineer, ZOT</span><span class="dc17-hint" aria-hidden="true">Read full &rarr;</span></div>
+            <div class="dc17-cite"><a class="dc17-person" href="https://www.linkedin.com/in/evan-polak-153ab4232/" target="_blank" rel="noopener noreferrer" aria-label="Evan Polak on LinkedIn (opens in a new tab)"><img class="dc17-avatar" src="assets/people/evan-polak.jpg" alt="" width="34" height="34" loading="lazy"><span class="name">Evan Polak</span></a><span class="role">Process Engineer, ZOT</span><span class="dc17-hint" aria-hidden="true">Read full &rarr;</span></div>
           </blockquote>
 
           <blockquote class="dc17-quote dc17-item" data-reveal data-delay="290" tabindex="0" role="button" aria-expanded="false" aria-label="Read full statement from Kerry Stewart" style="opacity:1; margin:0;">
@@ -1389,7 +1549,7 @@
             <div class="q-full-w"><div class="q-full-i">
               <div class="q-text">&ldquo;I am delighted to support the nomination of Vaikunth Guruswamy for the Technology Champion Award.<br><br>Since joining our organisation in August 2025, Vaikunth&rsquo;s supported the HR department through the development of a bespoke payroll database that integrates timesheet and absence information from our new HR system. Vaikunth took the time to gain a thorough understanding of our payroll processes, enabling him to create a solution that met our specific requirements and significantly streamlined our payroll administration.<br><br>Vaikunth also designed and developed a new company website in collaboration with our Marketing Assistant. He created an excellent recruitment portal that enables candidates to submit applications online directly to the organisation, modernising our recruitment process while significantly improving the candidate experience. The new platform has strengthened our ability to advertise vacancies, attract talent and manage recruitment activity more effectively.<br><br>Vaikunth&rsquo;s work has delivered measurable operational improvements which have made a significant impact in a relatively short period of time. He is thoroughly deserving of recognition as a Technology Champion. His creativity, technical expertise and commitment to continuous improvement make him an invaluable member of our organisation.&rdquo;</div>
             </div></div>
-            <div class="dc17-cite"><span class="name">Kerry Stewart</span><span class="role">Senior HR, ZOT</span><span class="dc17-hint" aria-hidden="true">Read full &rarr;</span></div>
+            <div class="dc17-cite"><a class="dc17-person" href="https://www.linkedin.com/in/kerry-stewart-7b6730232/" target="_blank" rel="noopener noreferrer" aria-label="Kerry Stewart on LinkedIn (opens in a new tab)"><img class="dc17-avatar" src="assets/people/kerry-stewart.jpg" alt="" width="34" height="34" loading="lazy"><span class="name">Kerry Stewart</span></a><span class="role">Senior HR, ZOT</span><span class="dc17-hint" aria-hidden="true">Read full &rarr;</span></div>
           </blockquote>
 
         </div>
@@ -1419,6 +1579,14 @@
     function collapseAll(except){
       quotes.forEach(function(q){ if(q !== except && q.classList.contains('open')) setOpen(q, false); });
     }
+
+    // Let the LinkedIn person link work on its own without toggling the quote.
+    Array.prototype.slice.call(document.querySelectorAll('#dc17 .dc17-person')).forEach(function(a){
+      a.addEventListener('click', function(ev){ ev.stopPropagation(); });
+      a.addEventListener('keydown', function(ev){
+        if(ev.key === 'Enter' || ev.key === ' ') ev.stopPropagation();
+      });
+    });
 
     quotes.forEach(function(q){
       q.addEventListener('click', function(ev){
