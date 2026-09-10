@@ -51,8 +51,10 @@
   <nav id="dcRail" style="position:fixed; right:20px; top:50%; transform:translateY(-50%); z-index:105; display:flex; flex-direction:column; gap:10px; align-items:flex-end;"></nav>
 
   <!-- 00 COVER -->
-  <section data-screen-label="00 Cover" data-chapter="Cover" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:space-between; padding:100px 5% 48px; background:#ffffff;">
-    <div style="width:100%; max-width:1100px; margin:0 auto; flex:1; display:flex; flex-direction:column; justify-content:center;">
+  <section data-screen-label="00 Cover" data-chapter="Cover" style="position:relative; overflow:hidden; min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:space-between; padding:100px 5% 48px; background:#ffffff;">
+    <img id="ztsHero" src="https://zotstorage.blob.core.windows.net/images/Resource-tab.jpg" alt="" aria-hidden="true"
+      style="position:absolute; top:0; right:0; width:min(64%,1000px); height:auto; z-index:0; pointer-events:none; user-select:none; opacity:1; transition:opacity 1.6s cubic-bezier(0.33,0,0.2,1); -webkit-mask-image:radial-gradient(135% 135% at 100% 0%, #000 34%, rgba(0,0,0,0.35) 58%, transparent 76%); mask-image:radial-gradient(135% 135% at 100% 0%, #000 34%, rgba(0,0,0,0.35) 58%, transparent 76%);">
+    <div style="position:relative; z-index:1; width:100%; max-width:1100px; margin:0 auto; flex:1; display:flex; flex-direction:column; justify-content:center;">
       <!-- <p data-reveal style="opacity:1; font-family:'Poppins',sans-serif; font-size:0.95rem; color:#757575; margin:0 0 1.6rem; letter-spacing:0.02em;">Round 2 presentation</p> -->
       <h1 data-reveal data-delay="80" style="opacity:1; font-family:'Montserrat','Poppins',sans-serif; font-weight:700; font-size:clamp(2rem,4.4vw,3.5rem); line-height:1.2; color:#004d4d; margin:0 0 1.5rem; max-width:26ch;">Digitization and automation across ZOT's three-divisions </h1>
       <!-- <p data-reveal data-delay="150" style="opacity:1; font-family:'Poppins',sans-serif; font-size:clamp(1.02rem,1.4vw,1.25rem); line-height:1.65; color:#333333; max-width:64ch; margin:0;">ZOT Engineering runs PCB manufacturing, assembly and sheet metal fabrication. Twenty-five years of production data spread across databases and a chain of spreadsheets. This is what I did about it, how it was improvised and delivered.</p> -->
@@ -63,7 +65,7 @@
       </div>
     </div>
 
-    <div id="ztsWrap" data-reveal data-delay="300" style="opacity:1; position:relative; width:100%; max-width:1000px; margin:0 auto 72px;">
+    <div id="ztsWrap" data-reveal data-delay="300" style="opacity:1; position:relative; z-index:1; width:100%; max-width:1000px; margin:0 auto 72px;">
       <div class="zts-diagram" id="ztsDiagram">
         <svg class="zts-conn" id="ztsConn" preserveAspectRatio="none" aria-hidden="true"></svg>
 
@@ -109,7 +111,7 @@
       <p id="ztsHint" style="text-align:center; font-family:'Poppins',sans-serif; font-size:0.82rem; color:#9e9e9e; margin:16px 0 0;">Select the <span style="color:#04936a; font-weight:600;">ZOT Platform</span> to see the technology it runs on, or <span style="color:#04936a; font-weight:600;">Live insight</span> to see what it delivers</p>
     </div>
 
-    <div data-reveal data-delay="360" style="opacity:1; width:100%; max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; gap:10px 32px; justify-content:space-between; align-items:center; padding-top:22px; border-top:1px solid #e0e0e0; font-family:'Poppins',sans-serif; font-size:0.85rem; color:#9e9e9e;">
+    <div data-reveal data-delay="360" style="opacity:1; position:relative; z-index:1; width:100%; max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; gap:10px 32px; justify-content:space-between; align-items:center; padding-top:22px; border-top:1px solid #e0e0e0; font-family:'Poppins',sans-serif; font-size:0.85rem; color:#9e9e9e;">
       <span>Five minutes about me, fifteen on the work</span>
       <span>Scroll, or use the arrow keys</span>
     </div>
@@ -203,6 +205,9 @@
       .zts-fan-items span { position:relative; display:flex; align-items:flex-start; gap:9px; font-family:'Poppins',sans-serif; font-size:0.76rem; line-height:1.38; color:#2b514a; }
       .zts-fan-items span::before { content:''; flex:0 0 auto; margin-top:0.4em; width:6px; height:6px; border-radius:1.5px; background:#05b981; transform:rotate(45deg); box-shadow:0 0 0 3px rgba(0,255,157,0.13); }
 
+      @media (max-width:820px) { #ztsHero { opacity:0 !important; } }
+      @media (prefers-reduced-motion: reduce) { #ztsHero { transition:none; } }
+
       @media (max-width:900px) {
         .zts-diagram.open, .zts-diagram.fan { flex-direction:column; align-items:stretch; }
         .zts-diagram.open .zts-inputs, .zts-diagram.fan .zts-inputs { flex-direction:row; }
@@ -244,6 +249,7 @@
       var conn = document.getElementById('ztsConn');
       var label = document.getElementById('ztsToggleLabel');
       var hint = document.getElementById('ztsHint');
+      var hero = document.getElementById('ztsHero');
       if (!diagram || !hit || !arch || !conn) return;
 
       var inputs = Array.prototype.slice.call(diagram.querySelectorAll('.zts-inputs .zts-io'));
@@ -358,6 +364,7 @@
         hit.setAttribute('aria-expanded', open ? 'true' : 'false');
         if (label) label.textContent = open ? 'CLOSE' : 'VIEW THE STACK ▾';
         if (hint) hint.style.opacity = open ? '0' : '1';
+        if (hero) hero.style.opacity = open ? '0' : '1';
         animateDraw(650);
         if (open) setTimeout(function () { diagram.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 280);
       }
@@ -445,6 +452,7 @@
         if (outFan) outFan.setAttribute('aria-hidden', outOpen ? 'false' : 'true');
         if (outCue) outCue.textContent = outOpen ? 'CLOSE ▴' : 'SEE WHAT IT DELIVERS ▾';
         if (hint) hint.style.opacity = outOpen ? '0' : '1';
+        if (hero) hero.style.opacity = outOpen ? '0' : '1';
         animateDraw(650);
         if (outOpen) setTimeout(function () { diagram.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 280);
       }
@@ -527,7 +535,7 @@
       <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.05rem; line-height:1.7; color:#333333; max-width:80ch; margin:0 0 2rem;">As the company's first software engineer, I built the platform before the products: I sat with colleagues across every division to understand how the industry and the company actually worked, chose the right technology stack, and architected a production-grade framework that tied it all together. It came together in three deliberate phases.</p>
 
       <figure data-reveal data-delay="180" style="opacity:1; margin:0;">
-        <svg id="tlSvg" viewBox="0 0 1340 720" style="width:100%; height:auto; display:block;" role="img" aria-label="Ascending timeline of the platform build in three phases. Phase 1 Build the Foundation, Feb to Aug 2025: the data foundation, then first products in use. Phase 2 Connect and Go Live, Oct 2025 to Feb 2026: into the cloud, then live on the floor. Phase 3 Automate and Scale, Mar 2026 to present: customers and sensors, automated inspection, and rollout across the business.">
+        <svg id="tlSvg" viewBox="0 0 1400 720" style="width:100%; height:auto; display:block;" role="img" aria-label="Ascending timeline of the platform build in three phases. Phase 1 Build the Foundation, Feb to Aug 2025: the data foundation, then first products in use. Phase 2 Connect and Go Live, Oct 2025 to Feb 2026: into the cloud, then live on the floor. Phase 3 Automate and Scale, Mar 2026 to present: customers and sensors, automated inspection, and rollout across the business.">
           <defs>
             <linearGradient id="tlGrad" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0" stop-color="#004d4d"></stop>
@@ -559,111 +567,111 @@
           <g class="tl-item">
             <circle cx="48" cy="555" r="13" fill="#007a55"></circle>
             <text x="48" y="559.5" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">1</text>
-            <text x="48" y="364" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">FEB &ndash; MAR 2025</text>
-            <text x="48" y="390" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">The data</text>
-            <text x="48" y="414" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">foundation</text>
-            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+            <text x="48" y="404" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">FEB &ndash; MAR 2025</text>
+            <text x="48" y="430" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">The data</text>
+            <text x="48" y="454" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">foundation</text>
+            <!-- <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
               <text x="48" y="438">Mapped the three</text>
               <text x="48" y="457">divisional databases,</text>
               <text x="48" y="476">a first for the</text>
               <text x="48" y="495">company, and built</text>
               <text x="48" y="514">the data layer and</text>
               <text x="48" y="533">first dashboards.</text>
-            </g>
+            </g> -->
           </g>
 
           <!-- ===== MILESTONE 2 ===== -->
           <g class="tl-item">
             <circle cx="232" cy="492.5" r="13" fill="#007a55"></circle>
             <text x="232" y="497" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">2</text>
-            <text x="232" y="301.5" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">APR &ndash; AUG 2025</text>
-            <text x="232" y="327.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">First products in</text>
-            <text x="232" y="351.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">use</text>
-            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+            <text x="232" y="341.5" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">APR &ndash; AUG 2025</text>
+            <text x="232" y="367.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">First products in</text>
+            <text x="232" y="391.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">use</text>
+            <!-- <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
               <text x="232" y="375.5">Productionized the</text>
               <text x="232" y="394.5">website and division</text>
               <text x="232" y="413.5">KPI dashboards. Digital</text>
               <text x="232" y="432.5">quotation replaced</text>
               <text x="232" y="451.5">spreadsheets; CRM</text>
               <text x="232" y="470.5">foundations laid.</text>
-            </g>
+            </g> -->
           </g>
 
           <!-- ===== MILESTONE 3 ===== -->
           <g class="tl-item">
             <circle cx="416" cy="430" r="13" fill="#009e63"></circle>
             <text x="416" y="434.5" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">3</text>
-            <text x="416" y="282" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">OCT &ndash; DEC 2025</text>
-            <text x="416" y="308" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">Into the cloud</text>
-            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+            <text x="416" y="322" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">OCT &ndash; DEC 2025</text>
+            <text x="416" y="348" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">Into the cloud</text>
+            <!-- <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
               <text x="416" y="332">Cloud estate built with</text>
               <text x="416" y="351">security partners and</text>
               <text x="416" y="370">the site deployed live.</text>
               <text x="416" y="389">Recruitment and payroll</text>
               <text x="416" y="408">automated.</text>
-            </g>
+            </g> -->
           </g>
 
           <!-- ===== MILESTONE 4 ===== -->
           <g class="tl-item">
             <circle cx="600" cy="367.5" r="13" fill="#009e63"></circle>
             <text x="600" y="372" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">4</text>
-            <text x="600" y="219.5" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">JAN &ndash; FEB 2026</text>
-            <text x="600" y="245.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">Live on the floor</text>
-            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+            <text x="600" y="259.5" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">JAN &ndash; FEB 2026</text>
+            <text x="600" y="285.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">Live on the floor</text>
+            <!-- <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
               <text x="600" y="269.5">Cloud linked to on-site</text>
               <text x="600" y="288.5">systems. Live production</text>
               <text x="600" y="307.5">dashboards across all</text>
               <text x="600" y="326.5">three divisions, with</text>
               <text x="600" y="345.5">role-based access.</text>
-            </g>
+            </g> -->
           </g>
 
           <!-- ===== MILESTONE 5 ===== -->
           <g class="tl-item">
             <circle cx="784" cy="305" r="13" fill="#00c97b"></circle>
             <text x="784" y="309.5" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">5</text>
-            <text x="784" y="133" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">MAR &ndash; APR 2026</text>
-            <text x="784" y="159" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">Customers &amp;</text>
-            <text x="784" y="183" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">sensors</text>
-            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+            <text x="784" y="173" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">MAR &ndash; APR 2026</text>
+            <text x="784" y="199" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">Customers &amp;</text>
+            <text x="784" y="223" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">sensors</text>
+            <!-- <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
               <text x="784" y="207">Vortex customer order</text>
               <text x="784" y="226">portal launched with</text>
               <text x="784" y="245">customer profiles.</text>
               <text x="784" y="264">Shop-floor sensors</text>
               <text x="784" y="283">connected to the cloud.</text>
-            </g>
+            </g> -->
           </g>
 
           <!-- ===== MILESTONE 6 ===== -->
           <g class="tl-item">
             <circle cx="968" cy="242.5" r="13" fill="#00c97b"></circle>
             <text x="968" y="247" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">6</text>
-            <text x="968" y="89.5" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">MAY &ndash; JUN 2026</text>
-            <text x="968" y="115.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">Automated</text>
-            <text x="968" y="139.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">inspection</text>
-            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+            <text x="968" y="129.5" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">MAY &ndash; JUN 2026</text>
+            <text x="968" y="155.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">Automated</text>
+            <text x="968" y="179.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">inspection</text>
+            <!-- <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
               <text x="968" y="163.5">Automated optical</text>
               <text x="968" y="182.5">inspection and digital</text>
               <text x="968" y="201.5">job cards live on the</text>
               <text x="968" y="220.5">PCB floor.</text>
-            </g>
+            </g> -->
           </g>
 
           <!-- ===== MILESTONE 7 (present) ===== -->
           <g class="tl-item">
             <circle class="z-tl-pulse" cx="1152" cy="180" r="14" fill="#00e08f"></circle>
-            <circle cx="1152" cy="180" r="13" fill="#004d4d"></circle>
+            <circle cx="1152" cy="180" r="13" fill="#00c97b"></circle>
             <text x="1152" y="184.5" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">7</text>
-            <text x="1152" y="32" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" letter-spacing="0.6" fill="#007a55">JUL 2026 &ndash; PRESENT</text>
-            <text x="1152" y="58" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#004d4d">Across the business</text>
-            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+            <text x="1152" y="72" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" letter-spacing="0.6" fill="#007a55">JUL 2026 &ndash; PRESENT</text>
+            <text x="1152" y="98" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">Across the business</text>
+            <!-- <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
               <text x="1152" y="82">Finance, Work-in-</text>
               <text x="1152" y="101">Progress and Sales</text>
               <text x="1152" y="120">dashboards. Digital</text>
               <text x="1152" y="139">quotation rolled out</text>
               <text x="1152" y="158">across divisions.</text>
-            </g>
+            </g> -->
           </g>
 
           <!-- ===== QUARTER AXIS ===== -->
@@ -762,85 +770,85 @@
 
             <!-- ===== PHASE 1 CARDS ===== -->
             <!-- card 1 -->
-            <rect x="8" y="52" width="285" height="264" rx="10" fill="#ffffff" stroke="#e0e0e0"></rect>
+            <rect x="8" y="52" width="285" height="170" rx="10" fill="#ffffff" stroke="#e0e0e0"></rect>
             <circle cx="42" cy="88" r="13" fill="#00c97b"></circle>
             <text x="42" y="93" text-anchor="middle" font-family="'Montserrat',sans-serif" font-weight="700" font-size="14" fill="#004d4d">1</text>
             <text x="64" y="93" font-family="'Inter',system-ui,sans-serif" font-size="16" font-weight="700" letter-spacing="0.1em" fill="#004d4d">IDEATE</text>
             <g font-family="'Poppins',sans-serif" font-size="16" fill="#333333">
-              <text x="30" y="125">Collaborate and brainstorm</text>
+              <!-- <text x="30" y="125">Collaborate and brainstorm</text> -->
               <text x="30" y="146">ideas</text>
             </g>
 
             <!-- card 2 -->
-            <rect x="308" y="52" width="285" height="264" rx="10" fill="#ffffff" stroke="#e0e0e0"></rect>
+            <rect x="308" y="52" width="285" height="170" rx="10" fill="#ffffff" stroke="#e0e0e0"></rect>
             <circle cx="342" cy="88" r="13" fill="#00c97b"></circle>
             <text x="342" y="93" text-anchor="middle" font-family="'Montserrat',sans-serif" font-weight="700" font-size="14" fill="#004d4d">2</text>
             <text x="364" y="93" font-family="'Inter',system-ui,sans-serif" font-size="16" font-weight="700" letter-spacing="0.1em" fill="#004d4d">BACKLOG</text>
             <g font-family="'Poppins',sans-serif" font-size="16" fill="#333333">
-              <text x="330" y="125">add the project into the</text>
-              <text x="330" y="146">agile management tool</text>
+              <!-- <text x="330" y="125">add the project into the</text>
+              <text x="330" y="146">agile management tool</text> -->
             </g>
-            <image href="assets/tech/clickup.svg" x="330" y="168" width="22" height="22" preserveAspectRatio="xMidYMid meet"></image>
-            <text x="358" y="184" font-family="'Poppins',sans-serif" font-size="14" fill="#557069">ClickUp</text>
+            <image href="assets/tech/clickup.svg" x="330" y="118" width="22" height="22" preserveAspectRatio="xMidYMid meet"></image>
+            <text x="358" y="134" font-family="'Poppins',sans-serif" font-size="14" fill="#557069">ClickUp</text>
 
             <!-- card 3 -->
-            <rect x="608" y="52" width="285" height="264" rx="10" fill="#ffffff" stroke="#e0e0e0"></rect>
+            <rect x="608" y="52" width="285" height="170" rx="10" fill="#ffffff" stroke="#e0e0e0"></rect>
             <circle cx="642" cy="88" r="13" fill="#00c97b"></circle>
             <text x="642" y="93" text-anchor="middle" font-family="'Montserrat',sans-serif" font-weight="700" font-size="14" fill="#004d4d">3</text>
             <text x="664" y="93" font-family="'Inter',system-ui,sans-serif" font-size="16" font-weight="700" letter-spacing="0.1em" fill="#004d4d">DISCOVERY</text>
             <g font-family="'Poppins',sans-serif" font-size="16" fill="#333333">
-              <text x="630" y="125">Collection of existing</text>
+              <!-- <text x="630" y="125">Collection of existing</text>
               <text x="630" y="146">implementation, speak with</text>
               <text x="630" y="167">associated people, gather</text>
               <text x="630" y="188">information on available</text>
-              <text x="630" y="209">data sources.</text>
+              <text x="630" y="209">data sources.</text> -->
             </g>
-            <image href="assets/tech/googlesheets.svg" x="630" y="225" width="22" height="22" preserveAspectRatio="xMidYMid meet"></image>
-            <text x="658" y="241" font-family="'Poppins',sans-serif" font-size="14" fill="#557069">Spreadsheets</text>
-            <image href="assets/tech/microsoftsqlserver.svg" x="630" y="253" width="22" height="22" preserveAspectRatio="xMidYMid meet"></image>
-            <text x="658" y="269" font-family="'Poppins',sans-serif" font-size="14" fill="#557069">SQL databases</text>
-            <image href="assets/tech/crystalreports.svg" x="630" y="281" width="22" height="22" preserveAspectRatio="xMidYMid meet"></image>
-            <text x="658" y="297" font-family="'Poppins',sans-serif" font-size="14" fill="#557069">Existing reports</text>
+            <image href="assets/tech/googlesheets.svg" x="630" y="118" width="22" height="22" preserveAspectRatio="xMidYMid meet"></image>
+            <text x="658" y="134" font-family="'Poppins',sans-serif" font-size="14" fill="#557069">Spreadsheets</text>
+            <image href="assets/tech/microsoftsqlserver.svg" x="630" y="146" width="22" height="22" preserveAspectRatio="xMidYMid meet"></image>
+            <text x="658" y="162" font-family="'Poppins',sans-serif" font-size="14" fill="#557069">SQL databases</text>
+            <image href="assets/tech/crystalreports.svg" x="630" y="174" width="22" height="22" preserveAspectRatio="xMidYMid meet"></image>
+            <text x="658" y="190" font-family="'Poppins',sans-serif" font-size="14" fill="#557069">Existing reports</text>
 
             <!-- card 4 -->
-            <rect x="908" y="52" width="285" height="264" rx="10" fill="#ffffff" stroke="#e0e0e0"></rect>
+            <rect x="908" y="52" width="285" height="170" rx="10" fill="#ffffff" stroke="#e0e0e0"></rect>
             <circle cx="942" cy="88" r="13" fill="#00c97b"></circle>
             <text x="942" y="93" text-anchor="middle" font-family="'Montserrat',sans-serif" font-weight="700" font-size="14" fill="#004d4d">4</text>
             <text x="964" y="93" font-family="'Inter',system-ui,sans-serif" font-size="16" font-weight="700" letter-spacing="0.1em" fill="#004d4d">PROTOTYPE</text>
             <g font-family="'Poppins',sans-serif" font-size="16" fill="#333333">
-              <text x="930" y="125">Ideate the features needed,</text>
+              <!-- <text x="930" y="125">Ideate the features needed,</text>
               <text x="930" y="146">create a mock prototype of</text>
               <text x="930" y="167">the expected result. Speak</text>
               <text x="930" y="188">with the respective people</text>
               <text x="930" y="209">to confirm we are all on the</text>
               <text x="930" y="230">same page and the prototype</text>
-              <text x="930" y="251">is meeting their expectation</text>
+              <text x="930" y="251">is meeting their expectation</text> -->
             </g>
-            <image href="assets/tech/figma.svg" x="932" y="269" width="20" height="22" preserveAspectRatio="xMidYMid meet"></image>
-            <text x="958" y="285" font-family="'Poppins',sans-serif" font-size="14" fill="#557069">Figma</text>
+            <image href="assets/tech/figma.svg" x="932" y="118" width="20" height="22" preserveAspectRatio="xMidYMid meet"></image>
+            <text x="958" y="134" font-family="'Poppins',sans-serif" font-size="14" fill="#557069">Figma</text>
 
             <!-- card 5 (highlighted) -->
-            <rect x="1208" y="52" width="285" height="264" rx="10" fill="#004d4d"></rect>
+            <rect x="1208" y="52" width="285" height="170" rx="10" fill="#004d4d"></rect>
             <circle cx="1242" cy="88" r="13" fill="#00e08f"></circle>
             <text x="1242" y="93" text-anchor="middle" font-family="'Montserrat',sans-serif" font-weight="700" font-size="14" fill="#004d4d">5</text>
             <text x="1264" y="93" font-family="'Inter',system-ui,sans-serif" font-size="16" font-weight="700" letter-spacing="0.1em" fill="#00e08f">ARCHITECTURE</text>
             <g font-family="'Poppins',sans-serif" font-size="16" fill="#eaf5f1">
-              <text x="1230" y="125">High Level System Design</text>
+              <!-- <text x="1230" y="125">High Level System Design</text>
               <text x="1230" y="146">and Low Level System</text>
-              <text x="1230" y="167">design</text>
+              <text x="1230" y="167">design</text> -->
             </g>
-            <text x="1230" y="300" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="600" fill="#00ff9d">Signed off before the first sprint</text>
+            <text x="1230" y="134" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="600" fill="#00ff9d">Signed off before the first sprint</text>
 
             <!-- inter-card arrows -->
             <g stroke="#004d4d" stroke-width="1.6">
-              <line x1="295" y1="184" x2="306" y2="184" marker-end="url(#wfArr)"></line>
-              <line x1="595" y1="184" x2="606" y2="184" marker-end="url(#wfArr)"></line>
-              <line x1="895" y1="184" x2="906" y2="184" marker-end="url(#wfArr)"></line>
-              <line x1="1195" y1="184" x2="1206" y2="184" marker-end="url(#wfArr)"></line>
+              <line x1="295" y1="137" x2="306" y2="137" marker-end="url(#wfArr)"></line>
+              <line x1="595" y1="137" x2="606" y2="137" marker-end="url(#wfArr)"></line>
+              <line x1="895" y1="137" x2="906" y2="137" marker-end="url(#wfArr)"></line>
+              <line x1="1195" y1="137" x2="1206" y2="137" marker-end="url(#wfArr)"></line>
             </g>
 
             <!-- design handoff into the sprint -->
-            <path d="M1350,316 L1350,432 L760,432 L760,468" fill="none" stroke="#004d4d" stroke-width="1.6" marker-end="url(#wfArr)"></path>
+            <path d="M1350,222 L1350,432 L760,432 L760,468" fill="none" stroke="#004d4d" stroke-width="1.6" marker-end="url(#wfArr)"></path>
             <text x="1055" y="424" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="#9aa7a3">DESIGN HANDOFF INTO THE SPRINT</text>
 
             <!-- ===== PHASE 2 HEADER (left) ===== -->
@@ -862,7 +870,7 @@
             <text x="496" y="1026" font-family="'Poppins',sans-serif" font-size="15" fill="#333333">Feedback, change in user requirements, request for modification</text>
 
             <!-- side notes -->
-            <circle cx="1086" cy="990" r="4" fill="#00c97b"></circle>
+            <!-- <circle cx="1086" cy="990" r="4" fill="#00c97b"></circle>
             <g font-family="'Poppins',sans-serif" font-size="13" fill="#557069">
               <text x="1102" y="988">Phase 1 runs once per project.</text>
               <text x="1102" y="1008">Phase 2 repeats every sprint.</text>
@@ -871,10 +879,10 @@
             <g font-family="'Poppins',sans-serif" font-size="13" fill="#557069">
               <text x="1102" y="1032">Requirement changes never</text>
               <text x="1102" y="1052">bypass the backlog; they re-enter at step 2.</text>
-            </g>
+            </g> -->
 
             <!-- re-enters the backlog (dashed return) -->
-            <path d="M470,1010 L40,1010 L40,388 L450,388 L450,320" fill="none" stroke="#004d4d" stroke-width="1.5" stroke-dasharray="3 6" marker-end="url(#wfArr)"></path>
+            <path d="M470,1010 L40,1010 L40,388 L450,388 L450,228" fill="none" stroke="#004d4d" stroke-width="1.5" stroke-dasharray="3 6" marker-end="url(#wfArr)"></path>
             <text x="255" y="1002" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="#9aa7a3">RE-ENTERS THE BACKLOG AS A NEW ITEM</text>
           </svg>
         </div>
@@ -997,7 +1005,7 @@
       <div data-reveal data-delay="360" style="opacity:1; display:flex; align-items:baseline; gap:14px; margin:0 0 1.5rem;">
         <span style="font-family:'Inter',system-ui,sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#9aa4ad;">Task by task</span>
         <span style="flex:1; height:1px; background:#eef1f3;"></span>
-        <span style="display:inline-flex; align-items:center; gap:16px; font-family:'Inter',system-ui,sans-serif; font-size:0.66rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#b3bcc2;">
+        <span style="display:inline-flex; align-items:center; gap:16px; font-family:'Inter',system-ui,sans-serif; font-size:0.66rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#e46343;">
           <span>Before</span>
           <span style="color:#00a36c;">After</span>
         </span>
@@ -1008,15 +1016,15 @@
         <div data-reveal data-delay="375" class="r5-task" style="opacity:1;">
           <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:14px;">
             <span class="r5-idx" style="font-family:'Montserrat',sans-serif; font-size:0.9rem; font-weight:700; color:#cfd8dd; transition:color .18s ease;">01</span>
-            <span style="font-family:'Poppins',sans-serif; font-size:0.98rem; font-weight:600; color:#004d4d;">Management reporting</span>
+            <span style="font-family:'Poppins',sans-serif; font-size:0.98rem; font-weight:600; color:#004d4d;">Component matching</span>
           </div>
           <div style="display:flex; gap:10px; margin-bottom:9px;">
-            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#b3bcc2; line-height:1.55; padding-top:2px;">Before</span>
-            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#9aa4ad;">Manual exports rebuilt into Excel charts each time a figure was needed</span>
+            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#e46343; line-height:1.55; padding-top:2px;">Before</span>
+            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#9aa4ad;"><strong style="color:#8a949d; font-weight:600;">Hours</strong> per bill of materials, switching between supplier sites row by row</span>
           </div>
           <div style="display:flex; gap:10px;">
             <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#00a36c; line-height:1.55; padding-top:2px;">After</span>
-            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#333333;">Live dashboards across all three divisions, <strong style="color:#004d4d; font-weight:600;">over 100 graphs</strong>, no export step</span>
+            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#333333;">One upload, ranked matches from stock and suppliers <strong style="color:#004d4d; font-weight:600;">on a single screen</strong></span>
           </div>
         </div>
 
@@ -1024,15 +1032,15 @@
         <div data-reveal data-delay="390" class="r5-task" style="opacity:1;">
           <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:14px;">
             <span class="r5-idx" style="font-family:'Montserrat',sans-serif; font-size:0.9rem; font-weight:700; color:#cfd8dd; transition:color .18s ease;">02</span>
-            <span style="font-family:'Poppins',sans-serif; font-size:0.98rem; font-weight:600; color:#004d4d;">Payroll verification</span>
+            <span style="font-family:'Poppins',sans-serif; font-size:0.98rem; font-weight:600; color:#004d4d;">Customer order updates</span>
           </div>
           <div style="display:flex; gap:10px; margin-bottom:9px;">
-            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#b3bcc2; line-height:1.55; padding-top:2px;">Before</span>
-            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#9aa4ad;"><strong style="color:#8a949d; font-weight:600;">Roughly a week</strong>, several people cross-checking every clock-in</span>
+            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#e46343; line-height:1.55; padding-top:2px;">Before</span>
+            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#9aa4ad;">Staff emailing each customer with the day's status</span>
           </div>
           <div style="display:flex; gap:10px;">
             <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#00a36c; line-height:1.55; padding-top:2px;">After</span>
-            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#333333;"><strong style="color:#004d4d; font-weight:600;">A few clicks</strong> each cycle, with anomalies flagged automatically</span>
+            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#333333;">Customers see their <strong style="color:#004d4d; font-weight:600;">own live position</strong> and delivery performance themselves</span>
           </div>
         </div>
 
@@ -1043,7 +1051,7 @@
             <span style="font-family:'Poppins',sans-serif; font-size:0.98rem; font-weight:600; color:#004d4d;">Invoice tallying</span>
           </div>
           <div style="display:flex; gap:10px; margin-bottom:9px;">
-            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#b3bcc2; line-height:1.55; padding-top:2px;">Before</span>
+            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#e46343; line-height:1.55; padding-top:2px;">Before</span>
             <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#9aa4ad;"><strong style="color:#8a949d; font-weight:600;">Days</strong> of reading PDFs and reconciling against the system by hand</span>
           </div>
           <div style="display:flex; gap:10px;">
@@ -1056,15 +1064,15 @@
         <div data-reveal data-delay="420" class="r5-task" style="opacity:1;">
           <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:14px;">
             <span class="r5-idx" style="font-family:'Montserrat',sans-serif; font-size:0.9rem; font-weight:700; color:#cfd8dd; transition:color .18s ease;">04</span>
-            <span style="font-family:'Poppins',sans-serif; font-size:0.98rem; font-weight:600; color:#004d4d;">Component matching</span>
+            <span style="font-family:'Poppins',sans-serif; font-size:0.98rem; font-weight:600; color:#004d4d;">Recruitment screening</span>
           </div>
           <div style="display:flex; gap:10px; margin-bottom:9px;">
-            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#b3bcc2; line-height:1.55; padding-top:2px;">Before</span>
-            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#9aa4ad;"><strong style="color:#8a949d; font-weight:600;">Hours</strong> per bill of materials, switching between supplier sites row by row</span>
+            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#e46343; line-height:1.55; padding-top:2px;">Before</span>
+            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#9aa4ad;"><strong style="color:#8a949d; font-weight:600;">Every CV read by hand</strong>; applications arriving by email</span>
           </div>
           <div style="display:flex; gap:10px;">
             <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#00a36c; line-height:1.55; padding-top:2px;">After</span>
-            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#333333;">One upload, ranked matches from stock and suppliers <strong style="color:#004d4d; font-weight:600;">on a single screen</strong></span>
+            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#333333;"><strong style="color:#004d4d; font-weight:600;">Anonymised scoring</strong> with a written analysis, inside a hiring pipeline</span>
           </div>
         </div>
 
@@ -1072,26 +1080,10 @@
         <div data-reveal data-delay="435" class="r5-task" style="opacity:1;">
           <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:14px;">
             <span class="r5-idx" style="font-family:'Montserrat',sans-serif; font-size:0.9rem; font-weight:700; color:#cfd8dd; transition:color .18s ease;">05</span>
-            <span style="font-family:'Poppins',sans-serif; font-size:0.98rem; font-weight:600; color:#004d4d;">Customer order updates</span>
-          </div>
-          <div style="display:flex; gap:10px; margin-bottom:9px;">
-            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#b3bcc2; line-height:1.55; padding-top:2px;">Before</span>
-            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#9aa4ad;">Staff emailing each customer with the day's status</span>
-          </div>
-          <div style="display:flex; gap:10px;">
-            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#00a36c; line-height:1.55; padding-top:2px;">After</span>
-            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#333333;">Customers see their <strong style="color:#004d4d; font-weight:600;">own live position</strong> and delivery performance themselves</span>
-          </div>
-        </div>
-
-        <!-- 06 -->
-        <div data-reveal data-delay="450" class="r5-task" style="opacity:1;">
-          <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:14px;">
-            <span class="r5-idx" style="font-family:'Montserrat',sans-serif; font-size:0.9rem; font-weight:700; color:#cfd8dd; transition:color .18s ease;">06</span>
             <span style="font-family:'Poppins',sans-serif; font-size:0.98rem; font-weight:600; color:#004d4d;">PCB job cards</span>
           </div>
           <div style="display:flex; gap:10px; margin-bottom:9px;">
-            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#b3bcc2; line-height:1.55; padding-top:2px;">Before</span>
+            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#e46343; line-height:1.55; padding-top:2px;">Before</span>
             <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#9aa4ad;"><strong style="color:#8a949d; font-weight:600;">Hundreds of printed sheets a day</strong>, untraceable once filed</span>
           </div>
           <div style="display:flex; gap:10px;">
@@ -1100,21 +1092,37 @@
           </div>
         </div>
 
+        <!-- 06 -->
+        <div data-reveal data-delay="450" class="r5-task" style="opacity:1;">
+          <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:14px;">
+            <span class="r5-idx" style="font-family:'Montserrat',sans-serif; font-size:0.9rem; font-weight:700; color:#cfd8dd; transition:color .18s ease;">06</span>
+            <span style="font-family:'Poppins',sans-serif; font-size:0.98rem; font-weight:600; color:#004d4d;">Payroll verification</span>
+          </div>
+          <div style="display:flex; gap:10px; margin-bottom:9px;">
+            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#e46343; line-height:1.55; padding-top:2px;">Before</span>
+            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#9aa4ad;"><strong style="color:#8a949d; font-weight:600;">Roughly a week</strong>, several people cross-checking every clock-in</span>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#00a36c; line-height:1.55; padding-top:2px;">After</span>
+            <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#333333;"><strong style="color:#004d4d; font-weight:600;">A few clicks</strong> each cycle, with anomalies flagged automatically</span>
+          </div>
+        </div>
+
         <!-- 07 -->
-        <div data-reveal data-delay="465" class="r5-task" style="opacity:1;">
+        <!-- <div data-reveal data-delay="465" class="r5-task" style="opacity:1;">
           <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:14px;">
             <span class="r5-idx" style="font-family:'Montserrat',sans-serif; font-size:0.9rem; font-weight:700; color:#cfd8dd; transition:color .18s ease;">07</span>
             <span style="font-family:'Poppins',sans-serif; font-size:0.98rem; font-weight:600; color:#004d4d;">Recruitment screening</span>
           </div>
           <div style="display:flex; gap:10px; margin-bottom:9px;">
-            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#b3bcc2; line-height:1.55; padding-top:2px;">Before</span>
+            <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#e46343; line-height:1.55; padding-top:2px;">Before</span>
             <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#9aa4ad;"><strong style="color:#8a949d; font-weight:600;">Every CV read by hand</strong>; applications arriving by email</span>
           </div>
           <div style="display:flex; gap:10px;">
             <span style="flex:0 0 46px; font-family:'Inter',system-ui,sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#00a36c; line-height:1.55; padding-top:2px;">After</span>
             <span style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#333333;"><strong style="color:#004d4d; font-weight:600;">Anonymised scoring</strong> with a written analysis, inside a hiring pipeline</span>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
@@ -1129,8 +1137,8 @@
           <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">06</div>
           <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.65rem,2.6vw,2.2rem); line-height:1.25; color:#333333; margin:0;">Vortex, the customer portal</h2>
           <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 1.4rem;"></div>
-          <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.7; color:#333333; margin:0 0 0.9rem; max-width:640px;">Our customers are other manufacturers placing bulk orders that split across batches, divisions and process stages. The Vortex portal keeps them informed of their order status at every stage.</p>
-          <p data-reveal data-delay="160" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.7; color:#333333; margin:0; max-width:640px;">For our larger accounts there is a cluster view covering every site they buy from.</p>
+          <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.7; color:#333333; margin:0 0 0.9rem; max-width:640px;">Our Vortex portal is a unique solution on a national scale, allowing our customers to track every process involved in manufacturing their orders.</p>
+          <!-- <p data-reveal data-delay="160" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1rem; line-height:1.7; color:#333333; margin:0; max-width:640px;">For our larger accounts there is a cluster view covering every site they buy from.</p> -->
         </div>
 
         <!-- demo switcher -->
@@ -1193,11 +1201,26 @@
       <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2.2rem;"></div>
 
       <div style="display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:52px; align-items:start;">
-        <div>
-          
-          <p data-reveal data-delay="210" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.06rem; line-height:1.7; color:#333333; margin:0 0 1.15rem;">Outside the business, ZOT encouraged me to attend research conferences and technical meetups, where I could learn from engineers with far more experience than me. My placement was published as a case study by the <a href="https://www.melcc.org.uk/successful-internship-results-in-a-new-website-for-zot-engineering/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">Midlothian and East Lothian Chamber of Commerce</a>, and I am glad it is being used to make the case for taking on technical interns in manufacturing.</p>
+        <div style="display:flex; flex-direction:column; gap:2.4rem;">
 
-          <p data-reveal data-delay="260" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.06rem; line-height:1.7; color:#333333; margin:0;">We regularly host groups of students from the <a href="https://www.linkedin.com/feed/update/urn:li:activity:7434991150366822403/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">University of Edinburgh</a>, <a href="https://www.linkedin.com/feed/update/urn:li:activity:7394422034925105152/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">Edinburgh Napier University</a> and <a href="https://www.linkedin.com/feed/update/urn:li:activity:7394422034925105152/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">Heriot-Watt University</a> on the shop floor. I walk them through our development progress and our transition into Industry 4.0 with complete traceability from order to dispatch, and talk openly about the kind of opportunity a fresh graduate can find in manufacturing.</p>
+          <div data-reveal data-delay="210" style="opacity:1; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:start;">
+            <span style="grid-row:span 2; width:12px; height:12px; margin-top:8px; border-radius:50%; background:#00ff9d; box-shadow:0 0 0 6px rgba(0,255,157,0.14); flex:none;"></span>
+            <h3 style="font-family:'Poppins',sans-serif; font-weight:600; font-size:1.12rem; color:#1a1a1a; margin:0 0 0.5rem;">Hosting the next generation</h3>
+            <p style="grid-column:2; font-family:'Poppins',sans-serif; font-size:1.02rem; line-height:1.7; color:#4a4a4a; margin:0 0 0.7rem;">We regularly host students from the <a href="https://www.linkedin.com/feed/update/urn:li:activity:7434991150366822403/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">University of Edinburgh</a>, <a href="https://www.linkedin.com/feed/update/urn:li:activity:7394422034925105152/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">Edinburgh Napier</a> and <a href="https://www.linkedin.com/feed/update/urn:li:activity:7394422034925105152/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">Heriot-Watt</a> on the shop floor — walking them through our transition into Industry 4.0 with complete traceability from order to dispatch, and the opportunity a fresh graduate can find in manufacturing.</p>
+          </div>
+
+          <div data-reveal data-delay="260" style="opacity:1; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:start;">
+            <span style="grid-row:span 2; width:12px; height:12px; margin-top:8px; border-radius:50%; background:#00ff9d; box-shadow:0 0 0 6px rgba(0,255,157,0.14); flex:none;"></span>
+            <h3 style="font-family:'Poppins',sans-serif; font-weight:600; font-size:1.12rem; color:#1a1a1a; margin:0 0 0.5rem;">Published as a case study</h3>
+            <p style="grid-column:2; font-family:'Poppins',sans-serif; font-size:1.02rem; line-height:1.7; color:#4a4a4a; margin:0;">My placement was published by the <a href="https://www.melcc.org.uk/successful-internship-results-in-a-new-website-for-zot-engineering/" target="_blank" rel="noopener" style="color:#009e77; text-decoration:none; border-bottom:1px solid rgba(0,158,119,0.4);">Midlothian and East Lothian Chamber of Commerce</a> — now used to make the case for taking on technical interns in manufacturing.</p>
+          </div>
+
+          <div data-reveal data-delay="310" style="opacity:1; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:start;">
+            <span style="grid-row:span 2; width:12px; height:12px; margin-top:8px; border-radius:50%; background:#00ff9d; box-shadow:0 0 0 6px rgba(0,255,157,0.14); flex:none;"></span>
+            <h3 style="font-family:'Poppins',sans-serif; font-weight:600; font-size:1.12rem; color:#1a1a1a; margin:0 0 0.5rem;">Learning beyond the business</h3>
+            <p style="grid-column:2; font-family:'Poppins',sans-serif; font-size:1.02rem; line-height:1.7; color:#4a4a4a; margin:0;">ZOT encouraged me to attend research conferences and technical meetups, where I could learn directly from engineers with far more experience than me.</p>
+          </div>
+
         </div>
 
         <div data-reveal data-delay="300" style="opacity:1;">
