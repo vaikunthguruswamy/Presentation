@@ -513,58 +513,230 @@
 
   <!-- 02 TIMELINE -->
   <section data-screen-label="02 Timeline" data-chapter="Timeline" style="min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding:120px 5% 80px; background:#ffffff;">
+    <style>
+      @keyframes zTlPulse { 0% { r:14px; opacity:0.5; } 70% { r:26px; opacity:0; } 100% { opacity:0; } }
+      .z-tl-pulse { animation: zTlPulse 2.6s ease-out infinite; }
+      .tl-item { opacity:1; }
+      @media (prefers-reduced-motion: reduce) { .z-tl-pulse { display:none; } }
+    </style>
     <div style="width:100%; max-width:1200px; margin:0 auto;">
       <div data-reveal style="opacity:1; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:#bdbdbd; margin-bottom:0.9rem;">02</div>
       <h2 data-reveal data-delay="60" style="opacity:1; font-family:'Poppins',sans-serif; font-weight:700; font-size:clamp(1.75rem,3vw,2.5rem); line-height:1.25; color:#333333; margin:0;">Architecting the platform</h2>
-      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 2rem;"></div>
+      <div data-reveal data-delay="60" data-rule style="opacity:1; width:60px; height:3px; background:#00ff9d; margin:15px 0 1.6rem;"></div>
 
-      <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.08rem; line-height:1.7; color:#333333; max-width:78ch; margin:0 0 3rem;">As the company's first software engineer, my role was to push the company's digital frontier forward and bring Industry 4.0 to the factory floor, and every new idea needed a solid platform beneath it. So I built that platform first. I sat with colleagues across every division to understand how the industry and the company actually worked, chose the right technology stack, and architected a framework that tied it all together into a production-grade system.</p>
-      <!-- , from plain-English database querying to live dashboards,  -->
-      <!--  Getting this foundation right is what has let everything since ship in weeks rather than quarters. As the founding engineer in this space, I built it step by step. -->
+      <p data-reveal data-delay="120" style="opacity:1; font-family:'Poppins',sans-serif; font-size:1.05rem; line-height:1.7; color:#333333; max-width:80ch; margin:0 0 2rem;">As the company's first software engineer, I built the platform before the products: I sat with colleagues across every division to understand how the industry and the company actually worked, chose the right technology stack, and architected a production-grade framework that tied it all together. It came together in three deliberate phases.</p>
 
-      <div data-reveal data-delay="180" style="opacity:1; position:relative; padding-top:8px;">
-        <div style="position:relative; height:2px; background:#e0e0e0; margin:0 0 0;">
-          <div data-grow style="position:absolute; inset:0; background:#00ff9d; transform:scaleX(0); transform-origin:left;"></div>
-        </div>
-        <div style="display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:16px; margin-top:0;">
-          <div style="padding-top:0;">
-            <div style="width:9px; height:9px; border-radius:50%; background:#00ff9d; margin:-5.5px 0 16px;"></div>
-            <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.76rem; font-weight:600; letter-spacing:0.06em; color:#004d4d; margin-bottom:8px;">FEB &ndash; MAR 2025</div>
-            <p style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#555555; margin:0;">Mapped the three divisional databases, a first for the company. Built the data layer and first dashboards.</p>
-          </div>
-          <div>
-            <div style="width:9px; height:9px; border-radius:50%; background:#00ff9d; margin:-5.5px 0 16px;"></div>
-            <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.76rem; font-weight:600; letter-spacing:0.06em; color:#004d4d; margin-bottom:8px;">APR &ndash; AUG 2025</div>
-            <p style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#555555; margin:0;">Productionized the website. Division KPI dashboards. Digital quotation replacing spreadsheets. CRM foundations.</p>
-          </div>
-          <div>
-            <div style="width:9px; height:9px; border-radius:50%; background:#00ff9d; margin:-5.5px 0 16px;"></div>
-            <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.76rem; font-weight:600; letter-spacing:0.06em; color:#004d4d; margin-bottom:8px;">OCT &ndash; DEC 2025</div>
-            <p style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#555555; margin:0;">Cloud estate built with security partners. Site deployed live. Recruitment and payroll automation.</p>
-          </div>
-          <div>
-            <div style="width:9px; height:9px; border-radius:50%; background:#00ff9d; margin:-5.5px 0 16px;"></div>
-            <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.76rem; font-weight:600; letter-spacing:0.06em; color:#004d4d; margin-bottom:8px;">JAN &ndash; FEB 2026</div>
-            <p style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#555555; margin:0;">Cloud linked to on-site systems. Live production dashboards across all three divisions. Role-based access.</p>
-          </div>
-          <div>
-            <div style="width:9px; height:9px; border-radius:50%; background:#00ff9d; margin:-5.5px 0 16px;"></div>
-            <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.76rem; font-weight:600; letter-spacing:0.06em; color:#004d4d; margin-bottom:8px;">MAR &ndash; APR 2026</div>
-            <p style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#555555; margin:0;">Vortex customer order portal launched. Customer profiles. Shop-floor sensors connected to the cloud.</p>
-          </div>
-          <div>
-            <div style="width:9px; height:9px; border-radius:50%; background:#00ff9d; margin:-5.5px 0 16px;"></div>
-            <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.76rem; font-weight:600; letter-spacing:0.06em; color:#004d4d; margin-bottom:8px;">MAY &ndash; JUN 2026</div>
-            <p style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#555555; margin:0;">Automated optical inspection. Digital job cards on the PCB floor.</p>
-          </div>
-          <div>
-            <div style="width:9px; height:9px; border-radius:50%; background:#004d4d; margin:-5.5px 0 16px;"></div>
-            <div style="font-family:'Inter',system-ui,sans-serif; font-size:0.76rem; font-weight:600; letter-spacing:0.06em; color:#004d4d; margin-bottom:8px;">JUL 2026 &ndash; PRESENT</div>
-            <p style="font-family:'Poppins',sans-serif; font-size:0.88rem; line-height:1.55; color:#555555; margin:0;">Finance, Work in Progress and Sales dashboards. Digital quotation rolled out across divisions.</p>
-          </div>
-        </div>
-      </div>
+      <figure data-reveal data-delay="180" style="opacity:1; margin:0;">
+        <svg id="tlSvg" viewBox="0 0 1340 720" style="width:100%; height:auto; display:block;" role="img" aria-label="Ascending timeline of the platform build in three phases. Phase 1 Build the Foundation, Feb to Aug 2025: the data foundation, then first products in use. Phase 2 Connect and Go Live, Oct 2025 to Feb 2026: into the cloud, then live on the floor. Phase 3 Automate and Scale, Mar 2026 to present: customers and sensors, automated inspection, and rollout across the business.">
+          <defs>
+            <linearGradient id="tlGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#004d4d"></stop>
+              <stop offset="0.5" stop-color="#009e63"></stop>
+              <stop offset="1" stop-color="#00c97b"></stop>
+            </linearGradient>
+          </defs>
+
+          <!-- ===== PHASE HEADERS ===== -->
+          <text x="40" y="22" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#00a56b">01</text>
+          <text x="66" y="22" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" letter-spacing="1.4" fill="#37605a">BUILD THE FOUNDATION</text>
+          <line x1="40" y1="32" x2="360" y2="32" stroke="#cfe3d8" stroke-width="1.5"></line>
+
+          <text x="396" y="22" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#00a56b">02</text>
+          <text x="422" y="22" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" letter-spacing="1.4" fill="#37605a">CONNECT &amp; GO LIVE</text>
+          <line x1="396" y1="32" x2="740" y2="32" stroke="#cfe3d8" stroke-width="1.5"></line>
+
+          <text x="772" y="22" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#00a56b">03</text>
+          <text x="798" y="22" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" letter-spacing="1.4" fill="#37605a">AUTOMATE &amp; SCALE</text>
+          <line x1="772" y1="32" x2="1300" y2="32" stroke="#cfe3d8" stroke-width="1.5"></line>
+
+          <line x1="376" y1="32" x2="376" y2="46" stroke="#dcede3" stroke-width="1.5"></line>
+          <line x1="756" y1="32" x2="756" y2="46" stroke="#dcede3" stroke-width="1.5"></line>
+
+          <!-- ===== STEPPED SPINE (draws left to right) ===== -->
+          <polyline id="tlLine" points="48,555 232,555 232,492.5 416,492.5 416,430 600,430 600,367.5 784,367.5 784,305 968,305 968,242.5 1152,242.5 1152,180 1300,180" fill="none" stroke="url(#tlGrad)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></polyline>
+
+          <!-- ===== MILESTONE 1 ===== -->
+          <g class="tl-item">
+            <circle cx="48" cy="555" r="13" fill="#007a55"></circle>
+            <text x="48" y="559.5" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">1</text>
+            <text x="48" y="364" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">FEB &ndash; MAR 2025</text>
+            <text x="48" y="390" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">The data</text>
+            <text x="48" y="414" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">foundation</text>
+            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+              <text x="48" y="438">Mapped the three</text>
+              <text x="48" y="457">divisional databases,</text>
+              <text x="48" y="476">a first for the</text>
+              <text x="48" y="495">company, and built</text>
+              <text x="48" y="514">the data layer and</text>
+              <text x="48" y="533">first dashboards.</text>
+            </g>
+          </g>
+
+          <!-- ===== MILESTONE 2 ===== -->
+          <g class="tl-item">
+            <circle cx="232" cy="492.5" r="13" fill="#007a55"></circle>
+            <text x="232" y="497" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">2</text>
+            <text x="232" y="301.5" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">APR &ndash; AUG 2025</text>
+            <text x="232" y="327.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">First products in</text>
+            <text x="232" y="351.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">use</text>
+            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+              <text x="232" y="375.5">Productionized the</text>
+              <text x="232" y="394.5">website and division</text>
+              <text x="232" y="413.5">KPI dashboards. Digital</text>
+              <text x="232" y="432.5">quotation replaced</text>
+              <text x="232" y="451.5">spreadsheets; CRM</text>
+              <text x="232" y="470.5">foundations laid.</text>
+            </g>
+          </g>
+
+          <!-- ===== MILESTONE 3 ===== -->
+          <g class="tl-item">
+            <circle cx="416" cy="430" r="13" fill="#009e63"></circle>
+            <text x="416" y="434.5" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">3</text>
+            <text x="416" y="282" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">OCT &ndash; DEC 2025</text>
+            <text x="416" y="308" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">Into the cloud</text>
+            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+              <text x="416" y="332">Cloud estate built with</text>
+              <text x="416" y="351">security partners and</text>
+              <text x="416" y="370">the site deployed live.</text>
+              <text x="416" y="389">Recruitment and payroll</text>
+              <text x="416" y="408">automated.</text>
+            </g>
+          </g>
+
+          <!-- ===== MILESTONE 4 ===== -->
+          <g class="tl-item">
+            <circle cx="600" cy="367.5" r="13" fill="#009e63"></circle>
+            <text x="600" y="372" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">4</text>
+            <text x="600" y="219.5" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">JAN &ndash; FEB 2026</text>
+            <text x="600" y="245.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">Live on the floor</text>
+            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+              <text x="600" y="269.5">Cloud linked to on-site</text>
+              <text x="600" y="288.5">systems. Live production</text>
+              <text x="600" y="307.5">dashboards across all</text>
+              <text x="600" y="326.5">three divisions, with</text>
+              <text x="600" y="345.5">role-based access.</text>
+            </g>
+          </g>
+
+          <!-- ===== MILESTONE 5 ===== -->
+          <g class="tl-item">
+            <circle cx="784" cy="305" r="13" fill="#00c97b"></circle>
+            <text x="784" y="309.5" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">5</text>
+            <text x="784" y="133" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">MAR &ndash; APR 2026</text>
+            <text x="784" y="159" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">Customers &amp;</text>
+            <text x="784" y="183" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">sensors</text>
+            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+              <text x="784" y="207">Vortex customer order</text>
+              <text x="784" y="226">portal launched with</text>
+              <text x="784" y="245">customer profiles.</text>
+              <text x="784" y="264">Shop-floor sensors</text>
+              <text x="784" y="283">connected to the cloud.</text>
+            </g>
+          </g>
+
+          <!-- ===== MILESTONE 6 ===== -->
+          <g class="tl-item">
+            <circle cx="968" cy="242.5" r="13" fill="#00c97b"></circle>
+            <text x="968" y="247" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">6</text>
+            <text x="968" y="89.5" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="0.6" fill="#007a55">MAY &ndash; JUN 2026</text>
+            <text x="968" y="115.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">Automated</text>
+            <text x="968" y="139.5" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#1f2937">inspection</text>
+            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+              <text x="968" y="163.5">Automated optical</text>
+              <text x="968" y="182.5">inspection and digital</text>
+              <text x="968" y="201.5">job cards live on the</text>
+              <text x="968" y="220.5">PCB floor.</text>
+            </g>
+          </g>
+
+          <!-- ===== MILESTONE 7 (present) ===== -->
+          <g class="tl-item">
+            <circle class="z-tl-pulse" cx="1152" cy="180" r="14" fill="#00e08f"></circle>
+            <circle cx="1152" cy="180" r="13" fill="#004d4d"></circle>
+            <text x="1152" y="184.5" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="13" font-weight="700" fill="#ffffff">7</text>
+            <text x="1152" y="32" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" letter-spacing="0.6" fill="#007a55">JUL 2026 &ndash; PRESENT</text>
+            <text x="1152" y="58" font-family="'Poppins',sans-serif" font-size="20" font-weight="600" fill="#004d4d">Across the business</text>
+            <g font-family="'Poppins',sans-serif" font-size="14" fill="#5f8072">
+              <text x="1152" y="82">Finance, Work-in-</text>
+              <text x="1152" y="101">Progress and Sales</text>
+              <text x="1152" y="120">dashboards. Digital</text>
+              <text x="1152" y="139">quotation rolled out</text>
+              <text x="1152" y="158">across divisions.</text>
+            </g>
+          </g>
+
+          <!-- ===== QUARTER AXIS ===== -->
+          <line x1="40" y1="600" x2="1300" y2="600" stroke="#e6ece9" stroke-width="1.5"></line>
+          <g stroke="#d6e0dc" stroke-width="1.5">
+            <line x1="44" y1="596" x2="44" y2="606"></line>
+            <line x1="250" y1="596" x2="250" y2="606"></line>
+            <line x1="456" y1="596" x2="456" y2="606"></line>
+            <line x1="662" y1="596" x2="662" y2="606"></line>
+            <line x1="868" y1="596" x2="868" y2="606"></line>
+            <line x1="1074" y1="596" x2="1074" y2="606"></line>
+            <line x1="1280" y1="596" x2="1280" y2="606"></line>
+          </g>
+          <g font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#9aa7a3">
+            <text x="44" y="620"><tspan font-weight="700" fill="#6b7a75">2025</tspan> Q1</text>
+            <text x="250" y="620">Q2</text>
+            <text x="456" y="620">Q3</text>
+            <text x="662" y="620">Q4</text>
+            <text x="868" y="620"><tspan font-weight="700" fill="#6b7a75">2026</tspan> Q1</text>
+            <text x="1074" y="620">Q2</text>
+            <text x="1280" y="620">Q3</text>
+          </g>
+        </svg>
+        <figcaption style="font-family:'Poppins',sans-serif; font-size:0.85rem; color:#557069; margin-top:14px; line-height:1.5;"><strong style="color:#004d4d; font-weight:600;">Eighteen months</strong> from the first database to a live platform across all three divisions, and still shipping every sprint.</figcaption>
+      </figure>
     </div>
+
+    <script>
+    (function () {
+      var svg = document.getElementById('tlSvg');
+      if (!svg) return;
+      var line = document.getElementById('tlLine');
+      var items = Array.prototype.slice.call(svg.querySelectorAll('.tl-item'));
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!('IntersectionObserver' in window) || reduce) return; // leave everything visible
+
+      // Total length of the stepped line, for a left-to-right draw.
+      var len = 0;
+      try { len = line.getTotalLength(); } catch (e) { len = 0; }
+      if (len) {
+        line.style.strokeDasharray = len;
+        line.style.strokeDashoffset = len;
+      }
+      // Hide each milestone until its turn.
+      items.forEach(function (g) {
+        g.style.opacity = '0';
+        g.style.transition = 'opacity 0.5s ease';
+      });
+
+      var played = false;
+      var DUR = 2000; // line draw duration
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting || played) return;
+          played = true;
+          io.disconnect();
+
+          if (len) {
+            line.style.transition = 'stroke-dashoffset ' + DUR + 'ms cubic-bezier(0.22,1,0.36,1)';
+            line.getBoundingClientRect(); // force reflow so the transition runs
+            line.style.strokeDashoffset = '0';
+          }
+          // Reveal milestones in step with the line reaching each node.
+          var n = items.length;
+          items.forEach(function (g, i) {
+            var t = 200 + (i / (n - 1)) * (DUR - 350);
+            setTimeout(function () { g.style.opacity = '1'; }, t);
+          });
+        });
+      }, { threshold: 0.25 });
+      io.observe(svg);
+    })();
+    </script>
   </section>
 
   <!-- 03 HOW IT WAS DELIVERED -->
